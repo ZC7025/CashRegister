@@ -1,0 +1,131 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.sucheng.dao.EmpRoleDAO">
+
+    <insert id="save" parameterType="com.sucheng.dos.EmpRoleDO">
+        insert into t_emp_role
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+				id,
+			</if>
+			<if test="empId != null">
+				emp_id,
+			</if>
+			<if test="roleId != null">
+				role_id,
+			</if>
+			
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+				#{id},
+			</if>
+			<if test="empId != null">
+				#{empId},
+			</if>
+			<if test="roleId != null">
+				#{roleId},
+			</if>
+			
+        </trim>
+    </insert>
+
+    <delete id="remove" parameterType="com.sucheng.dos.EmpRoleDO">
+        delete from t_emp_role where id = #{id}
+    </delete>
+
+    <delete id="removeById" parameterType="long">
+        delete from t_emp_role where id = #{id}
+    </delete>
+
+    <delete id="removeByIds">
+        delete from t_emp_role where id in
+        <foreach item="id" collection="array" separator="," open="(" close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <update id="update" parameterType="com.sucheng.dos.EmpRoleDO">
+        update t_emp_role
+        <set>
+            <if test="id != null">
+				id = #{id},
+			</if>
+			<if test="empId != null">
+				emp_id = #{empId},
+			</if>
+			<if test="roleId != null">
+				role_id = #{roleId},
+			</if>
+			
+        </set>
+        where id = #{id}
+    </update>
+
+    <update id="updateActiveStatus" parameterType="com.sucheng.query.StatusQuery">
+        update t_emp_role set is_active = #{status} where id = #{id}
+    </update>
+
+    <sql id="select_columns">
+        id, emp_id, role_id
+    </sql>
+
+    <select id="getById" parameterType="long" resultType="com.sucheng.dos.EmpRoleDO">
+        select
+        <include refid="select_columns"/>
+        from t_emp_role where id = #{id}
+    </select>
+
+    <select id="listAll" resultType="com.sucheng.dos.EmpRoleDO">
+        select
+        <include refid="select_columns"/>
+        from t_emp_role
+        order by created_time desc
+    </select>
+
+    <select id="listPage" parameterType="com.sucheng.query.PageQuery" resultType="com.sucheng.dos.EmpRoleDO">
+        select
+        <include refid="select_columns"/>
+        from t_emp_role
+        order by created_time desc
+        limit #{beginIndex}, #{pageSize}
+    </select>
+
+    <select id="count" resultType="long">
+        select count(*) from t_emp_role
+    </select>
+
+    <sql id="where_clause">
+        <if test="query != null and query.id != null">
+			id = #{id},
+		</if>
+		<if test="query != null and query.empId != null">
+			and emp_id = #{empId},
+		</if>
+		<if test="query != null and query.roleId != null">
+			and role_id = #{roleId},
+		</if>
+		
+    </sql>
+
+    <select id="listPageByCondition" resultType="com.sucheng.dos.EmpRoleDO">
+        select
+        <include refid="select_columns"/>
+        from t_emp_role
+        <where>
+            <include refid="where_clause"/>
+        </where>
+        order by created_time desc
+        limit #{beginIndex}, #{pageSize}
+    </select>
+
+    <select id="countByCondition" parameterType="com.sucheng.query.EmpRoleQuery" resultType="long">
+        select count(*) from t_emp_role
+        <where>
+            <include refid="where_clause"/>
+        </where>
+    </select>
+
+</mapper>

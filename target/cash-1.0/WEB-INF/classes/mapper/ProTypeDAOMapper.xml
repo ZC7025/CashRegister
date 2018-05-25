@@ -1,0 +1,155 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.sucheng.dao.ProTypeDAO">
+
+    <insert id="save" parameterType="com.sucheng.dos.ProTypeDO">
+        insert into t_pro_type
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+				id,
+			</if>
+			<if test="name != null">
+				name,
+			</if>
+			<if test="storeId != null">
+				store_id,
+			</if>
+			<if test="status != null">
+				status,
+			</if>
+			<if test="createdTime != null">
+				created_time,
+			</if>
+			
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+				#{id},
+			</if>
+			<if test="name != null">
+				#{name},
+			</if>
+			<if test="storeId != null">
+				#{storeId},
+			</if>
+			<if test="status != null">
+				#{status},
+			</if>
+			<if test="createdTime != null">
+				#{createdTime},
+			</if>
+			
+        </trim>
+    </insert>
+
+    <delete id="remove" parameterType="com.sucheng.dos.ProTypeDO">
+        delete from t_pro_type where id = #{id}
+    </delete>
+
+    <delete id="removeById" parameterType="long">
+        delete from t_pro_type where id = #{id}
+    </delete>
+
+    <delete id="removeByIds">
+        delete from t_pro_type where id in
+        <foreach item="id" collection="array" separator="," open="(" close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <update id="update" parameterType="com.sucheng.dos.ProTypeDO">
+        update t_pro_type
+        <set>
+            <if test="id != null">
+				id = #{id},
+			</if>
+			<if test="name != null">
+				name = #{name},
+			</if>
+			<if test="storeId != null">
+				store_id = #{storeId},
+			</if>
+			<if test="status != null">
+				status = #{status},
+			</if>
+			<if test="createdTime != null">
+				created_time = #{createdTime},
+			</if>
+			
+        </set>
+        where id = #{id}
+    </update>
+
+    <update id="updateActiveStatus" parameterType="com.sucheng.query.StatusQuery">
+        update t_pro_type set is_active = #{status} where id = #{id}
+    </update>
+
+    <sql id="select_columns">
+        id, name, store_id, status, created_time
+    </sql>
+
+    <select id="getById" parameterType="long" resultType="com.sucheng.dos.ProTypeDO">
+        select
+        <include refid="select_columns"/>
+        from t_pro_type where id = #{id}
+    </select>
+
+    <select id="listAll" resultType="com.sucheng.dos.ProTypeDO">
+        select
+        <include refid="select_columns"/>
+        from t_pro_type
+        order by created_time desc
+    </select>
+
+    <select id="listPage" parameterType="com.sucheng.query.PageQuery" resultType="com.sucheng.dos.ProTypeDO">
+        select
+        <include refid="select_columns"/>
+        from t_pro_type
+        order by created_time desc
+        limit #{beginIndex}, #{pageSize}
+    </select>
+
+    <select id="count" resultType="long">
+        select count(*) from t_pro_type
+    </select>
+
+    <sql id="where_clause">
+        <if test="query != null and query.id != null">
+			id = #{id},
+		</if>
+		<if test="query != null and query.name != null and query.name != ''">
+			and name = #{name},
+		</if>
+		<if test="query != null and query.storeId != null">
+			and store_id = #{storeId},
+		</if>
+		<if test="query != null and query.status != null and query.status != ''">
+			and status = #{status},
+		</if>
+		<if test="query != null and query.createdTime != null">
+			and created_time = #{createdTime},
+		</if>
+		
+    </sql>
+
+    <select id="listPageByCondition" resultType="com.sucheng.dos.ProTypeDO">
+        select
+        <include refid="select_columns"/>
+        from t_pro_type
+        <where>
+            <include refid="where_clause"/>
+        </where>
+        order by created_time desc
+        limit #{beginIndex}, #{pageSize}
+    </select>
+
+    <select id="countByCondition" parameterType="com.sucheng.query.ProTypeQuery" resultType="long">
+        select count(*) from t_pro_type
+        <where>
+            <include refid="where_clause"/>
+        </where>
+    </select>
+
+</mapper>

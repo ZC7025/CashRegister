@@ -1,0 +1,255 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.sucheng.dao.StoreDAO">
+
+    <insert id="save" parameterType="com.sucheng.dos.StoreDO">
+        insert into t_store
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+				id,
+			</if>
+			<if test="storeId != null">
+				store_id,
+			</if>
+			<if test="name != null">
+				name,
+			</if>
+			<if test="phone != null">
+				phone,
+			</if>
+			<if test="pwd != null">
+				pwd,
+			</if>
+			<if test="email != null">
+				email,
+			</if>
+			<if test="address != null">
+				address,
+			</if>
+			<if test="province != null">
+				province,
+			</if>
+			<if test="city != null">
+				city,
+			</if>
+			<if test="county != null">
+				county,
+			</if>
+			<if test="licenseImg != null">
+				license_img,
+			</if>
+			<if test="industryId != null">
+				industry_id,
+			</if>
+			<if test="generalId != null">
+				general_id,
+			</if>
+			<if test="status != null">
+				status,
+			</if>
+			<if test="createdTime != null">
+				created_time,
+			</if>
+			
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+				#{id},
+			</if>
+			<if test="storeId != null">
+				#{storeId},
+			</if>
+			<if test="name != null">
+				#{name},
+			</if>
+			<if test="phone != null">
+				#{phone},
+			</if>
+			<if test="pwd != null">
+				#{pwd},
+			</if>
+			<if test="email != null">
+				#{email},
+			</if>
+			<if test="address != null">
+				#{address},
+			</if>
+			<if test="province != null">
+				#{province},
+			</if>
+			<if test="city != null">
+				#{city},
+			</if>
+			<if test="county != null">
+				#{county},
+			</if>
+			<if test="licenseImg != null">
+				#{licenseImg},
+			</if>
+			<if test="industryId != null">
+				#{industryId},
+			</if>
+			<if test="generalId != null">
+				#{generalId},
+			</if>
+			<if test="status != null">
+				#{status},
+			</if>
+			<if test="createdTime != null">
+				#{createdTime},
+			</if>
+			
+        </trim>
+    </insert>
+
+    <delete id="remove" parameterType="com.sucheng.dos.StoreDO">
+        delete from t_store where id = #{id}
+    </delete>
+
+    <delete id="removeById" parameterType="long">
+        delete from t_store where id = #{id}
+    </delete>
+
+    <delete id="removeByIds">
+        delete from t_store where id in
+        <foreach item="id" collection="array" separator="," open="(" close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <update id="update" parameterType="com.sucheng.dos.StoreDO">
+        update t_store
+        <set>
+            <if test="id != null">
+				id = #{id},
+			</if>
+			<if test="storeId != null">
+				store_id = #{storeId},
+			</if>
+			<if test="name != null">
+				name = #{name},
+			</if>
+			<if test="phone != null">
+				phone = #{phone},
+			</if>
+			<if test="pwd != null">
+				pwd = #{pwd},
+			</if>
+			<if test="email != null">
+				email = #{email},
+			</if>
+			<if test="address != null">
+				address = #{address},
+			</if>
+			<if test="licenseImg != null">
+				license_img = #{licenseImg},
+			</if>
+			<if test="industryId != null">
+				industry_id = #{industryId},
+			</if>
+			<if test="generalId != null">
+				general_id = #{generalId},
+			</if>
+			<if test="status != null">
+				status = #{status},
+			</if>
+			<if test="createdTime != null">
+				created_time = #{createdTime},
+			</if>
+			
+        </set>
+        where id = #{id}
+    </update>
+
+    <update id="updateActiveStatus" parameterType="com.sucheng.query.StatusQuery">
+        update t_store set is_active = #{status} where id = #{id}
+    </update>
+
+    <sql id="select_columns">
+        id, store_id, name, phone, pwd, email, address, license_img, industry_id, general_id, status, created_time
+    </sql>
+
+    <select id="getById" parameterType="long" resultType="com.sucheng.dos.StoreDO">
+        select
+        <include refid="select_columns"/>
+        from t_store where id = #{id}
+    </select>
+
+    <select id="listAll" resultType="com.sucheng.dos.StoreDO">
+        select
+        <include refid="select_columns"/>
+        from t_store
+        order by created_time desc
+    </select>
+
+    <select id="listPage" parameterType="com.sucheng.query.PageQuery" resultType="com.sucheng.dos.StoreDO">
+        select
+        <include refid="select_columns"/>
+        from t_store
+        order by created_time desc
+        limit #{beginIndex}, #{pageSize}
+    </select>
+
+    <select id="count" resultType="long">
+        select count(*) from t_store
+    </select>
+
+    <sql id="where_clause">
+        <if test="query != null and query.id != null">
+			id = #{id},
+		</if>
+		<if test="query != null and query.storeId != null and query.storeId != ''">
+			and store_id = #{storeId},
+		</if>
+		<if test="query != null and query.name != null and query.name != ''">
+			and name = #{name},
+		</if>
+		<if test="query != null and query.phone != null and query.phone != ''">
+			and phone = #{phone},
+		</if>
+		<if test="query != null and query.pwd != null and query.pwd != ''">
+			and pwd = #{pwd},
+		</if>
+		<if test="query != null and query.email != null and query.email != ''">
+			and email = #{email},
+		</if>
+		<if test="query != null and query.address != null and query.address != ''">
+			and address = #{address},
+		</if>
+		<if test="query != null and query.licenseImg != null and query.licenseImg != ''">
+			and license_img = #{licenseImg},
+		</if>
+		<if test="query != null and query.industryId != null">
+			and industry_id = #{industryId},
+		</if>
+		<if test="query != null and query.generalId != null">
+			and general_id = #{generalId},
+		</if>
+		<if test="query != null and query.status != null and query.status != ''">
+			and status = #{status},
+		</if>
+		<if test="query != null and query.createdTime != null">
+			and created_time = #{createdTime},
+		</if>
+		
+    </sql>
+
+    <select id="listPageByCondition" resultType="com.sucheng.query.StoreQuery">
+        select s.*, ins.name as industryName from t_store s, t_industry ins
+        <where>
+            <include refid="where_clause"/>
+        </where>
+		and s.industry_id = ins.id order by s.created_time desc
+        limit #{pager.beginIndex}, #{pager.pageSize}
+    </select>
+
+    <select id="countByCondition" parameterType="com.sucheng.query.StoreQuery" resultType="long">
+        select count(*) from t_store
+        <where>
+            <include refid="where_clause"/>
+        </where>
+    </select>
+
+</mapper>
