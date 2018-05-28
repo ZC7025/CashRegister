@@ -68,6 +68,14 @@ public class StoreDTO extends BaseDTO {
 	 */
 	private Integer generalId;
 	/**
+	 * 行业名称
+	 */
+	private String industryName;
+	/**
+	 * 总部名称
+	 */
+	private String generalName;
+	/**
 	 *
 	 */
 	private String status;
@@ -214,6 +222,22 @@ public class StoreDTO extends BaseDTO {
 
 	public void setCounty(String county) {
 		this.county = county;
+	}
+
+	public String getIndustryName() {
+		return industryName;
+	}
+
+	public void setIndustryName(String industryName) {
+		this.industryName = industryName;
+	}
+
+	public String getGeneralName() {
+		return generalName;
+	}
+
+	public void setGeneralName(String generalName) {
+		this.generalName = generalName;
 	}
 
 	@Override

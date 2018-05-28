@@ -68,17 +68,17 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">选择地区</label>
                 <div class="layui-input-inline">
-                    <select name="province" id="province" lay-filter="province">
+                    <select name="province" id="province" lay-filter="province" lay-verify="required">
                         <option value="">请选择省</option>
                     </select>
                 </div>
                 <div class="layui-input-inline">
-                    <select name="city" id="city" lay-filter="city">
+                    <select name="city" id="city" lay-filter="city" lay-verify="required">
                         <option value="">请选择市</option>
                     </select>
                 </div>
                 <div class="layui-input-inline">
-                    <select name="county" id="county" lay-filter="county">
+                    <select name="county" id="county" lay-filter="county" lay-verify="required">
                         <option value="">请选择县/区</option>
                     </select>
                 </div>
@@ -127,7 +127,7 @@
 <script type="text/javascript" src="<%=path %>/static/layui/layui.js"></script>
 <script type="text/javascript" src="<%=path %>/static/js/area/data.js"></script>
 <script type="text/javascript" src="<%=path %>/static/js/area/province.js"></script>
-<script type="text/javascript" src="<%=path %>/static/js/current.js"></script>
+<script type="text/javascript" src="<%=path %>/static/js/home/public.js"></script>
 <script>
     layui.use(['form', 'upload'], function () {
 

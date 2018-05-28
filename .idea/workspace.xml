@@ -6,7 +6,39 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a55a7504-a131-48b4-936b-23080bbb86ee" name="Default" comment="" />
+    <list default="true" id="a55a7504-a131-48b4-936b-23080bbb86ee" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/sucheng/controller/StoreController.java" afterPath="$PROJECT_DIR$/src/main/java/com/sucheng/controller/StoreController.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/sucheng/controller/view/StoreView.java" afterPath="$PROJECT_DIR$/src/main/java/com/sucheng/controller/view/StoreView.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/sucheng/dto/StoreDTO.java" afterPath="$PROJECT_DIR$/src/main/java/com/sucheng/dto/StoreDTO.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/sucheng/query/StoreQuery.java" afterPath="$PROJECT_DIR$/src/main/java/com/sucheng/query/StoreQuery.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/mapper/StoreDAOMapper.xml" afterPath="$PROJECT_DIR$/src/main/resources/mapper/StoreDAOMapper.xml" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/base/home.jsp" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/base/home.jsp" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/industry/typeManage.jsp" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/industry/typeManage.jsp" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/store/add.jsp" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/store/add.jsp" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/store/storeManage.jsp" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/store/storeManage.jsp" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/static/js/area/province.js" afterPath="$PROJECT_DIR$/src/main/webapp/static/js/area/province.js" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/static/js/current.js" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/static/js/home/public.js" afterPath="$PROJECT_DIR$/src/main/webapp/static/js/home/public.js" />
+      <change beforePath="$PROJECT_DIR$/target/cash-1.0/WEB-INF/classes/com/sucheng/controller/StoreController.class" afterPath="$PROJECT_DIR$/target/cash-1.0/WEB-INF/classes/com/sucheng/controller/StoreController.class" />
+      <change beforePath="$PROJECT_DIR$/target/cash-1.0/WEB-INF/classes/com/sucheng/controller/view/StoreView.class" afterPath="$PROJECT_DIR$/target/cash-1.0/WEB-INF/classes/com/sucheng/controller/view/StoreView.class" />
+      <change beforePath="$PROJECT_DIR$/target/cash-1.0/WEB-INF/classes/com/sucheng/dao/StoreDAO.class" afterPath="$PROJECT_DIR$/target/cash-1.0/WEB-INF/classes/com/sucheng/dao/StoreDAO.class" />
+      <change beforePath="$PROJECT_DIR$/target/cash-1.0/WEB-INF/classes/com/sucheng/dto/StoreDTO.class" afterPath="$PROJECT_DIR$/target/cash-1.0/WEB-INF/classes/com/sucheng/dto/StoreDTO.class" />
+      <change beforePath="$PROJECT_DIR$/target/cash-1.0/WEB-INF/classes/com/sucheng/query/StoreQuery.class" afterPath="$PROJECT_DIR$/target/cash-1.0/WEB-INF/classes/com/sucheng/query/StoreQuery.class" />
+      <change beforePath="$PROJECT_DIR$/target/cash-1.0/WEB-INF/classes/mapper/StoreDAOMapper.xml" afterPath="$PROJECT_DIR$/target/cash-1.0/WEB-INF/classes/mapper/StoreDAOMapper.xml" />
+      <change beforePath="$PROJECT_DIR$/target/cash-1.0/WEB-INF/views/base/home.jsp" afterPath="$PROJECT_DIR$/target/cash-1.0/WEB-INF/views/base/home.jsp" />
+      <change beforePath="$PROJECT_DIR$/target/cash-1.0/WEB-INF/views/industry/typeManage.jsp" afterPath="$PROJECT_DIR$/target/cash-1.0/WEB-INF/views/industry/typeManage.jsp" />
+      <change beforePath="$PROJECT_DIR$/target/cash-1.0/WEB-INF/views/store/add.jsp" afterPath="$PROJECT_DIR$/target/cash-1.0/WEB-INF/views/store/add.jsp" />
+      <change beforePath="$PROJECT_DIR$/target/cash-1.0/static/js/area/province.js" afterPath="$PROJECT_DIR$/target/cash-1.0/static/js/area/province.js" />
+      <change beforePath="$PROJECT_DIR$/target/cash-1.0/static/js/current.js" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/target/cash-1.0/static/js/home/public.js" afterPath="$PROJECT_DIR$/target/cash-1.0/static/js/home/public.js" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/sucheng/controller/StoreController.class" afterPath="$PROJECT_DIR$/target/classes/com/sucheng/controller/StoreController.class" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/sucheng/controller/view/StoreView.class" afterPath="$PROJECT_DIR$/target/classes/com/sucheng/controller/view/StoreView.class" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/sucheng/dao/StoreDAO.class" afterPath="$PROJECT_DIR$/target/classes/com/sucheng/dao/StoreDAO.class" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/sucheng/dto/StoreDTO.class" afterPath="$PROJECT_DIR$/target/classes/com/sucheng/dto/StoreDTO.class" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/sucheng/query/StoreQuery.class" afterPath="$PROJECT_DIR$/target/classes/com/sucheng/query/StoreQuery.class" />
+      <change beforePath="$PROJECT_DIR$/target/classes/mapper/StoreDAOMapper.xml" afterPath="$PROJECT_DIR$/target/classes/mapper/StoreDAOMapper.xml" />
+    </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -18,72 +50,31 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="home.jsp" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/base/home.jsp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="275">
-              <caret line="93" column="52" lean-forward="false" selection-start-line="93" selection-start-column="52" selection-end-line="93" selection-end-column="52" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="storeManage.jsp" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/store/storeManage.jsp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-691">
-              <caret line="27" column="50" lean-forward="true" selection-start-line="27" selection-start-column="50" selection-end-line="27" selection-end-column="50" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="StoreController.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="StoreController.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/sucheng/controller/StoreController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="434">
-              <caret line="184" column="20" lean-forward="true" selection-start-line="184" selection-start-column="20" selection-end-line="184" selection-end-column="20" />
+            <state relative-caret-position="317">
+              <caret line="50" column="41" lean-forward="true" selection-start-line="50" selection-start-column="41" selection-end-line="50" selection-end-column="41" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="StoreDAOMapper.xml" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/resources/mapper/StoreDAOMapper.xml">
+      <file leaf-file-name="add.jsp" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/store/add.jsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="336">
-              <caret line="241" column="43" lean-forward="true" selection-start-line="241" selection-start-column="43" selection-end-line="241" selection-end-column="43" />
-              <folding>
-                <marker date="1527239921441" expanded="true" signature="2138:2174" ph="delete from t_store... " />
-                <marker date="1527239921441" expanded="true" signature="2248:2284" ph="delete from t_store... " />
-                <marker date="1527239921441" expanded="true" signature="2575:3438" ph="update t_store... " />
-                <marker date="1527239921441" expanded="true" signature="3545:3602" ph="update t_store... " />
-                <marker date="1527239921441" expanded="true" signature="3867:3953" ph="select from t_store" />
-                <marker date="1527239921441" expanded="true" signature="4040:4144" ph="select from t_store" />
-                <marker date="1527239921441" expanded="true" signature="4276:4421" ph="select from t_store" />
-                <marker date="1527239921441" expanded="true" signature="4487:4515" ph="select count... t_store" />
-                <marker date="1527239921441" expanded="true" signature="5929:6184" ph="select from t_store" />
-                <marker date="1527239921441" expanded="true" signature="6306:6334" ph="select count... t_store" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="typeManage.jsp" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/industry/typeManage.jsp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="375">
-              <caret line="30" column="30" lean-forward="true" selection-start-line="30" selection-start-column="30" selection-end-line="30" selection-end-column="30" />
+            <state relative-caret-position="236">
+              <caret line="186" column="46" lean-forward="true" selection-start-line="186" selection-start-column="46" selection-end-line="186" selection-end-column="46" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="IndustryController.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/sucheng/controller/IndustryController.java">
+      <file leaf-file-name="province.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/webapp/static/js/area/province.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="225">
-              <caret line="170" column="57" lean-forward="true" selection-start-line="170" selection-start-column="57" selection-end-line="170" selection-end-column="57" />
+            <state relative-caret-position="250">
+              <caret line="52" column="23" lean-forward="true" selection-start-line="52" selection-start-column="23" selection-end-line="52" selection-end-column="23" />
               <folding />
             </state>
           </provider>
@@ -101,9 +92,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>formulaDO</find>
-      <find>gradeDO</find>
-      <find>halfProDO</find>
       <find>industry</find>
       <find>query.logMoneyDO</find>
       <find>query.LogTrafficDO</find>
@@ -131,6 +119,9 @@
       <find>create_time</find>
       <find>update_time</find>
       <find>update_time desc,</find>
+      <find>d.status == 0</find>
+      <find>option</find>
+      <find>没有选项</find>
     </findStrings>
     <replaceStrings>
       <replace>com.sucheng.dos.EmployeeDO</replace>
@@ -169,6 +160,9 @@
       <dir>E:\IDEA\CashRegister</dir>
     </dirStrings>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="GradleLocalSettings">
     <option name="externalProjectsViewState">
       <projects_view />
@@ -177,9 +171,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/resources/mapper/SupplierDAOMapper.xml" />
-        <option value="$PROJECT_DIR$/src/main/resources/mapper/TasteDAOMapper.xml" />
-        <option value="$PROJECT_DIR$/src/main/resources/mapper/VipDAOMapper.xml" />
         <option value="$PROJECT_DIR$/src/main/resources/mapper/VipLevelDAOMapper.xml" />
         <option value="$PROJECT_DIR$/src/main/resources/mapper/VipManageDAOMapper.xml" />
         <option value="$PROJECT_DIR$/src/main/java/com/sucheng/constant/MD5Constants.java" />
@@ -199,7 +190,6 @@
         <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" />
         <option value="$PROJECT_DIR$/src/main/resources/mapper/AdminDAOMapper.xml" />
         <option value="$PROJECT_DIR$/src/main/webapp/static/js/home/tab.js" />
-        <option value="$PROJECT_DIR$/src/main/java/com/sucheng/controller/view/StoreView.java" />
         <option value="$PROJECT_DIR$/src/main/webapp/static/css/store/add.css" />
         <option value="$PROJECT_DIR$/src/main/webapp/static/css/form-public.css" />
         <option value="$PROJECT_DIR$/src/main/java/com/sucheng/dao/IndustryDAO.java" />
@@ -208,26 +198,30 @@
         <option value="$PROJECT_DIR$/src/main/java/com/sucheng/dto/PagerDTO.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/sucheng/query/PageQuery.java" />
         <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/industry/add.jsp" />
-        <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/industry/typeManage.jsp" />
-        <option value="$PROJECT_DIR$/src/main/webapp/static/js/home/public.js" />
         <option value="$PROJECT_DIR$/src/main/java/com/sucheng/controller/view/IndustryView.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/sucheng/controller/IndustryController.java" />
-        <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/base/home.jsp" />
         <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/industry/update.jsp" />
         <option value="$PROJECT_DIR$/src/main/resources/mapper/IndustryDAOMapper.xml" />
-        <option value="$PROJECT_DIR$/src/main/java/com/sucheng/vo/StoreVO.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/sucheng/dto/StoreDTO.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/sucheng/dos/StoreDO.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/sucheng/common/UploadResult.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/sucheng/common/PathUtils.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/sucheng/controller/UploadController.java" />
-        <option value="$PROJECT_DIR$/src/main/webapp/static/js/area/province.js" />
-        <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/store/add.jsp" />
-        <option value="$PROJECT_DIR$/src/main/java/com/sucheng/controller/StoreController.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/sucheng/dao/StoreDAO.java" />
-        <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/store/storeManage.jsp" />
+        <option value="$PROJECT_DIR$/src/main/java/com/sucheng/vo/StoreVO.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/sucheng/dto/StoreDTO.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/sucheng/query/StoreQuery.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/sucheng/controller/view/StoreView.java" />
+        <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/base/home.jsp" />
         <option value="$PROJECT_DIR$/src/main/resources/mapper/StoreDAOMapper.xml" />
+        <option value="$PROJECT_DIR$/src/main/webapp/static/js/current.js" />
+        <option value="$PROJECT_DIR$/src/main/webapp/static/js/home/public.js" />
+        <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/store/storeManage.jsp" />
+        <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/industry/typeManage.jsp" />
+        <option value="$PROJECT_DIR$/src/main/webapp/static/layui/json/address.js" />
+        <option value="$PROJECT_DIR$/src/main/webapp/static/layui/lay/modules/address.js" />
+        <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/store/add.jsp" />
+        <option value="$PROJECT_DIR$/src/main/webapp/static/js/area/province.js" />
+        <option value="$PROJECT_DIR$/src/main/java/com/sucheng/controller/StoreController.java" />
       </list>
     </option>
   </component>
@@ -265,9 +259,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="AndroidView" />
-      <pane id="Scratches" />
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -315,6 +306,25 @@
               <item name="CashRegister" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="sucheng" type="462c0819:PsiDirectoryNode" />
+              <item name="controller" type="462c0819:PsiDirectoryNode" />
+              <item name="view" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="CashRegister" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CashRegister" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="sucheng" type="462c0819:PsiDirectoryNode" />
+              <item name="query" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="CashRegister" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CashRegister" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="resources" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -346,6 +356,25 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="webapp" type="462c0819:PsiDirectoryNode" />
+              <item name="static" type="462c0819:PsiDirectoryNode" />
+              <item name="js" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="CashRegister" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CashRegister" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="webapp" type="462c0819:PsiDirectoryNode" />
+              <item name="static" type="462c0819:PsiDirectoryNode" />
+              <item name="js" type="462c0819:PsiDirectoryNode" />
+              <item name="area" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="CashRegister" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CashRegister" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="webapp" type="462c0819:PsiDirectoryNode" />
               <item name="WEB-INF" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -356,6 +385,16 @@
               <item name="webapp" type="462c0819:PsiDirectoryNode" />
               <item name="WEB-INF" type="462c0819:PsiDirectoryNode" />
               <item name="views" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="CashRegister" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CashRegister" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="webapp" type="462c0819:PsiDirectoryNode" />
+              <item name="WEB-INF" type="462c0819:PsiDirectoryNode" />
+              <item name="views" type="462c0819:PsiDirectoryNode" />
+              <item name="industry" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="CashRegister" type="b2602c69:ProjectViewProjectNode" />
@@ -371,7 +410,10 @@
           <select />
         </subPane>
       </pane>
+      <pane id="AndroidView" />
       <pane id="PackagesPane" />
+      <pane id="Scratches" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -381,6 +423,9 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../auto" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="E:\IDEA\CashRegister\src\main\webapp\static\layui\lay\modules" />
+    </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="com.sucheng.common" />
       <recent name="com.sucheng.controller" />
@@ -389,11 +434,11 @@
       <recent name="com.sucheng.filter" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\IDEA\CashRegister\src\main\webapp\static\layui\json" />
       <recent name="E:\IDEA\CashRegister\src\main\webapp\static\js" />
       <recent name="E:\IDEA\CashRegister\src\main\webapp\static\images" />
       <recent name="E:\IDEA\CashRegister\src\main\webapp\static\css" />
       <recent name="E:\IDEA\CashRegister\src\main\java\com\sucheng\filter" />
-      <recent name="E:\IDEA\CashRegister\src\main\resources\mapper" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -606,11 +651,12 @@
       <updated>1526973421810</updated>
       <workItem from="1526973425125" duration="28145000" />
       <workItem from="1527208773253" duration="23780000" />
+      <workItem from="1527241521192" duration="18297000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="51925000" />
+    <option name="totallyTimeSpent" value="70222000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -635,21 +681,21 @@
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.47549018" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.43535188" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32843137" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.34640524" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3970588" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39443535" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22012103" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22314675" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Bean Validation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32843137" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32733223" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -667,68 +713,15 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="30" />
+      <option name="time" value="39" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-aop/4.3.10.RELEASE/spring-aop-4.3.10.RELEASE.jar!/org/springframework/aop/support/AopUtils.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="82">
-          <caret line="180" column="0" lean-forward="false" selection-start-line="180" selection-start-column="0" selection-end-line="180" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/static/css/home/app.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/static/js/home/app.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/static/js/home/tab.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="25">
-          <caret line="1" column="179" lean-forward="false" selection-start-line="1" selection-start-column="179" selection-end-line="1" selection-end-column="179" />
-          <folding>
-            <element signature="n#!!doc" expanded="false" />
-            <marker date="1527148057551" expanded="true" signature="1110:1116" ph="&amp;nbsp;" />
-            <marker date="1527148057551" expanded="true" signature="3373:3381" ph="&amp;##x1006;" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/mapper/AdminDAOMapper.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="96">
-          <caret line="60" column="24" lean-forward="false" selection-start-line="60" selection-start-column="24" selection-end-line="60" selection-end-column="24" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/sucheng/service/AdminService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="50">
-          <caret line="2" column="26" lean-forward="false" selection-start-line="2" selection-start-column="26" selection-end-line="2" selection-end-column="26" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/sucheng/service/impl/AdminServiceImpl.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="334">
           <caret line="39" column="0" lean-forward="false" selection-start-line="39" selection-start-column="0" selection-end-line="39" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#1027#1028#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -740,28 +733,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/sucheng/controller/view/StoreView.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="175">
-          <caret line="7" column="24" lean-forward="false" selection-start-line="7" selection-start-column="24" selection-end-line="7" selection-end-column="24" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#272#273#0" expanded="false" />
-            <element signature="e#306#307#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/sucheng/controller/view/AdminView.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="100">
           <caret line="5" column="11" lean-forward="false" selection-start-line="5" selection-start-column="11" selection-end-line="5" selection-end-column="11" />
-          <folding>
-            <element signature="e#281#282#0" expanded="false" />
-            <element signature="e#317#318#0" expanded="false" />
-            <element signature="e#378#379#0" expanded="false" />
-            <element signature="e#412#413#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -808,7 +783,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="650">
           <caret line="26" column="124" lean-forward="false" selection-start-line="26" selection-start-column="124" selection-end-line="26" selection-end-column="124" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -823,7 +797,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="44">
           <caret line="12" column="13" lean-forward="false" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -831,7 +804,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="250">
           <caret line="10" column="54" lean-forward="false" selection-start-line="10" selection-start-column="54" selection-end-line="10" selection-end-column="54" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -839,7 +811,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="394">
           <caret line="93" column="43" lean-forward="false" selection-start-line="93" selection-start-column="43" selection-end-line="93" selection-end-column="43" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -847,7 +818,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="325">
           <caret line="21" column="13" lean-forward="false" selection-start-line="21" selection-start-column="13" selection-end-line="21" selection-end-column="13" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -855,7 +825,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-64">
           <caret line="140" column="0" lean-forward="false" selection-start-line="140" selection-start-column="0" selection-end-line="140" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -883,19 +852,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/static/js/home/public.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1950">
-          <caret line="78" column="1" lean-forward="false" selection-start-line="78" selection-start-column="1" selection-end-line="78" selection-end-column="1" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/sucheng/controller/view/IndustryView.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="300">
           <caret line="17" column="5" lean-forward="true" selection-start-line="17" selection-start-column="5" selection-end-line="17" selection-end-column="5" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -919,53 +879,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/industry/add.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="570">
-          <caret line="61" column="21" lean-forward="false" selection-start-line="61" selection-start-column="21" selection-end-line="61" selection-end-column="21" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/sucheng/dos/StoreDO.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="294">
-          <caret line="78" column="24" lean-forward="true" selection-start-line="78" selection-start-column="24" selection-end-line="78" selection-end-column="24" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/sucheng/dto/StoreDTO.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="350">
-          <caret line="80" column="19" lean-forward="false" selection-start-line="80" selection-start-column="19" selection-end-line="80" selection-end-column="19" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/sucheng/vo/StoreVO.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-639">
-          <caret line="12" column="13" lean-forward="false" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/static/js/current.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <marker date="1516324041720" expanded="true" signature="930:945" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/sucheng/common/UploadResult.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -973,7 +890,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -981,37 +897,12 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="75">
           <caret line="3" column="36" lean-forward="true" selection-start-line="3" selection-start-column="36" selection-end-line="3" selection-end-column="36" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/static/js/area/province.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1366">
-          <caret line="3" column="17" lean-forward="true" selection-start-line="3" selection-start-column="17" selection-end-line="3" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/static/js/area/data.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2925">
-          <caret line="0" column="404" lean-forward="false" selection-start-line="0" selection-start-column="404" selection-end-line="0" selection-end-column="404" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/target/cash-1.0/static/uploads/微信图片_20180522153553 - 副本_看图王.png">
       <provider selected="true" editor-type-id="images">
         <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/industry/typeManage.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="375">
-          <caret line="30" column="30" lean-forward="true" selection-start-line="30" selection-start-column="30" selection-end-line="30" selection-end-column="30" />
-          <folding />
-        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/sucheng/controller/AdminController.java">
@@ -1026,8 +917,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/sucheng/controller/IndustryController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="170" column="57" lean-forward="true" selection-start-line="170" selection-start-column="57" selection-end-line="170" selection-end-column="57" />
+        <state relative-caret-position="3750">
+          <caret line="170" column="57" lean-forward="false" selection-start-line="170" selection-start-column="57" selection-end-line="170" selection-end-column="57" />
           <folding />
         </state>
       </provider>
@@ -1036,7 +927,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="434">
           <caret line="23" column="59" lean-forward="false" selection-start-line="23" selection-start-column="59" selection-end-line="23" selection-end-column="59" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1044,7 +934,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="383">
           <caret line="27" column="59" lean-forward="true" selection-start-line="27" selection-start-column="59" selection-end-line="27" selection-end-column="59" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1056,67 +945,229 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/store/add.jsp">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/sucheng/vo/StoreVO.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="25">
-          <caret line="106" column="94" lean-forward="true" selection-start-line="106" selection-start-column="94" selection-end-line="106" selection-end-column="94" />
+        <state relative-caret-position="105">
+          <caret line="68" column="30" lean-forward="false" selection-start-line="68" selection-start-column="30" selection-end-line="68" selection-end-column="30" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/base/home.jsp">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/sucheng/dto/StoreDTO.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="275">
-          <caret line="93" column="52" lean-forward="false" selection-start-line="93" selection-start-column="52" selection-end-line="93" selection-end-column="52" />
+        <state relative-caret-position="-2845">
+          <caret line="72" column="32" lean-forward="true" selection-start-line="72" selection-start-column="32" selection-end-line="72" selection-end-column="32" />
+          <folding>
+            <element signature="e#3463#3464#0" expanded="true" />
+            <element signature="e#3489#3490#0" expanded="true" />
+            <element signature="e#3542#3543#0" expanded="true" />
+            <element signature="e#3581#3582#0" expanded="true" />
+            <element signature="e#3616#3617#0" expanded="true" />
+            <element signature="e#3641#3642#0" expanded="true" />
+            <element signature="e#3692#3693#0" expanded="true" />
+            <element signature="e#3729#3730#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/sucheng/dos/StoreDO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2618">
+          <caret line="51" column="26" lean-forward="true" selection-start-line="51" selection-start-column="26" selection-end-line="51" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/sucheng/controller/view/StoreView.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="17" column="5" lean-forward="true" selection-start-line="17" selection-start-column="5" selection-end-line="17" selection-end-column="5" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/sucheng/query/StoreQuery.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="189" column="5" lean-forward="true" selection-start-line="189" selection-start-column="5" selection-end-line="189" selection-end-column="5" />
+        <state relative-caret-position="269">
+          <caret line="75" column="24" lean-forward="false" selection-start-line="75" selection-start-column="24" selection-end-line="75" selection-end-column="24" />
           <folding>
-            <element signature="e#3036#3037#0" expanded="true" />
-            <element signature="e#3061#3062#0" expanded="true" />
-            <element signature="e#3113#3114#0" expanded="true" />
-            <element signature="e#3150#3151#0" expanded="true" />
+            <element signature="e#2184#2185#0" expanded="true" />
+            <element signature="e#2206#2207#0" expanded="true" />
+            <element signature="e#2251#2252#0" expanded="true" />
+            <element signature="e#2282#2283#0" expanded="true" />
+            <element signature="e#2310#2311#0" expanded="true" />
+            <element signature="e#2328#2329#0" expanded="true" />
+            <element signature="e#2365#2366#0" expanded="true" />
+            <element signature="e#2388#2389#0" expanded="true" />
+            <element signature="e#2418#2419#0" expanded="true" />
+            <element signature="e#2438#2439#0" expanded="true" />
+            <element signature="e#2479#2480#0" expanded="true" />
+            <element signature="e#2506#2507#0" expanded="true" />
+            <element signature="e#3352#3353#0" expanded="true" />
+            <element signature="e#3378#3379#0" expanded="true" />
+            <element signature="e#3431#3432#0" expanded="true" />
+            <element signature="e#3470#3471#0" expanded="true" />
+            <element signature="e#3505#3506#0" expanded="true" />
+            <element signature="e#3530#3531#0" expanded="true" />
+            <element signature="e#3581#3582#0" expanded="true" />
+            <element signature="e#3618#3619#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/sucheng/controller/StoreController.java">
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/static/js/current.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="434">
-          <caret line="184" column="20" lean-forward="true" selection-start-line="184" selection-start-column="20" selection-end-line="184" selection-end-column="20" />
+        <state relative-caret-position="394">
+          <caret line="42" column="0" lean-forward="true" selection-start-line="42" selection-start-column="0" selection-end-line="42" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/store/storeManage.jsp">
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/static/js/home/public.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-691">
-          <caret line="27" column="50" lean-forward="true" selection-start-line="27" selection-start-column="50" selection-end-line="27" selection-end-column="50" />
-          <folding />
+        <state relative-caret-position="-181">
+          <caret line="81" column="40" lean-forward="true" selection-start-line="81" selection-start-column="40" selection-end-line="81" selection-end-column="40" />
+          <folding>
+            <marker date="1527473067227" expanded="true" signature="3071:3086" ph="..." />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/mapper/StoreDAOMapper.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="336">
-          <caret line="241" column="43" lean-forward="true" selection-start-line="241" selection-start-column="43" selection-end-line="241" selection-end-column="43" />
+        <state relative-caret-position="69">
+          <caret line="239" column="117" lean-forward="false" selection-start-line="239" selection-start-column="117" selection-end-line="239" selection-end-column="117" />
           <folding>
-            <marker date="1527239921441" expanded="true" signature="2138:2174" ph="delete from t_store... " />
-            <marker date="1527239921441" expanded="true" signature="2248:2284" ph="delete from t_store... " />
-            <marker date="1527239921441" expanded="true" signature="2575:3438" ph="update t_store... " />
-            <marker date="1527239921441" expanded="true" signature="3545:3602" ph="update t_store... " />
-            <marker date="1527239921441" expanded="true" signature="3867:3953" ph="select from t_store" />
-            <marker date="1527239921441" expanded="true" signature="4040:4144" ph="select from t_store" />
-            <marker date="1527239921441" expanded="true" signature="4276:4421" ph="select from t_store" />
-            <marker date="1527239921441" expanded="true" signature="4487:4515" ph="select count... t_store" />
-            <marker date="1527239921441" expanded="true" signature="5929:6184" ph="select from t_store" />
-            <marker date="1527239921441" expanded="true" signature="6306:6334" ph="select count... t_store" />
+            <marker date="1527471380509" expanded="true" signature="2138:2174" ph="delete from t_store... " />
+            <marker date="1527471380509" expanded="true" signature="2248:2284" ph="delete from t_store... " />
+            <marker date="1527471380509" expanded="true" signature="2575:3438" ph="update t_store... " />
+            <marker date="1527471380509" expanded="true" signature="3545:3602" ph="update t_store... " />
+            <marker date="1527471380509" expanded="true" signature="3867:3953" ph="select from t_store" />
+            <marker date="1527471380509" expanded="true" signature="4040:4144" ph="select from t_store" />
+            <marker date="1527471380509" expanded="true" signature="4276:4421" ph="select from t_store" />
+            <marker date="1527471380509" expanded="true" signature="4487:4515" ph="select count... t_store" />
+            <marker date="1527471380509" expanded="true" signature="5929:6286" ph="select from t_store" />
+            <marker date="1527471380509" expanded="true" signature="5968:6022" ph="select name t_store" />
+            <marker date="1527471380509" expanded="true" signature="6408:6436" ph="select count... t_store" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/store/storeManage.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-700">
+          <caret line="8" column="85" lean-forward="true" selection-start-line="8" selection-start-column="85" selection-end-line="8" selection-end-column="85" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/industry/typeManage.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external/lib.dom.d.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="186">
+          <caret line="14801" column="4" lean-forward="false" selection-start-line="14801" selection-start-column="4" selection-end-line="14801" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/static/layui/json/address.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-28634">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/base/home.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="375">
+          <caret line="90" column="170" lean-forward="false" selection-start-line="90" selection-start-column="170" selection-end-line="90" selection-end-column="170" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/static/layui/lay/modules/layer.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="n#!!doc" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/static/layui/lay/modules/address.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="175">
+          <caret line="7" column="37" lean-forward="true" selection-start-line="7" selection-start-column="37" selection-end-line="7" selection-end-column="37" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/static/layui/lay/modules/upload.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="n#!!doc" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/industry/add.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="257">
+          <caret line="29" column="47" lean-forward="true" selection-start-line="29" selection-start-column="47" selection-end-line="29" selection-end-column="47" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/static/layui/lay/modules/form.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="25">
+          <caret line="1" column="2971" lean-forward="false" selection-start-line="1" selection-start-column="2965" selection-end-line="1" selection-end-column="2971" />
+          <folding>
+            <element signature="n#!!doc" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/static/js/area/data.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-75">
+          <caret line="0" column="4" lean-forward="false" selection-start-line="0" selection-start-column="4" selection-end-line="0" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/static/js/area/province.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="250">
+          <caret line="52" column="23" lean-forward="true" selection-start-line="52" selection-start-column="23" selection-end-line="52" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/store/add.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="236">
+          <caret line="186" column="46" lean-forward="true" selection-start-line="186" selection-start-column="46" selection-end-line="186" selection-end-column="46" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/sucheng/controller/StoreController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="317">
+          <caret line="50" column="41" lean-forward="true" selection-start-line="50" selection-start-column="41" selection-end-line="50" selection-end-column="41" />
+          <folding />
         </state>
       </provider>
     </entry>

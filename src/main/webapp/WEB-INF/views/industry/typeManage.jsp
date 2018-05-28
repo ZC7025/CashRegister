@@ -1,10 +1,3 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: CMY
-  Date: 2018/1/2
-  Time: 8:22
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
     String path = request.getContextPath();
@@ -28,7 +21,7 @@
 <table id="type_table" lay-filter="demo"></table>
 
 <script type="text/html" id="statusID">
-    {{#  if(d.status == 0){ }}
+    {{#  if(d.status == 'N'){ }}
     <span style="color: red;">冻结</span>
     {{#  } else { }}
     <span style="color: green;">激活</span>

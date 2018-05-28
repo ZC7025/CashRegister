@@ -39,6 +39,18 @@ public class StoreQuery extends BaseQuery {
 	*/
 	private String email;
 	/**
+	 * 省
+	 */
+	private String province;
+	/**
+	 * 市
+	 */
+	private String city;
+	/**
+	 * 县
+	 */
+	private String county;
+	/**
 	*
 	*/
 	private String address;
@@ -53,7 +65,7 @@ public class StoreQuery extends BaseQuery {
 	/**
 	 * 行业名称
 	 */
-	private Integer industryName;
+	private String industryName;
 	/**
 	*总部id
 	*/
@@ -61,7 +73,7 @@ public class StoreQuery extends BaseQuery {
 	/**
 	 * 总部名称
 	 */
-	private Integer generalName;
+	private String generalName;
 	/**
 	*
 	*/
@@ -137,6 +149,30 @@ public class StoreQuery extends BaseQuery {
 		this.email = email;
 	}
 
+	public String getProvince() {
+		return province;
+	}
+
+	public void setProvince(String province) {
+		this.province = province;
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+	public String getCounty() {
+		return county;
+	}
+
+	public void setCounty(String county) {
+		this.county = county;
+	}
+
 	public String getAddress() {
 		return address;
 	}
@@ -185,19 +221,19 @@ public class StoreQuery extends BaseQuery {
 		this.createdTime = createdTime;
 	}
 
-	public Integer getIndustryName() {
+	public String getIndustryName() {
 		return industryName;
 	}
 
-	public void setIndustryName(Integer industryName) {
+	public void setIndustryName(String industryName) {
 		this.industryName = industryName;
 	}
 
-	public Integer getGeneralName() {
+	public String getGeneralName() {
 		return generalName;
 	}
 
-	public void setGeneralName(Integer generalName) {
+	public void setGeneralName(String generalName) {
 		this.generalName = generalName;
 	}
 

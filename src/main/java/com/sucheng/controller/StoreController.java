@@ -48,7 +48,7 @@ public class StoreController extends BaseController {
         try {
             storeVO.setPwd(HashUtils.md5(storeVO.getPwd(), Constants.SALT, HashEncodeEnum.HEX));
             storeService.save(getBeanMapper().map(storeVO, StoreDTO.class));
-            statusVO.okStatus(200, "添加成功");
+            statusVO.okStatus(0, "添加成功");
         } catch (ServiceException e) {
             logger.error("添加失败：{}", e.getMessage());
             statusVO.errorStatus(500, "添加失败");
@@ -169,7 +169,7 @@ public class StoreController extends BaseController {
         return pagerVO;
     }
 
-    @PostMapping("storeList")
+    @RequestMapping("storeList")
     @ResponseBody
     public PagerVO listPageByCondition(int page, int limit, StoreQuery storeQuery) {
         PageQuery pageQuery = new PageQuery(page, limit);
@@ -178,7 +178,7 @@ public class StoreController extends BaseController {
             PagerDTO pagerDTO = storeService.listPageByCondition(pageQuery, storeQuery);
             Mapper mapper = getBeanMapper();
             pagerVO = mapper.map(pagerDTO, PagerVO.class);
-            pagerVO.setRows(DozerMapperUtils.mapList(mapper, pagerDTO.getRows(), StoreVO.class));
+            pagerVO.setRows(DozerMapperUtils.mapList(mapper, pagerDTO.getRows(), StoreQuery.class));
         } catch (ServiceException e) {
             logger.error("返回指定条件的分页对象JSON数据失败：{}", e.getMessage());
         }

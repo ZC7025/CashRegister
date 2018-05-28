@@ -236,15 +236,17 @@
 		
     </sql>
 
-    <select id="listPageByCondition" resultType="com.sucheng.dos.StoreDO">
-        select
-        <include refid="select_columns"/>
-        from t_store
+    <select id="listPageByCondition" resultType="com.sucheng.query.StoreQuery">
+        select s.*, ins.name as industryName, (select name from t_store st where st.id = s.general_id) as generalName
+		from t_store s, t_industry ins
         <where>
             <include refid="where_clause"/>
-        </where>
-        order by created_time desc
-        limit #{beginIndex}, #{pageSize}
+			<if test="true">
+				and s.industry_id = ins.id
+			</if>
+		</where>
+		order by s.created_time desc
+        limit #{pager.beginIndex}, #{pager.pageSize}
     </select>
 
     <select id="countByCondition" parameterType="com.sucheng.query.StoreQuery" resultType="long">

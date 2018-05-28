@@ -237,11 +237,15 @@
     </sql>
 
     <select id="listPageByCondition" resultType="com.sucheng.query.StoreQuery">
-        select s.*, ins.name as industryName from t_store s, t_industry ins
+        select s.*, ins.name as industryName, (select name from t_store st where st.id = s.general_id) as generalName
+		from t_store s, t_industry ins
         <where>
             <include refid="where_clause"/>
-        </where>
-		and s.industry_id = ins.id order by s.created_time desc
+			<if test="true">
+				and s.industry_id = ins.id
+			</if>
+		</where>
+		order by s.created_time desc
         limit #{pager.beginIndex}, #{pager.pageSize}
     </select>
 

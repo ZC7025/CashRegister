@@ -11,4 +11,9 @@ public class StoreView {
     public String add() {
         return "store/add";
     }
+
+    @RequestMapping("storeList")
+    public String storeList() {
+        return "store/storeManage";
+    }
 }

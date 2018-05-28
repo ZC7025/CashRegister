@@ -24,10 +24,20 @@ function treeSelect(config) {
     });
     form.render();
     cityEvent(config);
+    config.v2 = config.v2.split("-")[1];
     areaEvent(config);
     form.on('select(' + config.s1 + ')', function (data) {
+        var tempVal = data.value;
+        data.value = data.value.split("-")[1];
         cityEvent(data);
+        // $('select[name="city"]').next().find('.layui-select-title input').click();
+        // var select = 'dd[lay-value="' + tempVal + '"]';
+        // $('#city').siblings("div.layui-form-select").find('dl').find(select).click();
+        config.v2 = $('select[name=' + config.s2 + ']').val();
+        config.v2 = config.v2.split("-")[1];
+        areaEvent(config);
         form.on('select(' + config.s2 + ')', function (data) {
+            data.value = data.value.split("-")[1];
             areaEvent(data);
         });
     });
@@ -68,7 +78,7 @@ function treeSelect(config) {
         form.on('select(' + config.s3 + ')', function (data) { });
     }
     function appendOptionTo($o, k, v, d) {
-        var $opt = $("<option>").text(k).val(v);
+        var $opt = $("<option>").text(k).val(k+'-'+v);
         if (v == d) { $opt.attr("selected", "selected") }
         $opt.appendTo($o);
     }

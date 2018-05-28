@@ -87,6 +87,9 @@
                             <dd><a href="javascript:;" kit-target
                                    data-options="{url:'<%=path %>/page/store/add',icon:'&#xe658;',title:'门店添加',id:'1'}"><i class="layui-icon">&#xe658;</i><span>门店添加</span></a>
                             </dd>
+                            <dd><a href="javascript:;" kit-target
+                                   data-options="{url:'<%=path %>/page/store/storeList',icon:'&#xe658;',title:'门店管理',id:'2'}"><i class="layui-icon">&#xe658;</i><span>门店管理</span></a>
+                            </dd>
                         </dl>
                     </li>
                     <li class="layui-nav-item">
