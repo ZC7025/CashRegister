@@ -59,18 +59,23 @@ public class AdminController extends BaseController {
             Session session = subject.getSession();
             session.setAttribute("admin",adminVO1);
             statusVO.okStatus(0,"登录成功");
-        } catch (ServiceException e) {
+        } catch (ServiceException | AuthenticationException e) {
             logger.error("登录失败：{}", e.getMessage());
             statusVO.errorStatus(500, "登录失败");
-        } catch (UnknownAccountException e) {
-            logger.error("登录失败：{}", e.getMessage());
-            statusVO.errorStatus(500, "登录失败");
-        } catch (IncorrectCredentialsException e) {
-            logger.error("登录失败：{}", e.getMessage());
-            statusVO.errorStatus(500, "登录失败");
-        } catch (AuthenticationException e) {
-            logger.error("登录失败：{}", e.getMessage());
-            statusVO.errorStatus(500, "登录失败");
+        }
+        return statusVO;
+    }
+
+    @RequestMapping("out")
+    @ResponseBody
+    public ControllerStatusVO outTest() {
+        ControllerStatusVO statusVO = new ControllerStatusVO();
+        Subject subject = SecurityUtils.getSubject();
+        if (subject.isAuthenticated()) {
+            subject.logout(); // session 会销毁，在SessionListener监听session销毁，清理权限缓存
+            statusVO.okStatus(0,"注销成功");
+        } else {
+            statusVO.errorStatus(500, "注销失败");
         }
         return statusVO;
     }

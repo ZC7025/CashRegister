@@ -82,6 +82,10 @@ function formatStatus(status) {
     return status === 'N' ? "冻结" : "激活";
 }
 
+function formatArea(value) {
+    return value.split("-")[0];
+}
+
 /**
  * 上传图片的通用js
  * @param upload 必填

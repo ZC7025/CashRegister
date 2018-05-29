@@ -1,6 +1,7 @@
 package com.sucheng.dao;
 
 import com.sucheng.query.PageQuery;
+import com.sucheng.vo.StoreVO;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
@@ -22,4 +23,6 @@ public interface StoreDAO extends BaseDAO {
 
     @Override
     Long countByCondition(@Param("query") Object queryObj);
+
+    StoreVO getByPhonePwd(@Param("phone") String phone, @Param("pwd") String pwd);
 }

@@ -12,7 +12,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>修改行业类型</title>
+    <title>修改牌号</title>
     <link rel="stylesheet" href="<%=path %>/static/layui/css/layui.css" media="all"/>
 </head>
 <body>
@@ -21,7 +21,6 @@
     <div class="layui-row">
         <div class="layui-col-md12">
             <form id="update" class="layui-form">
-
                 <div class="layui-form-item" style="margin-top: 20px;">
                     <label class="layui-form-label"></label>
                     <div class="layui-input-block">
@@ -31,17 +30,17 @@
                 </div>
 
                 <div class="layui-form-item" style="margin-top: 20px;">
-                    <label class="layui-form-label">行业类型</label>
+                    <label class="layui-form-label">牌号</label>
                     <div class="layui-input-block">
-                        <input type="text" name="name" id="name" lay-verify="required" autocomplete="off"
+                        <input type="text" name="gradeName" id="gradeName" lay-verify="required" autocomplete="off"
                                class="layui-input">
                     </div>
                 </div>
-                <div class="layui-form-item">
-                    <label class="layui-form-label">状态</label>
+                <div class="layui-form-item" style="margin-top: 20px;">
+                    <label class="layui-form-label">座位数</label>
                     <div class="layui-input-block">
-                        <input type="radio" name="status" value="Y" title="激活" checked>
-                        <input type="radio" name="status" value="N" title="冻结">
+                        <input type="number" name="seat" id="seat" lay-verify="required|isNumber" autocomplete="off"
+                               class="layui-input">
                     </div>
                 </div>
 
@@ -67,23 +66,26 @@
         }
         return null;
     }
-    var leixingId = GetQueryString("id");
+    var gradeId = GetQueryString("id");
     layui.use(['form'], function () {
 
         var form = layui.form;
         var $ = layui.jquery;
         var layer = layui.layer;
 
-        $.get('<%=path %>/data/industry/one/' + leixingId,
+        $.get('<%=path %>/data/grade/one/' + gradeId,
             function (data) {
                 $('#id').val(data.id);
-                $('#name').val(data.name);
-//                $('#status').val(data.status);
+                $('#gradeName').val(data.gradeName);
+                $('#seat').val(data.seat);
             });
 
-        //修改行业类型
+        form.verify({
+            isNumber: [/^\+?[1-9][0-9]*$/, '座位必须是正整数']
+        });
+
         form.on('submit(update)', function (data) {
-            $.post('<%=path %>/data/industry/update',
+            $.post('<%=path %>/data/grade/update',
                 $('#update').serialize(),
                 function (res) {
                     if (res.code === 0) {
@@ -100,7 +102,6 @@
             );
             return false;
         });
-
     });
 </script>
 </body>

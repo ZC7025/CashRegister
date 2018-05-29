@@ -7,7 +7,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>后台</title>
+    <title>门店后台</title>
     <link rel="stylesheet" href="<%=path %>/static/layui/css/layui.css" media="all"/>
     <link rel="stylesheet" href="<%=path %>/static/css/home/app.css" media="all">
 </head>
@@ -61,7 +61,7 @@
         <ul class="layui-nav layui-layout-right kit-nav">
             <li class="layui-nav-item">
                 <a href="javascript:;">
-                    <img src="<%=path %>/static/images/face.jpg" class="layui-nav-img"> <sapn id="nickname">${admin.nickname }</sapn>
+                    <img src="<%=path %>/static/images/face.jpg" class="layui-nav-img"> <sapn id="nickname">${store.name }</sapn>
                 </a>
                 <dl class="layui-nav-child">
                     <dd><a href="javascript:;" id="info">基本资料</a></dd>
@@ -85,18 +85,18 @@
                         <a href="javascript:;"><span>门店管理</span></a>
                         <dl class="layui-nav-child">
                             <dd><a href="javascript:;" kit-target
-                                   data-options="{url:'<%=path %>/page/store/add',icon:'&#xe658;',title:'门店添加',id:'1'}"><i class="layui-icon">&#xe658;</i><span>门店添加</span></a>
+                                   data-options="{url:'<%=path %>/page/store/update?id=${store.id}',icon:'&#xe658;',title:'修改信息',id:'1'}"><i class="layui-icon">&#xe658;</i><span>修改信息</span></a>
                             </dd>
                             <dd><a href="javascript:;" kit-target
-                                   data-options="{url:'<%=path %>/page/store/storeList',icon:'&#xe658;',title:'门店管理',id:'2'}"><i class="layui-icon">&#xe658;</i><span>门店管理</span></a>
+                                   data-options="{url:'<%=path %>/page/store/updatePwd',icon:'&#xe658;',title:'修改密码',id:'2'}"><i class="layui-icon">&#xe658;</i><span>修改密码</span></a>
                             </dd>
                         </dl>
                     </li>
                     <li class="layui-nav-item">
-                        <a href="javascript:;"><span>行业类别管理</span></a>
+                        <a href="javascript:;"><span>牌号管理</span></a>
                         <dl class="layui-nav-child">
                             <dd><a href="javascript:;" kit-target
-                                   data-options="{url:'<%=path %>/page/industry/typeList',icon:'&#xe658;',title:'行业类别管理',id:'3'}"><i class="layui-icon">&#xe658;</i><span>行业类别管理</span></a>
+                                   data-options="{url:'<%=path %>/page/grade/gradeList',icon:'&#xe658;',title:'牌号管理',id:'3'}"><i class="layui-icon">&#xe658;</i><span>牌号管理</span></a>
                             </dd>
                         </dl>
                     </li>
@@ -140,59 +140,6 @@
     </div>
 </div>
 
-<%--<div style="display: none;" id="editIndexMsg">--%>
-    <%--<form class="layui-form" id="huserForm">--%>
-        <%--<div class="layui-form-item">--%>
-            <%--<label class="layui-form-label">昵称</label>--%>
-            <%--<div class="layui-input-block">--%>
-                <%--<input type="text" name="rname" autocomplete="off" placeholder="请输入昵称" class="layui-input"--%>
-                       <%--value="${admin.rname}">--%>
-            <%--</div>--%>
-        <%--</div>--%>
-        <%--<div class="layui-form-item">--%>
-            <%--<label class="layui-form-label">性别</label>--%>
-            <%--<div class="layui-input-block">--%>
-                <%--<input type="hidden" name="sex" value=0 checked/>--%>
-                <%--<input type="radio" name="sex" value=1 title="男"/>--%>
-                <%--<input type="radio" name="sex" value=2 title="女"/>--%>
-            <%--</div>--%>
-        <%--</div>--%>
-        <%--<div class="layui-form-item">--%>
-            <%--<label class="layui-form-label">手机号</label>--%>
-            <%--<div class="layui-input-block">--%>
-                <%--<input type="text" name="phone" autocomplete="off" placeholder="请输入手机号" class="layui-input"--%>
-                       <%--value="${admin.phone}">--%>
-            <%--</div>--%>
-        <%--</div>--%>
-        <%--<div class="layui-form-item">--%>
-            <%--<label class="layui-form-label">真实姓名</label>--%>
-            <%--<div class="layui-input-block">--%>
-                <%--<input type="text" name="huname" autocomplete="off" placeholder="请输入真实姓名" class="layui-input"--%>
-                       <%--value="${admin.huname}">--%>
-            <%--</div>--%>
-        <%--</div>--%>
-        <%--<div class="layui-form-item">--%>
-            <%--<label class="layui-form-label">邮箱</label>--%>
-            <%--<div class="layui-input-block">--%>
-                <%--<input type="text" name="email" autocomplete="off" placeholder="请输入邮箱" class="layui-input"--%>
-                       <%--value="${admin.email}">--%>
-            <%--</div>--%>
-        <%--</div>--%>
-        <%--<div class="layui-form-item">--%>
-            <%--<label class="layui-form-label">组织</label>--%>
-            <%--<div class="layui-input-block">--%>
-                <%--<input type="text" name="oname" class="layui-input" value="${admin.oname}" disabled>--%>
-            <%--</div>--%>
-        <%--</div>--%>
-        <%--<input type="hidden" name="huid" value="${admin.huid}"/>--%>
-        <%--<div class="layui-form-item">--%>
-            <%--<div class="layui-input-block">--%>
-                <%--<button class="layui-btn" lay-submit lay-filter="edit">修改信息</button>--%>
-            <%--</div>--%>
-        <%--</div>--%>
-    <%--</form>--%>
-<%--</div>--%>
-
 <script type="text/javascript" src="<%=path %>/static/js/jquery.min.js"></script>
 <script type="text/javascript" src="<%=path %>/static/layui/layui.js"></script>
 <script>
@@ -228,7 +175,7 @@
         });
 
         $('#out').on('click', function () {
-            $.get('<%=path %>/data/admin/out',
+            $.get('<%=path %>/data/store/out',
               function (data) {
                   if(data.code === 0) {
                       window.location = '/'

@@ -12,7 +12,7 @@
 %>
 <html>
 <head>
-    <title>门店添加</title>
+    <title>门店修改</title>
 </head>
 <link rel="stylesheet" href="<%=path%>/static/css/public.css">
 <link rel="stylesheet" href="<%=path%>/static/layui/css/layui.css">
@@ -20,48 +20,41 @@
 <body>
 <div class="container">
     <div class="account-right">
-        <h1>门店添加</h1>
+        <h1>门店修改</h1>
         <hr/>
         <form class="layui-form" id="store">
+            <div class="layui-form-item" style="margin-top: 20px;">
+                <label class="layui-form-label"></label>
+                <div class="layui-input-block">
+                    <input type="hidden" name="id" id="id" lay-verify="id" autocomplete="off"
+                           class="layui-input" readonly/>
+                </div>
+            </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">门店编号</label>
                 <div class="layui-input-block">
-                    <input type="text" name="storeId" lay-verify="required" autocomplete="off" placeholder="请输入门店编号"
+                    <input type="text" name="storeId" id="storeId" lay-verify="required" autocomplete="off" placeholder="请输入门店编号"
                            class="layui-input">
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">门店名称</label>
                 <div class="layui-input-block">
-                    <input type="text" name="name" lay-verify="required" autocomplete="off"
+                    <input type="text" name="name" id="name" lay-verify="required" autocomplete="off"
                            placeholder="请输入门店名称" class="layui-input">
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">手机号码</label>
                 <div class="layui-input-block">
-                    <input type="text" name="phone" lay-verify="required" autocomplete="off"
+                    <input type="text" name="phone" id="phone" lay-verify="required" autocomplete="off"
                            placeholder="请输入手机号码" maxlength="11" class="layui-input">
-                </div>
-            </div>
-            <div class="layui-form-item">
-                <label class="layui-form-label">登录密码</label>
-                <div class="layui-input-block">
-                    <input type="password" id="pwd" name="pwd" lay-verify="required|pass" autocomplete="off"
-                           placeholder="请输入登录密码" class="layui-input">
-                </div>
-            </div>
-            <div class="layui-form-item">
-                <label class="layui-form-label">确认密码</label>
-                <div class="layui-input-block">
-                    <input type="password" id="repwd" name="repwd" lay-verify="required|repass" autocomplete="off"
-                           placeholder="请输入确认密码" class="layui-input">
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">关联邮箱</label>
                 <div class="layui-input-block">
-                    <input type="text" name="email" lay-verify="required|email" autocomplete="off"
+                    <input type="text" name="email" id="email" lay-verify="required|email" autocomplete="off"
                            placeholder="请输入关联邮箱" class="layui-input">
                 </div>
             </div>
@@ -86,7 +79,7 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">详细地址</label>
                 <div class="layui-input-block">
-                    <input type="text" name="address" lay-verify="required" autocomplete="off"
+                    <input type="text" name="address" id="address" lay-verify="required" autocomplete="off"
                            placeholder="请输入详细地址" class="layui-input">
                 </div>
             </div>
@@ -108,24 +101,9 @@
             </div>
 
             <div class="layui-form-item">
-                <div class="layui-row">
-                    <label class="layui-form-label">相关文件</label>
-                    <div class="layui-col-md2">
-                        <div class="layui-upload">
-                            <button type="button" class="layui-btn" id="license">营业执照</button>
-                            <div class="layui-upload-list">
-                                <img class="layui-upload-img" id="imgDemo" style="width:120px;height:120px">
-                                <p id="imgText"></p>
-                            </div>
-                        </div>
-                        <input type="hidden" name="licenseImg" id="licenseImg"/>
-                    </div>
-                </div>
-            </div>
-            <div class="layui-form-item">
                 <label class="layui-form-label"></label>
                 <div class="layui-input-block">
-                    <button class="layui-btn" lay-submit lay-filter="add">提交申请</button>
+                    <button class="layui-btn" lay-submit lay-filter="update">确认修改</button>
                 </div>
             </div>
         </form>
@@ -137,12 +115,49 @@
 <script type="text/javascript" src="<%=path %>/static/js/area/province.js"></script>
 <script type="text/javascript" src="<%=path %>/static/js/home/public.js"></script>
 <script>
+    //获取url上的值,获取页面传过来的值
+    function GetQueryString(name) {
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+        var r = window.location.search.substr(1).match(reg);
+        if (r != null) {
+            return unescape(r[2]);
+        }
+        return null;
+    }
+    var storeId = GetQueryString("id");
     layui.use(['form', 'upload'], function () {
 
         var form = layui.form;
         var $ = layui.jquery;
         var layer = layui.layer;
         var upload = layui.upload;
+        var config = {
+            s1: 'province',
+            s2: 'city',
+            s3: 'county',
+            v1: null,
+            v2: null,
+            v3: null
+        };
+        var typeId = null;
+        var generalId = null;
+
+        $.get('<%=path %>/data/store/one/' + storeId,
+            function (data) {
+                $('#id').val(data.id);
+                $('#storeId').val(data.storeId);
+                $('#name').val(data.name);
+                $('#phone').val(data.phone);
+                $('#email').val(data.email);
+                $('#address').val(data.address);
+                config.v1 = data.province.split("-")[1];
+                config.v2 = data.city.split("-")[1];
+                config.v3 = data.county.split("-")[1];
+                typeId = data.industryId;
+                generalId = data.generalId;
+                treeSelect(config);
+            });
+
         $(function () {
             var html = "";
             $.ajax({
@@ -150,28 +165,36 @@
                 success: function (data) {
                     //加载数据
                     for (var i = 0; i < data.length; i++) {
-                        html += '<option value="' + data[i].id + '">' + data[i].name + '</option>'
+                        if(typeId !== data[i].id) {
+                            html += '<option value="' + data[i].id + '">' + data[i].name + '</option>'
+                        } else {
+                            html += '<option value="' + data[i].id + '" selected="selected">' + data[i].name + '</option>'
+                        }
                     }
                     $("#type-select").append(html);
                     // 重新刷新表单，新option才会出现
                     form.render();
                 }
             });
-            var storeList = "";
-            $.ajax({
-                url: '<%=path %>/data/store/all',
-                success: function (data) {
-                    //加载数据
-                    for (var i = 0; i < data.length; i++) {
-                        var city = data[i].city.split("-")[0];
-                        var county = data[i].county.split("-")[0];
+        });
+        var storeList = "";
+        $.ajax({
+            url: '<%=path %>/data/store/all',
+            success: function (data) {
+                //加载数据
+                for (var i = 0; i < data.length; i++) {
+                    var city = data[i].city.split("-")[0];
+                    var county = data[i].county.split("-")[0];
+                    if(generalId !== data[i].id) {
                         storeList += '<option value="' + data[i].id + '">' + data[i].name + '('+city+county+data[i].address+')</option>'
+                    } else {
+                        storeList += '<option value="' + data[i].id + '" selected="selected">' + data[i].name + '('+city+county+data[i].address+')</option>'
                     }
-                    $("#store-select").append(storeList);
-                    // 重新刷新表单，新option才会出现
-                    form.render();
                 }
-            });
+                $("#store-select").append(storeList);
+                // 重新刷新表单，新option才会出现
+                form.render();
+            }
         });
 
         form.verify({
@@ -187,10 +210,10 @@
             }
         });
 
-        uploadImg(upload, 'license', '<%=path %>/file/firist', 'imgDemo', 'licenseImg', 'imgText');
+        <%--uploadImg(upload, 'license', '<%=path %>/file/firist', 'imgDemo', 'licenseImg', 'imgText');--%>
 
-        form.on('submit(add)', function (data) {
-            $.post('<%=path %>/data/store/save',
+        form.on('submit(update)', function (data) {
+            $.post('<%=path %>/data/store/update',
                 $('#store').serialize(),
                 function (res) {
                     if (res.code === 0) {

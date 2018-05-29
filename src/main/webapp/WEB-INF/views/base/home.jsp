@@ -134,8 +134,8 @@
 
     <div class="layui-footer">
         <!-- 底部固定区域 -->
-        2017 &copy;
-        <a href="">P2P</a>
+        2018 &copy;
+        <a href="">东莞市速成信息科技有限公司</a>
 
     </div>
 </div>
@@ -230,7 +230,7 @@
         $('#out').on('click', function () {
             $.get('<%=path %>/data/admin/out',
               function (data) {
-                  if(data.code == 0) {
+                  if(data.code === 0) {
                       window.location = '/'
                   } else {
                       layer.msg('注销失败！');

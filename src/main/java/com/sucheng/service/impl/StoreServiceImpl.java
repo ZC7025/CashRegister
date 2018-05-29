@@ -5,6 +5,7 @@ import com.sucheng.dos.StoreDO;
 import com.sucheng.dto.StoreDTO;
 import com.sucheng.service.AbstractBaseService;
 import com.sucheng.service.StoreService;
+import com.sucheng.vo.StoreVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -32,5 +33,10 @@ public class StoreServiceImpl extends AbstractBaseService implements StoreServic
     @PostConstruct
     public void init() {
         super.init(StoreDO.class, StoreDTO.class);
+    }
+
+    @Override
+    public StoreVO getByPhonePwd(String phone, String pwd) {
+        return storeDAO.getByPhonePwd(phone, pwd);
     }
 }

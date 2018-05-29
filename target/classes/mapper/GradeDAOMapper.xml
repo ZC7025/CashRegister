@@ -154,7 +154,7 @@
             <include refid="where_clause"/>
         </where>
         order by created_time desc
-        limit #{beginIndex}, #{pageSize}
+        limit #{pager.beginIndex}, #{pager.pageSize}
     </select>
 
     <select id="countByCondition" parameterType="com.sucheng.query.GradeQuery" resultType="long">

@@ -12,9 +12,9 @@
 
 
 <div class="layui-btn-group demoTable" >
-    <button class="layui-btn" data-type="add">新增行业类型</button>
-    <button class="layui-btn" data-type="update">修改行业类型</button>
-    <button class="layui-btn" data-type="delete">删除行业类型</button>
+    <button class="layui-btn" data-type="add">新增门店</button>
+    <button class="layui-btn" data-type="update">修改门店信息</button>
+    <button class="layui-btn" data-type="delete">删除门店</button>
     <button class="layui-btn" data-type="refresh">刷新</button>
 </div>
 
@@ -36,14 +36,14 @@
                 ,{field:'name', title:'门店名称', width:150}
                 ,{field:'phone', title:'联系号码', width:150}
                 ,{field:'email', title:'邮箱', width:150}
-                ,{field:'province', title:'省', width:150}
-                ,{field:'city', title:'市', width:150}
-                ,{field:'county', title:'县/区', width:150}
+                ,{field:'province', title:'省', width:150,templet:'<div>{{formatArea(d.province)}}</div>'}
+                ,{field:'city', title:'市', width:150,templet:'<div>{{formatArea(d.city)}}</div>'}
+                ,{field:'county', title:'县/区', width:150,templet:'<div>{{formatArea(d.county)}}</div>'}
                 ,{field:'address', title:'详细地址', width:150}
                 ,{field:'industryName', title:'行业类型', width:150}
                 ,{field:'generalName', title:'总店名称', width:150}
                 ,{field:'status', title:'状态', width:100,templet:'<div>{{formatStatus(d.status)}}</div>'}
-                ,{field:'createdTime', title:'入驻时间', width:100,templet:'<div>{{ formatDateTime(d.createdTime)}}</div>'}
+                ,{field:'createdTime', title:'入驻时间', width:150,templet:'<div>{{ formatDateTime(d.createdTime)}}</div>'}
             ]]
             ,id: 'idTest'
             ,page: true
@@ -57,12 +57,6 @@
             }
         });
 
-        //监听表格复选框选择
-        table.on('checkbox(demo)', function(obj){
-            console.log(obj)
-        });
-
-
         $('.demoTable .layui-btn').on('click', function(){
             var type = $(this).data('type');
             active[type] ? active[type].call(this) : '';
@@ -72,10 +66,10 @@
             delete:function () {
                 var checkStatus = table.checkStatus('idTest')
                     ,data = checkStatus.data;
-                if(data.length == 1) {
-                    $.get('<%=path %>/data/industry/remove/' + data[0].id,
+                if(data.length === 1) {
+                    $.get('<%=path %>/data/store/remove/' + data[0].id,
                         function (data) {
-                            if(data.code==0){
+                            if(data.code===0){
                                 layer.msg("删除成功！");
                                 location.reload(true);
                             }else {
@@ -89,20 +83,21 @@
             ,add: function(){ //行业类型添加
                 layer.open({
                     type: 2,
-                    title: '行业类型添加',
-                    area: ['700px', '400px'],
-                    content: '<%=path %>/page/industry/add'
+                    title: '添加门店',
+                    area: ['80%', '80%'],
+                    maxmin:true,
+                    content: '<%=path %>/page/store/add'
                 });
             }
             ,update: function(){ //验证是否全选
                 var checkStatus = table.checkStatus('idTest')
                     ,data = checkStatus.data;
-                if(data.length == 1) {
+                if(data.length === 1) {
                     layer.open({
                         type: 2,
-                        area: ['700px', '400px'],
+                        area: ['80%', '80%'],
                         maxmin:true,
-                        content:"<%=path %>/page/industry/update?id="+data[0].id
+                        content:"<%=path %>/page/store/update?id="+data[0].id
                     })
                 } else {
                     layer.msg("请选择一行！");

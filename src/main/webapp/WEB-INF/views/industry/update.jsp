@@ -25,7 +25,7 @@
                 <div class="layui-form-item" style="margin-top: 20px;">
                     <label class="layui-form-label"></label>
                     <div class="layui-input-block">
-                        <input type="hidden" name="id" id="id" lay-verify="id" autocomplete="off"
+                        <input type="hidden" name="id" id="id" lay-verify="required" autocomplete="off"
                                class="layui-input" readonly/>
                     </div>
                 </div>
@@ -33,7 +33,7 @@
                 <div class="layui-form-item" style="margin-top: 20px;">
                     <label class="layui-form-label">行业类型</label>
                     <div class="layui-input-block">
-                        <input type="text" name="name" id="name" lay-verify="name" autocomplete="off"
+                        <input type="text" name="name" id="name" lay-verify="required" autocomplete="off"
                                class="layui-input">
                     </div>
                 </div>

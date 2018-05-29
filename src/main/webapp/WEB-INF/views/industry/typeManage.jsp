@@ -20,14 +20,8 @@
 
 <table id="type_table" lay-filter="demo"></table>
 
-<script type="text/html" id="statusID">
-    {{#  if(d.status == 'N'){ }}
-    <span style="color: red;">冻结</span>
-    {{#  } else { }}
-    <span style="color: green;">激活</span>
-    {{#  } }}
-</script>
 <script type="text/javascript" src="<%=path %>/static/layui/layui.js"></script>
+<script type="text/javascript" src="<%=path %>/static/js/home/public.js"></script>
 <script>
     layui.use('table', function(){
         var table = layui.table;
@@ -39,7 +33,7 @@
             ,cols: [[
                 {checkbox: true, fixed: true}
                 ,{field:'name', title:'行业类型', width:150}
-                ,{field:'status', title:'状态', width:100,templet:'#statusID'}
+                ,{field:'status', title:'状态', width:100,templet:'<div>{{formatStatus(d.status)}}</div>'}
 
             ]]
             ,id: 'idTest'
@@ -54,12 +48,6 @@
             }
         });
 
-        //监听表格复选框选择
-        table.on('checkbox(demo)', function(obj){
-            console.log(obj)
-        });
-
-
         $('.demoTable .layui-btn').on('click', function(){
             var type = $(this).data('type');
             active[type] ? active[type].call(this) : '';
@@ -69,10 +57,10 @@
             delete:function () {
                 var checkStatus = table.checkStatus('idTest')
                     ,data = checkStatus.data;
-                if(data.length == 1) {
+                if(data.length === 1) {
                     $.get('<%=path %>/data/industry/remove/' + data[0].id,
                         function (data) {
-                            if(data.code==0){
+                            if(data.code===0){
                                 layer.msg("删除成功！");
                                 location.reload(true);
                             }else {
@@ -89,13 +77,14 @@
                     type: 2,
                     title: '行业类型添加',
                     area: ['700px', '400px'],
+                    maxmin:true,
                     content: '<%=path %>/page/industry/add'
                 });
             }
             ,update: function(){ //验证是否全选
                 var checkStatus = table.checkStatus('idTest')
                     ,data = checkStatus.data;
-                if(data.length == 1) {
+                if(data.length === 1) {
                     layer.open({
                         type: 2,
                         area: ['700px', '400px'],

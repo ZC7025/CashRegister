@@ -1,5 +1,7 @@
 package com.sucheng.service;
 
+import com.sucheng.vo.StoreVO;
+
 /**
  * StoreService服务接口<br/>
  *
@@ -9,4 +11,5 @@ package com.sucheng.service;
  * @version 1.0
  */
 public interface StoreService extends BaseService {
+    StoreVO getByPhonePwd(String phone, String pwd);
 }

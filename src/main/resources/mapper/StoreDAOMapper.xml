@@ -122,9 +122,6 @@
     <update id="update" parameterType="com.sucheng.dos.StoreDO">
         update t_store
         <set>
-            <if test="id != null">
-				id = #{id},
-			</if>
 			<if test="storeId != null">
 				store_id = #{storeId},
 			</if>
@@ -139,6 +136,15 @@
 			</if>
 			<if test="email != null">
 				email = #{email},
+			</if>
+			<if test="province != null">
+				province = #{province},
+			</if>
+			<if test="city != null">
+				city = #{city},
+			</if>
+			<if test="county != null">
+				county = #{county},
 			</if>
 			<if test="address != null">
 				address = #{address},
@@ -163,12 +169,18 @@
         where id = #{id}
     </update>
 
+	<select id="getByPhonePwd" resultType="StoreVO">
+		<![CDATA[
+      select *  from t_store where phone = #{phone} and pwd = #{pwd}
+     ]]>
+	</select>
+
     <update id="updateActiveStatus" parameterType="com.sucheng.query.StatusQuery">
         update t_store set is_active = #{status} where id = #{id}
     </update>
 
     <sql id="select_columns">
-        id, store_id, name, phone, pwd, email, address, license_img, industry_id, general_id, status, created_time
+        id, store_id, name, phone, pwd, email, province, city, county, address, license_img, industry_id, general_id, status, created_time
     </sql>
 
     <select id="getById" parameterType="long" resultType="com.sucheng.dos.StoreDO">
@@ -178,9 +190,8 @@
     </select>
 
     <select id="listAll" resultType="com.sucheng.dos.StoreDO">
-        select
-        <include refid="select_columns"/>
-        from t_store
+        select id, name, city, county, address
+        from t_store where status = 'Y'
         order by created_time desc
     </select>
 

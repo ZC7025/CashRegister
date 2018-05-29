@@ -15,6 +15,13 @@ import com.sucheng.service.StoreService;
 import com.sucheng.vo.ControllerStatusVO;
 import com.sucheng.vo.PagerVO;
 import com.sucheng.vo.StoreVO;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.AuthenticationException;
+import org.apache.shiro.authc.IncorrectCredentialsException;
+import org.apache.shiro.authc.UnknownAccountException;
+import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.session.Session;
+import org.apache.shiro.subject.Subject;
 import org.dozer.Mapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -46,6 +53,7 @@ public class StoreController extends BaseController {
     public ControllerStatusVO save(StoreVO storeVO) {
         ControllerStatusVO statusVO = new ControllerStatusVO();
         try {
+            // TODO 判断手机号和邮箱唯一
             storeVO.setPwd(HashUtils.md5(storeVO.getPwd(), Constants.SALT, HashEncodeEnum.HEX));
             storeService.save(getBeanMapper().map(storeVO, StoreDTO.class));
             statusVO.okStatus(0, "添加成功");
@@ -98,6 +106,38 @@ public class StoreController extends BaseController {
         return statusVO;
     }
 
+    @PostMapping("login")
+    @ResponseBody
+    public ControllerStatusVO login(StoreVO storeVO) {
+        ControllerStatusVO statusVO = new ControllerStatusVO();
+        try {
+            Subject subject = SecurityUtils.getSubject();
+            subject.login(new UsernamePasswordToken(storeVO.getPhone(), HashUtils.md5(storeVO.getPwd(),Constants.SALT, HashEncodeEnum.HEX)));
+            StoreVO storeVO1 =storeService.getByPhonePwd(storeVO.getPhone(), HashUtils.md5(storeVO.getPwd(), Constants.SALT, HashEncodeEnum.HEX));
+            Session session = subject.getSession();
+            session.setAttribute("store",storeVO1);
+            statusVO.okStatus(0,"登录成功");
+        } catch (ServiceException | AuthenticationException e) {
+            logger.error("登录失败：{}", e.getMessage());
+            statusVO.errorStatus(500, "登录失败");
+        }
+        return statusVO;
+    }
+
+    @RequestMapping("out")
+    @ResponseBody
+    public ControllerStatusVO outTest() {
+        ControllerStatusVO statusVO = new ControllerStatusVO();
+        Subject subject = SecurityUtils.getSubject();
+        if (subject.isAuthenticated()) {
+            subject.logout(); // session 会销毁，在SessionListener监听session销毁，清理权限缓存
+            statusVO.okStatus(0,"注销成功");
+        } else {
+            statusVO.errorStatus(500, "注销失败");
+        }
+        return statusVO;
+    }
+
     @PostMapping("update")
     @ResponseBody
     public ControllerStatusVO update(StoreVO storeVO) {
@@ -105,6 +145,30 @@ public class StoreController extends BaseController {
         try {
             storeService.update(getBeanMapper().map(storeVO, StoreDTO.class));
             statusVO.okStatus(200, "更新成功");
+        } catch (ServiceException e) {
+            logger.error("更新失败：{}", e.getMessage());
+            statusVO.errorStatus(500, "更新失败");
+        }
+        return statusVO;
+    }
+
+    @PostMapping("updatePwd")
+    @ResponseBody
+    public ControllerStatusVO updatePwd(StoreVO storeVO, String newPwd) {
+        ControllerStatusVO statusVO = new ControllerStatusVO();
+        try {
+            StoreVO storeVO1 =storeService.getByPhonePwd(storeVO.getPhone(), HashUtils.md5(storeVO.getPwd(), Constants.SALT, HashEncodeEnum.HEX));
+            if(storeVO1 != null) {
+                storeVO.setPwd(HashUtils.md5(newPwd, Constants.SALT, HashEncodeEnum.HEX));
+                storeService.update(getBeanMapper().map(storeVO, StoreDTO.class));
+                statusVO.okStatus(0, "更新成功");
+                logger.error("更新密码：{}",storeVO1.getName());
+                //删除登录凭证，重新登录
+                SecurityUtils.getSubject().getSession().removeAttribute("store");
+            } else {
+                statusVO.errorStatus(500, "密码错误");
+                logger.error("更新失败：{密码错误}",storeVO.getPhone());
+            }
         } catch (ServiceException e) {
             logger.error("更新失败：{}", e.getMessage());
             statusVO.errorStatus(500, "更新失败");

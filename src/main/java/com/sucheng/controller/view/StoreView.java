@@ -16,4 +16,19 @@ public class StoreView {
     public String storeList() {
         return "store/storeManage";
     }
+
+    @RequestMapping("update")
+    public String update() {
+        return "store/update";
+    }
+
+    @RequestMapping("home")
+    public String home() {
+        return "store/home";
+    }
+
+    @RequestMapping("updatePwd")
+    public String updatePwd() {
+        return "store/updatePwd";
+    }
 }

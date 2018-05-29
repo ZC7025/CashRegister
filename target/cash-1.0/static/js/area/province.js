@@ -2,9 +2,9 @@
     s1: 'province',
     s2: 'city',
     s3: 'county',
-    v1: null,
-    v2: null,
-    v3: null
+    v1: "440000",
+    v2: "441900",
+    v3: "441901"
 };
 var $form;
 var form;
@@ -16,29 +16,43 @@ layui.define(['jquery', 'form'], function () {
     treeSelect(defaults);
 });
 function treeSelect(config) {
-    config.v1 = config.v1 ? config.v1 : 110000;
-    config.v2 = config.v2 ? config.v2 : 110100;
-    config.v3 = config.v3 ? config.v3 : 110101;
+    config.v1 = config.v1 ? config.v1 : "440000";
+    config.v2 = config.v2 ? config.v2 : "441900";
+    config.v3 = config.v3 ? config.v3 : "441901";
     $.each(threeSelectData, function (k, v) {
         appendOptionTo($form.find('select[name=' + config.s1 + ']'), k, v.val, config.v1);
     });
     form.render();
     cityEvent(config);
-    config.v2 = config.v2.split("-")[1];
+    if(config.v2.indexOf("-")>-1){
+        config.v2 = config.v2.split("-")[1];
+    }
     areaEvent(config);
     form.on('select(' + config.s1 + ')', function (data) {
-        var tempVal = data.value;
-        data.value = data.value.split("-")[1];
+        if(data.value.indexOf("-")>-1){
+            data.value = data.value.split("-")[1];
+        }
         cityEvent(data);
         // $('select[name="city"]').next().find('.layui-select-title input').click();
         // var select = 'dd[lay-value="' + tempVal + '"]';
         // $('#city').siblings("div.layui-form-select").find('dl').find(select).click();
         config.v2 = $('select[name=' + config.s2 + ']').val();
-        config.v2 = config.v2.split("-")[1];
+        if(config.v2.indexOf("-")>-1){
+            config.v2 = config.v2.split("-")[1];
+        }
         areaEvent(config);
         form.on('select(' + config.s2 + ')', function (data) {
-            data.value = data.value.split("-")[1];
-            areaEvent(data);
+            console.log(data);
+            // if(data.value.indexOf("-")>-1){
+            //     data.value = data.value.split("-")[1];
+            // }
+            // areaEvent(data);
+            config.v2 = $('select[name=' + config.s2 + ']').val();
+            if(config.v2.indexOf("-")>-1){
+                config.v2 = config.v2.split("-")[1];
+            }
+            console.log(config.v2);
+            areaEvent(config);
         });
     });
 
@@ -46,7 +60,7 @@ function treeSelect(config) {
         $form.find('select[name=' + config.s2 + ']').html("");
         config.v1 = data.value ? data.value : config.v1;
         $.each(threeSelectData, function (k, v) {
-            if (v.val == config.v1) {
+            if (v.val === config.v1) {
                 if (v.items) {
                     $.each(v.items, function (kt, vt) {
                         appendOptionTo($form.find('select[name=' + config.s2 + ']'), kt, vt.val, config.v2);
@@ -56,16 +70,19 @@ function treeSelect(config) {
         });
         form.render();
         config.v2 = $('select[name=' + config.s2 + ']').val();
+        if(config.v2.indexOf("-")>-1){
+            config.v2 = config.v2.split("-")[1];
+        }
         areaEvent(config);
     }
     function areaEvent(data) {
         $form.find('select[name=' + config.s3 + ']').html("");
         config.v2 = data.value ? data.value : config.v2;
         $.each(threeSelectData, function (k, v) {
-            if (v.val == config.v1) {
+            if (v.val === config.v1) {
                 if (v.items) {
                     $.each(v.items, function (kt, vt) {
-                        if (vt.val == config.v2) {
+                        if (vt.val === config.v2) {
                             $.each(vt.items, function (ka, va) {
                                 appendOptionTo($form.find('select[name=' + config.s3 + ']'), ka, va, config.v3);
                             });
@@ -79,7 +96,7 @@ function treeSelect(config) {
     }
     function appendOptionTo($o, k, v, d) {
         var $opt = $("<option>").text(k).val(k+'-'+v);
-        if (v == d) { $opt.attr("selected", "selected") }
+        if (v === d) { $opt.attr("selected", "selected") }
         $opt.appendTo($o);
     }
 }
