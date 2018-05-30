@@ -12,6 +12,8 @@ import com.sucheng.service.ProTypeService;
 import com.sucheng.vo.ControllerStatusVO;
 import com.sucheng.vo.PagerVO;
 import com.sucheng.vo.ProTypeVO;
+import com.sucheng.vo.StoreVO;
+import org.apache.shiro.SecurityUtils;
 import org.dozer.Mapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,7 +33,7 @@ import java.util.List;
  * @version 1.0
  */
 @Controller
-@RequestMapping("/pro-type")
+@RequestMapping("/data/proType")
 public class ProTypeController extends BaseController {
 
     private static final Logger logger = LoggerFactory.getLogger(ProTypeController.class);
@@ -44,24 +46,10 @@ public class ProTypeController extends BaseController {
         ControllerStatusVO statusVO = new ControllerStatusVO();
         try {
             proTypeService.save(getBeanMapper().map(proTypeVO, ProTypeDTO.class));
-            statusVO.okStatus(200, "添加成功");
+            statusVO.okStatus(0, "添加成功");
         } catch (ServiceException e) {
             logger.error("添加失败：{}", e.getMessage());
             statusVO.errorStatus(500, "添加失败");
-        }
-        return statusVO;
-    }
-
-    @PostMapping("remove")
-    @ResponseBody
-    public ControllerStatusVO remove(ProTypeVO proTypeVO) {
-        ControllerStatusVO statusVO = new ControllerStatusVO();
-        try {
-            proTypeService.remove(getBeanMapper().map(proTypeVO, ProTypeDTO.class));
-            statusVO.okStatus(200, "删除成功");
-        } catch (ServiceException e) {
-            logger.error("删除失败：{}", e.getMessage());
-            statusVO.errorStatus(500, "删除失败");
         }
         return statusVO;
     }
@@ -72,7 +60,7 @@ public class ProTypeController extends BaseController {
         ControllerStatusVO statusVO = new ControllerStatusVO();
         try {
             proTypeService.removeById(id);
-            statusVO.okStatus(200, "删除成功");
+            statusVO.okStatus(0, "删除成功");
         } catch (ServiceException e) {
             logger.error("删除失败：{}", e.getMessage());
             statusVO.errorStatus(500, "删除失败");
@@ -100,7 +88,7 @@ public class ProTypeController extends BaseController {
         ControllerStatusVO statusVO = new ControllerStatusVO();
         try {
             proTypeService.update(getBeanMapper().map(proTypeVO, ProTypeDTO.class));
-            statusVO.okStatus(200, "更新成功");
+            statusVO.okStatus(0, "更新成功");
         } catch (ServiceException e) {
             logger.error("更新失败：{}", e.getMessage());
             statusVO.errorStatus(500, "更新失败");
@@ -165,11 +153,18 @@ public class ProTypeController extends BaseController {
         return pagerVO;
     }
 
-    @PostMapping("page-cond")
+    @RequestMapping("proTypeList")
     @ResponseBody
-    public PagerVO listPageByCondition(PageQuery pageQuery, ProTypeQuery proTypeQuery) {
+    public PagerVO listPageByCondition(int page, int limit, ProTypeQuery proTypeQuery) {
+        PageQuery pageQuery = new PageQuery(page, limit);
         PagerVO pagerVO = new PagerVO();
         try {
+            StoreVO storeVO = (StoreVO) SecurityUtils.getSubject().getSession().getAttribute("store");
+            if(storeVO == null) {
+                logger.error("session失效");
+                return pagerVO;
+            }
+            proTypeQuery.setStoreId(storeVO.getId());
             PagerDTO pagerDTO = proTypeService.listPageByCondition(pageQuery, proTypeQuery);
             Mapper mapper = getBeanMapper();
             pagerVO = mapper.map(pagerDTO, PagerVO.class);

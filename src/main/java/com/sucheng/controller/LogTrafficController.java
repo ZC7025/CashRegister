@@ -165,7 +165,7 @@ public class LogTrafficController extends BaseController {
         return pagerVO;
     }
 
-    @PostMapping("page-cond")
+    @RequestMapping("pageList")
     @ResponseBody
     public PagerVO listPageByCondition(PageQuery pageQuery, LogTrafficQuery logTrafficQuery) {
         PagerVO pagerVO = new PagerVO();

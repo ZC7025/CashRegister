@@ -165,7 +165,7 @@ public class VipManageController extends BaseController {
         return pagerVO;
     }
 
-    @PostMapping("page-cond")
+    @RequestMapping("pageList")
     @ResponseBody
     public PagerVO listPageByCondition(PageQuery pageQuery, VipManageQuery vipManageQuery) {
         PagerVO pagerVO = new PagerVO();

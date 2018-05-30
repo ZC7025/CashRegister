@@ -165,7 +165,7 @@ public class RawMaterialsController extends BaseController {
         return pagerVO;
     }
 
-    @PostMapping("page-cond")
+    @RequestMapping("pageList")
     @ResponseBody
     public PagerVO listPageByCondition(PageQuery pageQuery, RawMaterialsQuery rawMaterialsQuery) {
         PagerVO pagerVO = new PagerVO();

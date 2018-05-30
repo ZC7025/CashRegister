@@ -165,7 +165,7 @@ public class LoseController extends BaseController {
         return pagerVO;
     }
 
-    @PostMapping("page-cond")
+    @RequestMapping("pageList")
     @ResponseBody
     public PagerVO listPageByCondition(PageQuery pageQuery, LoseQuery loseQuery) {
         PagerVO pagerVO = new PagerVO();

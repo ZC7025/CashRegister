@@ -165,7 +165,7 @@ public class StockController extends BaseController {
         return pagerVO;
     }
 
-    @PostMapping("page-cond")
+    @RequestMapping("pageList")
     @ResponseBody
     public PagerVO listPageByCondition(PageQuery pageQuery, StockQuery stockQuery) {
         PagerVO pagerVO = new PagerVO();

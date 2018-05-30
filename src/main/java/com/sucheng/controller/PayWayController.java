@@ -165,7 +165,7 @@ public class PayWayController extends BaseController {
         return pagerVO;
     }
 
-    @PostMapping("page-cond")
+    @RequestMapping("pageList")
     @ResponseBody
     public PagerVO listPageByCondition(PageQuery pageQuery, PayWayQuery payWayQuery) {
         PagerVO pagerVO = new PagerVO();

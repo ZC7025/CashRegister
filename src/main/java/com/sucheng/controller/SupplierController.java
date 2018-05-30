@@ -165,7 +165,7 @@ public class SupplierController extends BaseController {
         return pagerVO;
     }
 
-    @PostMapping("page-cond")
+    @RequestMapping("pageList")
     @ResponseBody
     public PagerVO listPageByCondition(PageQuery pageQuery, SupplierQuery supplierQuery) {
         PagerVO pagerVO = new PagerVO();

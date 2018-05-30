@@ -165,7 +165,7 @@ public class EmpRoleController extends BaseController {
         return pagerVO;
     }
 
-    @PostMapping("page-cond")
+    @RequestMapping("pageList")
     @ResponseBody
     public PagerVO listPageByCondition(PageQuery pageQuery, EmpRoleQuery empRoleQuery) {
         PagerVO pagerVO = new PagerVO();

@@ -165,7 +165,7 @@ public class StoreOrderController extends BaseController {
         return pagerVO;
     }
 
-    @PostMapping("page-cond")
+    @RequestMapping("pageList")
     @ResponseBody
     public PagerVO listPageByCondition(PageQuery pageQuery, StoreOrderQuery storeOrderQuery) {
         PagerVO pagerVO = new PagerVO();

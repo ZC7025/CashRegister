@@ -165,7 +165,7 @@ public class LogMoneyController extends BaseController {
         return pagerVO;
     }
 
-    @PostMapping("page-cond")
+    @RequestMapping("pageList")
     @ResponseBody
     public PagerVO listPageByCondition(PageQuery pageQuery, LogMoneyQuery logMoneyQuery) {
         PagerVO pagerVO = new PagerVO();

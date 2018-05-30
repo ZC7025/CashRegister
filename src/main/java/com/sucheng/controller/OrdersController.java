@@ -165,7 +165,7 @@ public class OrdersController extends BaseController {
         return pagerVO;
     }
 
-    @PostMapping("page-cond")
+    @RequestMapping("pageList")
     @ResponseBody
     public PagerVO listPageByCondition(PageQuery pageQuery, OrdersQuery ordersQuery) {
         PagerVO pagerVO = new PagerVO();

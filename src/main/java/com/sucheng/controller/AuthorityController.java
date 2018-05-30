@@ -165,7 +165,7 @@ public class AuthorityController extends BaseController {
         return pagerVO;
     }
 
-    @PostMapping("page-cond")
+    @RequestMapping("page-cond")
     @ResponseBody
     public PagerVO listPageByCondition(PageQuery pageQuery, AuthorityQuery authorityQuery) {
         PagerVO pagerVO = new PagerVO();

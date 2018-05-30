@@ -165,7 +165,7 @@ public class FormulaController extends BaseController {
         return pagerVO;
     }
 
-    @PostMapping("page-cond")
+    @RequestMapping("pageList")
     @ResponseBody
     public PagerVO listPageByCondition(PageQuery pageQuery, FormulaQuery formulaQuery) {
         PagerVO pagerVO = new PagerVO();

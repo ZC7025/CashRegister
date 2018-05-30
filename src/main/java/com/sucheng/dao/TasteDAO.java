@@ -19,4 +19,7 @@ public interface TasteDAO extends BaseDAO {
 
     @Override
     List<Object> listPageByCondition(@Param("pager") PageQuery pageQuery, @Param("query") Object queryObj);
+
+    @Override
+    Long countByCondition(@Param("query") Object queryObj);
 }

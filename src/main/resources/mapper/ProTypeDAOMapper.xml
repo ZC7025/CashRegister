@@ -117,24 +117,24 @@
 
     <sql id="where_clause">
         <if test="query != null and query.id != null">
-			id = #{id},
+			id = #{query.id}
 		</if>
 		<if test="query != null and query.name != null and query.name != ''">
-			and name = #{name},
+			and name = #{query.name}
 		</if>
 		<if test="query != null and query.storeId != null">
-			and store_id = #{storeId},
+			and store_id = #{query.storeId}
 		</if>
 		<if test="query != null and query.status != null and query.status != ''">
-			and status = #{status},
+			and status = #{query.status}
 		</if>
 		<if test="query != null and query.createdTime != null">
-			and created_time = #{createdTime},
+			and created_time = #{query.createdTime}
 		</if>
 		
     </sql>
 
-    <select id="listPageByCondition" resultType="com.sucheng.dos.ProTypeDO">
+    <select id="listPageByCondition" resultType="com.sucheng.query.ProTypeQuery">
         select
         <include refid="select_columns"/>
         from t_pro_type
@@ -142,7 +142,7 @@
             <include refid="where_clause"/>
         </where>
         order by created_time desc
-        limit #{beginIndex}, #{pageSize}
+        limit #{pager.beginIndex}, #{pager.pageSize}
     </select>
 
     <select id="countByCondition" parameterType="com.sucheng.query.ProTypeQuery" resultType="long">

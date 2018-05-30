@@ -27,6 +27,10 @@ public class TasteQuery extends BaseQuery {
 	*/
 	private String descript;
 	/**
+	 *
+	 */
+	private Integer storeId;
+	/**
 	*
 	*/
 	private String status;
@@ -37,16 +41,16 @@ public class TasteQuery extends BaseQuery {
 	
     public TasteQuery () {}
 
-    public TasteQuery (Integer id, String taste, String descript, String status, Date createdTime) {
-        this.id = id;
+	public TasteQuery(Integer id, String taste, String descript, Integer storeId, String status, Date createdTime) {
+		this.id = id;
 		this.taste = taste;
 		this.descript = descript;
+		this.storeId = storeId;
 		this.status = status;
 		this.createdTime = createdTime;
-		
-    }
+	}
 
-    public Integer getId() {
+	public Integer getId() {
 		return id;
 	}
 
@@ -68,6 +72,14 @@ public class TasteQuery extends BaseQuery {
 
 	public void setDescript(String descript) {
 		this.descript = descript;
+	}
+
+	public Integer getStoreId() {
+		return storeId;
+	}
+
+	public void setStoreId(Integer storeId) {
+		this.storeId = storeId;
 	}
 
 	public String getStatus() {

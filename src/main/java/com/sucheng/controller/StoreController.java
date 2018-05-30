@@ -53,7 +53,7 @@ public class StoreController extends BaseController {
     public ControllerStatusVO save(StoreVO storeVO) {
         ControllerStatusVO statusVO = new ControllerStatusVO();
         try {
-            // TODO 判断手机号和邮箱唯一
+            // TODO 判断手机号和邮箱唯一 门店金额初始化
             storeVO.setPwd(HashUtils.md5(storeVO.getPwd(), Constants.SALT, HashEncodeEnum.HEX));
             StoreVO storeVO1 = (StoreVO) SecurityUtils.getSubject().getSession().getAttribute("store");
             if(storeVO1 != null) {

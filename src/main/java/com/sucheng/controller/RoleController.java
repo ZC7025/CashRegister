@@ -165,7 +165,7 @@ public class RoleController extends BaseController {
         return pagerVO;
     }
 
-    @PostMapping("page-cond")
+    @RequestMapping("pageList")
     @ResponseBody
     public PagerVO listPageByCondition(PageQuery pageQuery, RoleQuery roleQuery) {
         PagerVO pagerVO = new PagerVO();

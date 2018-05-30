@@ -27,6 +27,10 @@ public class TasteDTO extends BaseDTO {
 	*/
 	private String descript;
 	/**
+	 *
+	 */
+	private Integer storeId;
+	/**
 	*
 	*/
 	private String status;
@@ -68,6 +72,14 @@ public class TasteDTO extends BaseDTO {
 
 	public void setDescript(String descript) {
 		this.descript = descript;
+	}
+
+	public Integer getStoreId() {
+		return storeId;
+	}
+
+	public void setStoreId(Integer storeId) {
+		this.storeId = storeId;
 	}
 
 	public String getStatus() {

@@ -111,6 +111,17 @@
                             </dd>
                         </dl>
                     </li>
+                    <li class="layui-nav-item">
+                        <a href="javascript:;"><span>商品管理</span></a>
+                        <dl class="layui-nav-child">
+                            <dd><a href="javascript:;" kit-target
+                                   data-options="{url:'<%=path %>/page/proType/proTypeList',icon:'&#xe658;',title:'商品类型管理',id:'6'}"><i class="layui-icon">&#xe658;</i><span>商品类型管理</span></a>
+                            </dd>
+                            <dd><a href="javascript:;" kit-target
+                                   data-options="{url:'<%=path %>/page/taste/tasteList',icon:'&#xe658;',title:'商品口味管理',id:'7'}"><i class="layui-icon">&#xe658;</i><span>商品口味管理</span></a>
+                            </dd>
+                        </dl>
+                    </li>
                     <%--&lt;%&ndash;root用户可见&ndash;%&gt;--%>
                     <%--<shiro:hasPermission name="root">--%>
                         <%--<li class="layui-nav-item">--%>

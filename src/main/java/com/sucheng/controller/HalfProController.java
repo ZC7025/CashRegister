@@ -165,7 +165,7 @@ public class HalfProController extends BaseController {
         return pagerVO;
     }
 
-    @PostMapping("page-cond")
+    @RequestMapping("pageList")
     @ResponseBody
     public PagerVO listPageByCondition(PageQuery pageQuery, HalfProQuery halfProQuery) {
         PagerVO pagerVO = new PagerVO();

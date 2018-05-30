@@ -165,7 +165,7 @@ public class AidCardController extends BaseController {
         return pagerVO;
     }
 
-    @PostMapping("page-cond")
+    @RequestMapping("page-cond")
     @ResponseBody
     public PagerVO listPageByCondition(PageQuery pageQuery, AidCardQuery aidCardQuery) {
         PagerVO pagerVO = new PagerVO();

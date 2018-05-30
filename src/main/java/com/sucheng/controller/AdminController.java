@@ -207,7 +207,7 @@ public class AdminController extends BaseController {
         return pagerVO;
     }
 
-    @PostMapping("page-cond")
+    @RequestMapping("pageList")
     @ResponseBody
     public PagerVO listPageByCondition(PageQuery pageQuery, AdminQuery adminQuery) {
         PagerVO pagerVO = new PagerVO();
