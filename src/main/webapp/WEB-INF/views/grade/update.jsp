@@ -57,15 +57,6 @@
 <script type="text/javascript" src="<%=path %>/static/layui/layui.js"></script>
 <script src="<%=path %>/static/js/home/public.js"></script>
 <script>
-    //获取url上的值,获取页面传过来的值
-    function GetQueryString(name) {
-        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
-        var r = window.location.search.substr(1).match(reg);
-        if (r != null) {
-            return unescape(r[2]);
-        }
-        return null;
-    }
     var gradeId = GetQueryString("id");
     layui.use(['form'], function () {
 

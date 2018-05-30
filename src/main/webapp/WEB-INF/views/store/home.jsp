@@ -90,25 +90,27 @@
                             <dd><a href="javascript:;" kit-target
                                    data-options="{url:'<%=path %>/page/store/updatePwd',icon:'&#xe658;',title:'修改密码',id:'2'}"><i class="layui-icon">&#xe658;</i><span>修改密码</span></a>
                             </dd>
+                            <dd><a href="javascript:;" kit-target
+                                   data-options="{url:'<%=path %>/page/store/storeList',icon:'&#xe658;',title:'分店管理',id:'3'}"><i class="layui-icon">&#xe658;</i><span>分店管理</span></a>
+                            </dd>
                         </dl>
                     </li>
                     <li class="layui-nav-item">
                         <a href="javascript:;"><span>牌号管理</span></a>
                         <dl class="layui-nav-child">
                             <dd><a href="javascript:;" kit-target
-                                   data-options="{url:'<%=path %>/page/grade/gradeList',icon:'&#xe658;',title:'牌号管理',id:'3'}"><i class="layui-icon">&#xe658;</i><span>牌号管理</span></a>
+                                   data-options="{url:'<%=path %>/page/grade/gradeList',icon:'&#xe658;',title:'牌号管理',id:'4'}"><i class="layui-icon">&#xe658;</i><span>牌号管理</span></a>
                             </dd>
                         </dl>
                     </li>
-                    <%--<li class="layui-nav-item">--%>
-                        <%--<a href="javascript:;"><span>认证管理</span></a>--%>
-                        <%--<dl class="layui-nav-child">--%>
-                            <%--<dd><a href="javascript:;" kit-target--%>
-                                   <%--data-options="{url:'<%=path %>/page/vip/userVipPage',icon:'&#xe658;',title:'用户',id:'20'}"><i class="layui-icon">&#xe658;</i><span>用户</span></a>--%>
-                            <%--</dd>--%>
-                        <%--</dl>--%>
-                    <%--</li>--%>
-                <%--</shiro:hasPermission>--%>
+                    <li class="layui-nav-item">
+                        <a href="javascript:;"><span>员工管理</span></a>
+                        <dl class="layui-nav-child">
+                            <dd><a href="javascript:;" kit-target
+                                   data-options="{url:'<%=path %>/page/employee/empList',icon:'&#xe658;',title:'员工管理',id:'5'}"><i class="layui-icon">&#xe658;</i><span>员工管理</span></a>
+                            </dd>
+                        </dl>
+                    </li>
                     <%--&lt;%&ndash;root用户可见&ndash;%&gt;--%>
                     <%--<shiro:hasPermission name="root">--%>
                         <%--<li class="layui-nav-item">--%>
@@ -159,21 +161,6 @@
             type: 'iframe'
         }).init();
 
-
-        //信息
-        $('#info').on('click', function () {
-            layer.open({
-                type: 1,                //弹窗类型
-                title: '编辑个人信息',     //显示标题
-                closeBtn: 1,         //是否显示关闭按钮
-                shadeClose: true, //显示模态窗口
-                fixed: false,    //层是否固定在可视区域
-                move: false,//禁止拖拽
-                area: ['890px', '560px'], //宽高
-                content: $("#editIndexMsg")  //弹窗内容
-            });
-        });
-
         $('#out').on('click', function () {
             $.get('<%=path %>/data/store/out',
               function (data) {
@@ -184,24 +171,6 @@
                   }
               }
             );
-        });
-
-        //修改信息
-        form.on('submit(edit)', function (data) {
-            $.post('<%=path %>/data/admin/edit',
-                $('#huserForm').serialize(),
-                function (res) {
-                    if (res.code === 0) {
-                        layer.closeAll();
-                        layer.msg('修改成功！');
-                        $('#rname').empty();
-                        $('#rname').text(res.data.rname);
-                    } else {
-                        layer.msg("修改失败，请重新再试")
-                    }
-                }, 'json'
-            );
-            return false;
         });
 
     });

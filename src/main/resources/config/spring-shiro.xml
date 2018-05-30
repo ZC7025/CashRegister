@@ -20,11 +20,22 @@
         <property name="permissionsQuery" value="select au.authority_name from t_role r, t_role_authority ra, t_authority au where r.id = ra.role_id and ra.authority_id = au.id and r.role_name = ?" />
         <property name="permissionsLookupEnabled" value="true" />
     </bean>
+    <bean id="storeRealm" class="org.apache.shiro.realm.jdbc.JdbcRealm">
+        <property name="dataSource" ref="dataSource"></property>
+        <!-- 根据用户邮箱查找用户密码 -->
+        <property name="authenticationQuery" value="select pwd from t_store where phone = ?"></property>
+        <!-- 根据用户的邮箱查找用户的角色名称 -->
+        <property name="userRolesQuery" value="select r.role_name from t_store a, t_emp_role er, t_role r where a.id = er.store_id and er.role_id = r.id and a.phone = ?" />
+        <!-- 根据用户的邮箱查找用户的权限 -->
+        <property name="permissionsQuery" value="select au.authority_name from t_role r, t_role_authority ra, t_authority au where r.id = ra.role_id and ra.authority_id = au.id and r.role_name = ?" />
+        <property name="permissionsLookupEnabled" value="true" />
+    </bean>
     <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
         <!-- 我们自定义的realm -->
         <property name="realms">
             <set>
                 <ref bean="jdbcRealm" />
+                <ref bean="storeRealm" />
             </set>
         </property>
         <!-- 缓存管理器 -->
@@ -46,6 +57,9 @@
                 <entry key="role">
                     <bean class="com.sucheng.filter.AdminRolesAuthorizationFilter" />
                 </entry>
+                <entry key="storeRole">
+                    <bean class="com.sucheng.filter.StoreRolesAuthorizationFilter" />
+                </entry>
             </map>
         </property>
 
@@ -55,28 +69,28 @@
                 /login = anon
                 /static/** = anon
                 /home/**=authc
-                <!--manage角色-->
-                /page/jklx/jklxTypeList = authc,role["manage,root"]
-                /page/borrowApply/adminBorrowList = authc,role["manage,root"]
-                /page/borrowApply/investManage = authc,role["manage,root"]
-                /page/bz/** = authc,role["manage,root"]
-                /page/sway/** = authc,role["manage,root"]
-                /page/vip/** = authc,role["manage,root"]
-                <!--message-->
-                /page/home/addIndexMsgPage = authc,role["message,root"]
-                /page/home/indexMsg = authc,role["message,root"]
-                /page/dynamic/addDynamicPage = authc,role["message,root"]
-                /page/dynamic/dynamicPage = authc,role["message,root"]
-                /page/dynamic/editPage = authc,role["message,root"]
-                /page/company/addMediaReportPage = authc,role["message,root"]
-                /page/company/mediaReport = authc,role["message,root"]
-                /page/company/editPage = authc,role["message,root"]
-                /page/message/** = role["message,root"]
-                <!--root-->
-                /page/Jur/** = role["root"]
-                /page/Role/** = role["root"]
-                /page/admin/add = role["root"]
-                /page/admin/List = role["root"]
+                <!--&lt;!&ndash;manage角色&ndash;&gt;-->
+                <!--/page/jklx/jklxTypeList = authc,role["manage,root"]-->
+                <!--/page/borrowApply/adminBorrowList = authc,role["manage,root"]-->
+                <!--/page/borrowApply/investManage = authc,role["manage,root"]-->
+                <!--/page/bz/** = authc,role["manage,root"]-->
+                <!--/page/sway/** = authc,role["manage,root"]-->
+                <!--/page/vip/** = authc,role["manage,root"]-->
+                <!--&lt;!&ndash;message&ndash;&gt;-->
+                <!--/page/home/addIndexMsgPage = authc,role["message,root"]-->
+                <!--/page/home/indexMsg = authc,role["message,root"]-->
+                <!--/page/dynamic/addDynamicPage = authc,role["message,root"]-->
+                <!--/page/dynamic/dynamicPage = authc,role["message,root"]-->
+                <!--/page/dynamic/editPage = authc,role["message,root"]-->
+                <!--/page/company/addMediaReportPage = authc,role["message,root"]-->
+                <!--/page/company/mediaReport = authc,role["message,root"]-->
+                <!--/page/company/editPage = authc,role["message,root"]-->
+                <!--/page/message/** = role["message,root"]-->
+                <!--&lt;!&ndash;root&ndash;&gt;-->
+                <!--/page/Jur/** = role["root"]-->
+                <!--/page/Role/** = role["root"]-->
+                <!--/page/admin/add = role["root"]-->
+                <!--/page/admin/List = role["root"]-->
             </value>
         </property>
     </bean>

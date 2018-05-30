@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
     String path = request.getContextPath();
@@ -98,14 +99,16 @@
                     </select>
                 </div>
             </div>
-            <div class="layui-form-item">
-                <label class="layui-form-label">所属总店</label>
-                <div class="layui-input-block">
-                    <select name="generalId" id="store-select">
-                        <option value="">请选择所属总店</option>
-                    </select>
+            <c:if test="${store.id == null}">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">所属总店</label>
+                    <div class="layui-input-block">
+                        <select name="generalId" id="store-select">
+                            <option value="">请选择所属总店</option>
+                        </select>
+                    </div>
                 </div>
-            </div>
+            </c:if>
 
             <div class="layui-form-item">
                 <div class="layui-row">
@@ -158,20 +161,22 @@
                 }
             });
             var storeList = "";
-            $.ajax({
-                url: '<%=path %>/data/store/all',
-                success: function (data) {
-                    //加载数据
-                    for (var i = 0; i < data.length; i++) {
-                        var city = data[i].city.split("-")[0];
-                        var county = data[i].county.split("-")[0];
-                        storeList += '<option value="' + data[i].id + '">' + data[i].name + '('+city+county+data[i].address+')</option>'
+            if(${sessionScope.store == null}) {
+                $.ajax({
+                    url: '<%=path %>/data/store/all',
+                    success: function (data) {
+                        //加载数据
+                        for (var i = 0; i < data.length; i++) {
+                            var city = data[i].city.split("-")[0];
+                            var county = data[i].county.split("-")[0];
+                            storeList += '<option value="' + data[i].id + '">' + data[i].name + '(' + city + county + data[i].address + ')</option>'
+                        }
+                        $("#store-select").append(storeList);
+                        // 重新刷新表单，新option才会出现
+                        form.render();
                     }
-                    $("#store-select").append(storeList);
-                    // 重新刷新表单，新option才会出现
-                    form.render();
-                }
-            });
+                });
+            }
         });
 
         form.verify({

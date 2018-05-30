@@ -35,6 +35,10 @@ public class EmployeeDO extends BaseDO {
 	*/
 	private String email;
 	/**
+	 *
+	 */
+	private Integer storeId;
+	/**
 	*
 	*/
 	private String status;
@@ -45,7 +49,7 @@ public class EmployeeDO extends BaseDO {
 	
     public EmployeeDO () {}
 
-    public EmployeeDO (Integer id, String realName, String phone, String pwd, String email, String status, Date createdTime) {
+    public EmployeeDO (Integer id, String realName, String phone, String pwd, String email, Integer storeId, String status, Date createdTime) {
         this.id = id;
 		this.realName = realName;
 		this.phone = phone;
@@ -53,7 +57,7 @@ public class EmployeeDO extends BaseDO {
 		this.email = email;
 		this.status = status;
 		this.createdTime = createdTime;
-		
+		this.storeId = storeId;
     }
 
     public Integer getId() {
@@ -94,6 +98,14 @@ public class EmployeeDO extends BaseDO {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public Integer getStoreId() {
+		return storeId;
+	}
+
+	public void setStoreId(Integer storeId) {
+		this.storeId = storeId;
 	}
 
 	public String getStatus() {

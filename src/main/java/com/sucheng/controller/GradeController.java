@@ -12,6 +12,10 @@ import com.sucheng.service.GradeService;
 import com.sucheng.vo.ControllerStatusVO;
 import com.sucheng.vo.GradeVO;
 import com.sucheng.vo.PagerVO;
+import com.sucheng.vo.StoreVO;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.session.Session;
+import org.apache.shiro.subject.Subject;
 import org.dozer.Mapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -171,6 +175,13 @@ public class GradeController extends BaseController {
         PageQuery pageQuery = new PageQuery(page, limit);
         PagerVO pagerVO = new PagerVO();
         try {
+            Session session = SecurityUtils.getSubject().getSession();
+            StoreVO storeVO = (StoreVO) session.getAttribute("store");
+            if(storeVO == null) {
+                logger.error("门店session失效");
+                return null;
+            }
+            gradeQuery.setStoreId(storeVO.getId());
             PagerDTO pagerDTO = gradeService.listPageByCondition(pageQuery, gradeQuery);
             Mapper mapper = getBeanMapper();
             pagerVO = mapper.map(pagerDTO, PagerVO.class);

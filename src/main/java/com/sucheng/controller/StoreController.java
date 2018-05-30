@@ -55,6 +55,10 @@ public class StoreController extends BaseController {
         try {
             // TODO 判断手机号和邮箱唯一
             storeVO.setPwd(HashUtils.md5(storeVO.getPwd(), Constants.SALT, HashEncodeEnum.HEX));
+            StoreVO storeVO1 = (StoreVO) SecurityUtils.getSubject().getSession().getAttribute("store");
+            if(storeVO1 != null) {
+                storeVO.setGeneralId(storeVO1.getId());
+            }
             storeService.save(getBeanMapper().map(storeVO, StoreDTO.class));
             statusVO.okStatus(0, "添加成功");
         } catch (ServiceException e) {
@@ -144,7 +148,7 @@ public class StoreController extends BaseController {
         ControllerStatusVO statusVO = new ControllerStatusVO();
         try {
             storeService.update(getBeanMapper().map(storeVO, StoreDTO.class));
-            statusVO.okStatus(200, "更新成功");
+            statusVO.okStatus(0, "更新成功");
         } catch (ServiceException e) {
             logger.error("更新失败：{}", e.getMessage());
             statusVO.errorStatus(500, "更新失败");
@@ -239,6 +243,10 @@ public class StoreController extends BaseController {
         PageQuery pageQuery = new PageQuery(page, limit);
         PagerVO pagerVO = new PagerVO();
         try {
+            StoreVO storeVO = (StoreVO) SecurityUtils.getSubject().getSession().getAttribute("store");
+            if(storeVO != null) {
+                storeQuery.setGeneralId(storeVO.getId());
+            }
             PagerDTO pagerDTO = storeService.listPageByCondition(pageQuery, storeQuery);
             Mapper mapper = getBeanMapper();
             pagerVO = mapper.map(pagerDTO, PagerVO.class);

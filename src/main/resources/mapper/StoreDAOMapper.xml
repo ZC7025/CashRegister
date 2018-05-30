@@ -209,40 +209,40 @@
 
     <sql id="where_clause">
         <if test="query != null and query.id != null">
-			id = #{id},
+			id = #{query.id}
 		</if>
 		<if test="query != null and query.storeId != null and query.storeId != ''">
-			and store_id = #{storeId},
+			and store_id = #{query.storeId}
 		</if>
 		<if test="query != null and query.name != null and query.name != ''">
-			and name = #{name},
+			and name = #{query.name}
 		</if>
 		<if test="query != null and query.phone != null and query.phone != ''">
-			and phone = #{phone},
+			and phone = #{query.phone}
 		</if>
 		<if test="query != null and query.pwd != null and query.pwd != ''">
-			and pwd = #{pwd},
+			and pwd = #{query.pwd}
 		</if>
 		<if test="query != null and query.email != null and query.email != ''">
-			and email = #{email},
+			and email = #{query.email}
 		</if>
 		<if test="query != null and query.address != null and query.address != ''">
-			and address = #{address},
+			and address = #{query.address}
 		</if>
 		<if test="query != null and query.licenseImg != null and query.licenseImg != ''">
-			and license_img = #{licenseImg},
+			and license_img = #{query.licenseImg}
 		</if>
 		<if test="query != null and query.industryId != null">
-			and industry_id = #{industryId},
+			and industry_id = #{query.industryId}
 		</if>
 		<if test="query != null and query.generalId != null">
-			and general_id = #{generalId},
+			and general_id = #{query.generalId}
 		</if>
 		<if test="query != null and query.status != null and query.status != ''">
-			and status = #{status},
+			and status = #{query.status}
 		</if>
 		<if test="query != null and query.createdTime != null">
-			and created_time = #{createdTime},
+			and created_time = #{query.createdTime}
 		</if>
 		
     </sql>

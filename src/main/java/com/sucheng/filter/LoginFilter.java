@@ -25,12 +25,12 @@ public class LoginFilter implements Filter {
         String uri = request.getRequestURI();
         if (isFilter(uri)) {
             HttpSession session = request.getSession();
-            Object user = session.getAttribute(Constants.USER_IN_SESSION);
+            Object user = session.getAttribute(Constants.STORE_IN_SESSION);
             if (user != null) {
                 filterChain.doFilter(servletRequest, servletResponse);
             } else {
                 HttpServletResponse response = (HttpServletResponse) servletResponse;
-                response.sendRedirect("/page/login");
+                response.sendRedirect("/");
             }
         } else {
             filterChain.doFilter(servletRequest, servletResponse);
@@ -43,6 +43,6 @@ public class LoginFilter implements Filter {
     }
 
     private boolean isFilter(String uri) {
-        return uri.contains("/page/user/");
+        return uri.contains("/page/");
     }
 }

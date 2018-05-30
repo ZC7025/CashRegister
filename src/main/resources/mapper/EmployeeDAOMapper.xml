@@ -22,6 +22,9 @@
 			<if test="email != null">
 				email,
 			</if>
+			<if test="storeId != null">
+				store_id,
+			</if>
 			<if test="status != null">
 				status,
 			</if>
@@ -45,6 +48,9 @@
 			</if>
 			<if test="email != null">
 				#{email},
+			</if>
+			<if test="storeId != null">
+				#{storeId},
 			</if>
 			<if test="status != null">
 				#{status},
@@ -105,7 +111,7 @@
     </update>
 
     <sql id="select_columns">
-        id, real_name, phone, pwd, email, status, created_time
+        id, real_name, phone, pwd, email, store_id, status, created_time
     </sql>
 
     <select id="getById" parameterType="long" resultType="com.sucheng.dos.EmployeeDO">
@@ -135,38 +141,45 @@
 
     <sql id="where_clause">
         <if test="query != null and query.id != null">
-			id = #{id},
+			id = #{query.id}
 		</if>
 		<if test="query != null and query.realName != null and query.realName != ''">
-			and real_name = #{realName},
+			and real_name = #{query.realName}
 		</if>
 		<if test="query != null and query.phone != null and query.phone != ''">
-			and phone = #{phone},
+			and phone = #{query.phone}
 		</if>
 		<if test="query != null and query.pwd != null and query.pwd != ''">
-			and pwd = #{pwd},
+			and pwd = #{query.pwd}
 		</if>
 		<if test="query != null and query.email != null and query.email != ''">
-			and email = #{email},
+			and email = #{query.email}
 		</if>
+		<!--<if test="query != null and query.storeId != null">-->
+			<!--and store_id = #{query.storeId}-->
+		<!--</if>-->
 		<if test="query != null and query.status != null and query.status != ''">
-			and status = #{status},
+			and status = #{query.status}
 		</if>
 		<if test="query != null and query.createdTime != null">
-			and created_time = #{createdTime},
+			and created_time = #{query.createdTime}
 		</if>
 		
     </sql>
 
-    <select id="listPageByCondition" resultType="com.sucheng.dos.EmployeeDO">
-        select
-        <include refid="select_columns"/>
-        from t_employee
+    <select id="listPageByCondition" resultType="com.sucheng.query.EmployeeQuery">
+        select e.*, s.name as storeName from t_employee e, t_store s
         <where>
             <include refid="where_clause"/>
+			<if test="true">
+				and e.store_id = s.id
+			</if>
+			<if test="query != null and query.storeId != null">
+				and e.store_id = #{query.storeId}
+			</if>
         </where>
-        order by created_time desc
-        limit #{beginIndex}, #{pageSize}
+        order by e.created_time desc
+        limit #{pager.beginIndex}, #{pager.pageSize}
     </select>
 
     <select id="countByCondition" parameterType="com.sucheng.query.EmployeeQuery" resultType="long">

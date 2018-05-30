@@ -35,6 +35,10 @@ public class EmployeeVO extends BaseVO {
 	*/
 	private String email;
 	/**
+	 *
+	 */
+	private Integer storeId;
+	/**
 	*
 	*/
 	private String status;
@@ -94,6 +98,14 @@ public class EmployeeVO extends BaseVO {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public Integer getStoreId() {
+		return storeId;
+	}
+
+	public void setStoreId(Integer storeId) {
+		this.storeId = storeId;
 	}
 
 	public String getStatus() {

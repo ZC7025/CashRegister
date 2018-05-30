@@ -86,6 +86,16 @@ function formatArea(value) {
     return value.split("-")[0];
 }
 
+//获取url上的值,获取页面传过来的值
+function GetQueryString(name) {
+    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+    var r = window.location.search.substr(1).match(reg);
+    if (r != null) {
+        return unescape(r[2]);
+    }
+    return null;
+}
+
 /**
  * 上传图片的通用js
  * @param upload 必填

@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
     String path = request.getContextPath();
@@ -91,14 +92,16 @@
                     </select>
                 </div>
             </div>
-            <div class="layui-form-item">
-                <label class="layui-form-label">所属总店</label>
-                <div class="layui-input-block">
-                    <select name="generalId" id="store-select">
-                        <option value="">请选择所属总店</option>
-                    </select>
+            <c:if test="${store.id == null}">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">所属总店</label>
+                    <div class="layui-input-block">
+                        <select name="generalId" id="store-select">
+                            <option value="">请选择所属总店</option>
+                        </select>
+                    </div>
                 </div>
-            </div>
+            </c:if>
 
             <div class="layui-form-item">
                 <label class="layui-form-label"></label>
@@ -115,15 +118,6 @@
 <script type="text/javascript" src="<%=path %>/static/js/area/province.js"></script>
 <script type="text/javascript" src="<%=path %>/static/js/home/public.js"></script>
 <script>
-    //获取url上的值,获取页面传过来的值
-    function GetQueryString(name) {
-        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
-        var r = window.location.search.substr(1).match(reg);
-        if (r != null) {
-            return unescape(r[2]);
-        }
-        return null;
-    }
     var storeId = GetQueryString("id");
     layui.use(['form', 'upload'], function () {
 
@@ -178,39 +172,26 @@
             });
         });
         var storeList = "";
-        $.ajax({
-            url: '<%=path %>/data/store/all',
-            success: function (data) {
-                //加载数据
-                for (var i = 0; i < data.length; i++) {
-                    var city = data[i].city.split("-")[0];
-                    var county = data[i].county.split("-")[0];
-                    if(generalId !== data[i].id) {
-                        storeList += '<option value="' + data[i].id + '">' + data[i].name + '('+city+county+data[i].address+')</option>'
-                    } else {
-                        storeList += '<option value="' + data[i].id + '" selected="selected">' + data[i].name + '('+city+county+data[i].address+')</option>'
+        if(${sessionScope.store == null}) {
+            $.ajax({
+                url: '<%=path %>/data/store/all',
+                success: function (data) {
+                    //加载数据
+                    for (var i = 0; i < data.length; i++) {
+                        var city = data[i].city.split("-")[0];
+                        var county = data[i].county.split("-")[0];
+                        if(generalId !== data[i].id) {
+                            storeList += '<option value="' + data[i].id + '">' + data[i].name + '('+city+county+data[i].address+')</option>'
+                        } else {
+                            storeList += '<option value="' + data[i].id + '" selected="selected">' + data[i].name + '('+city+county+data[i].address+')</option>'
+                        }
                     }
+                    $("#store-select").append(storeList);
+                    // 重新刷新表单，新option才会出现
+                    form.render();
                 }
-                $("#store-select").append(storeList);
-                // 重新刷新表单，新option才会出现
-                form.render();
-            }
-        });
-
-        form.verify({
-            pass: [/(.+){6,12}$/, '密码必须6到12位']
-        });
-
-        form.verify({
-            repass: function(value){
-                var repassValue = $('#pwd').val();
-                if(value !== repassValue){
-                    return '两次输入的密码不一致!';
-                }
-            }
-        });
-
-        <%--uploadImg(upload, 'license', '<%=path %>/file/firist', 'imgDemo', 'licenseImg', 'imgText');--%>
+            });
+        }
 
         form.on('submit(update)', function (data) {
             $.post('<%=path %>/data/store/update',
