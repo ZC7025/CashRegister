@@ -12,6 +12,8 @@ import com.sucheng.service.RawMaterialsService;
 import com.sucheng.vo.ControllerStatusVO;
 import com.sucheng.vo.PagerVO;
 import com.sucheng.vo.RawMaterialsVO;
+import com.sucheng.vo.StoreVO;
+import org.apache.shiro.SecurityUtils;
 import org.dozer.Mapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,20 +33,26 @@ import java.util.List;
  * @version 1.0
  */
 @Controller
-@RequestMapping("/raw-materials")
+@RequestMapping("/data/rawMat")
 public class RawMaterialsController extends BaseController {
 
     private static final Logger logger = LoggerFactory.getLogger(RawMaterialsController.class);
 
     private RawMaterialsService rawMaterialsService;
 
-    @PostMapping("save")
+    @RequestMapping("save")
     @ResponseBody
     public ControllerStatusVO save(RawMaterialsVO rawMaterialsVO) {
         ControllerStatusVO statusVO = new ControllerStatusVO();
         try {
+            StoreVO storeVO = (StoreVO) SecurityUtils.getSubject().getSession().getAttribute("store");
+            if(storeVO == null) {
+                logger.error("session失效");
+                return statusVO;
+            }
+            rawMaterialsVO.setStoreId(storeVO.getId());
             rawMaterialsService.save(getBeanMapper().map(rawMaterialsVO, RawMaterialsDTO.class));
-            statusVO.okStatus(200, "添加成功");
+            statusVO.okStatus(0, "添加成功");
         } catch (ServiceException e) {
             logger.error("添加失败：{}", e.getMessage());
             statusVO.errorStatus(500, "添加失败");
@@ -58,7 +66,7 @@ public class RawMaterialsController extends BaseController {
         ControllerStatusVO statusVO = new ControllerStatusVO();
         try {
             rawMaterialsService.remove(getBeanMapper().map(rawMaterialsVO, RawMaterialsDTO.class));
-            statusVO.okStatus(200, "删除成功");
+            statusVO.okStatus(0, "删除成功");
         } catch (ServiceException e) {
             logger.error("删除失败：{}", e.getMessage());
             statusVO.errorStatus(500, "删除失败");
@@ -72,7 +80,7 @@ public class RawMaterialsController extends BaseController {
         ControllerStatusVO statusVO = new ControllerStatusVO();
         try {
             rawMaterialsService.removeById(id);
-            statusVO.okStatus(200, "删除成功");
+            statusVO.okStatus(0, "删除成功");
         } catch (ServiceException e) {
             logger.error("删除失败：{}", e.getMessage());
             statusVO.errorStatus(500, "删除失败");
@@ -86,7 +94,7 @@ public class RawMaterialsController extends BaseController {
         ControllerStatusVO statusVO = new ControllerStatusVO();
         try {
             rawMaterialsService.removeByIds(StringUtils.strToLongArray(ids, ","));
-            statusVO.okStatus(200, "批量删除成功");
+            statusVO.okStatus(0, "批量删除成功");
         } catch (ServiceException e) {
             logger.error("批量删除失败：{}", e.getMessage());
             statusVO.errorStatus(500, "批量删除失败");
@@ -100,7 +108,7 @@ public class RawMaterialsController extends BaseController {
         ControllerStatusVO statusVO = new ControllerStatusVO();
         try {
             rawMaterialsService.update(getBeanMapper().map(rawMaterialsVO, RawMaterialsDTO.class));
-            statusVO.okStatus(200, "更新成功");
+            statusVO.okStatus(0, "更新成功");
         } catch (ServiceException e) {
             logger.error("更新失败：{}", e.getMessage());
             statusVO.errorStatus(500, "更新失败");
@@ -114,7 +122,7 @@ public class RawMaterialsController extends BaseController {
         ControllerStatusVO statusVO = new ControllerStatusVO();
         try {
             rawMaterialsService.updateActiveStatus(statusQuery);
-            statusVO.okStatus(200, statusQuery.getStatus() == 0 ? "激活成功" : "冻结成功");
+            statusVO.okStatus(0, statusQuery.getStatus() == 0 ? "激活成功" : "冻结成功");
         } catch (ServiceException e) {
             logger.error("激活或冻结失败：{}", e.getMessage());
             statusVO.errorStatus(500, statusQuery.getStatus() == 0 ? "激活失败" : "冻结失败");
@@ -165,15 +173,22 @@ public class RawMaterialsController extends BaseController {
         return pagerVO;
     }
 
-    @RequestMapping("pageList")
+    @RequestMapping("rawList")
     @ResponseBody
-    public PagerVO listPageByCondition(PageQuery pageQuery, RawMaterialsQuery rawMaterialsQuery) {
+    public PagerVO listPageByCondition(int page, int limit, RawMaterialsQuery rawMaterialsQuery) {
+        PageQuery pageQuery = new PageQuery(page, limit);
         PagerVO pagerVO = new PagerVO();
         try {
+            StoreVO storeVO = (StoreVO) SecurityUtils.getSubject().getSession().getAttribute("store");
+            if(storeVO == null) {
+                logger.error("session失效");
+                return pagerVO;
+            }
+            rawMaterialsQuery.setStoreId(storeVO.getId());
             PagerDTO pagerDTO = rawMaterialsService.listPageByCondition(pageQuery, rawMaterialsQuery);
             Mapper mapper = getBeanMapper();
             pagerVO = mapper.map(pagerDTO, PagerVO.class);
-            pagerVO.setRows(DozerMapperUtils.mapList(mapper, pagerDTO.getRows(), RawMaterialsVO.class));
+            pagerVO.setRows(DozerMapperUtils.mapList(mapper, pagerDTO.getRows(), RawMaterialsQuery.class));
         } catch (ServiceException e) {
             logger.error("返回指定条件的分页对象JSON数据失败：{}", e.getMessage());
         }

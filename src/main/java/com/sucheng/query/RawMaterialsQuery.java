@@ -28,6 +28,10 @@ public class RawMaterialsQuery extends BaseQuery {
 	*/
 	private BigDecimal price;
 	/**
+	 * 数量
+	 */
+	private Float amount;
+	/**
 	*单位
 	*/
 	private String unit;
@@ -36,13 +40,21 @@ public class RawMaterialsQuery extends BaseQuery {
 	*/
 	private Integer supplierId;
 	/**
+	 * 供应商名称
+	 */
+	private String supplierName;
+	/**
+	 * 供应商电话
+	 */
+	private String phone;
+	/**
 	*生产日期
 	*/
 	private Date birthTime;
 	/**
 	*保质期
 	*/
-	private Date shelfTime;
+	private String shelfTime;
 	/**
 	*过期时间
 	*/
@@ -70,12 +82,19 @@ public class RawMaterialsQuery extends BaseQuery {
 	
     public RawMaterialsQuery () {}
 
-    public RawMaterialsQuery (Integer id, String name, BigDecimal price, String unit, Integer supplierId, Date birthTime, Date shelfTime, Date deadTime, Integer minStock, Integer maxStock, Integer storeId, String status, Date createdTime) {
-        this.id = id;
+	public RawMaterialsQuery(Integer id, String name, Float amount,
+						   BigDecimal price, String unit, Integer supplierId,
+						   String supplierName, String phone, Date birthTime,
+						   String shelfTime, Date deadTime, Integer minStock,
+						   Integer maxStock, Integer storeId, String status, Date createdTime) {
+		this.id = id;
 		this.name = name;
+		this.amount = amount;
 		this.price = price;
 		this.unit = unit;
 		this.supplierId = supplierId;
+		this.supplierName = supplierName;
+		this.phone = phone;
 		this.birthTime = birthTime;
 		this.shelfTime = shelfTime;
 		this.deadTime = deadTime;
@@ -84,8 +103,7 @@ public class RawMaterialsQuery extends BaseQuery {
 		this.storeId = storeId;
 		this.status = status;
 		this.createdTime = createdTime;
-		
-    }
+	}
 
     public Integer getId() {
 		return id;
@@ -101,6 +119,14 @@ public class RawMaterialsQuery extends BaseQuery {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public Float getAmount() {
+		return amount;
+	}
+
+	public void setAmount(Float amount) {
+		this.amount = amount;
 	}
 
 	public BigDecimal getPrice() {
@@ -127,6 +153,22 @@ public class RawMaterialsQuery extends BaseQuery {
 		this.supplierId = supplierId;
 	}
 
+	public String getSupplierName() {
+		return supplierName;
+	}
+
+	public void setSupplierName(String supplierName) {
+		this.supplierName = supplierName;
+	}
+
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+
 	public Date getBirthTime() {
 		return birthTime;
 	}
@@ -135,11 +177,11 @@ public class RawMaterialsQuery extends BaseQuery {
 		this.birthTime = birthTime;
 	}
 
-	public Date getShelfTime() {
+	public String getShelfTime() {
 		return shelfTime;
 	}
 
-	public void setShelfTime(Date shelfTime) {
+	public void setShelfTime(String shelfTime) {
 		this.shelfTime = shelfTime;
 	}
 

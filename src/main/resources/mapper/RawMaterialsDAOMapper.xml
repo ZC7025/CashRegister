@@ -16,6 +16,9 @@
 			<if test="price != null">
 				price,
 			</if>
+			<if test="amount != null">
+				amount,
+			</if>
 			<if test="unit != null">
 				unit,
 			</if>
@@ -57,6 +60,9 @@
 			</if>
 			<if test="price != null">
 				#{price},
+			</if>
+			<if test="amount != null">
+				#{amount},
 			</if>
 			<if test="unit != null">
 				#{unit},
@@ -119,6 +125,9 @@
 			<if test="price != null">
 				price = #{price},
 			</if>
+			<if test="amount != null">
+				amount = #{amount},
+			</if>
 			<if test="unit != null">
 				unit = #{unit},
 			</if>
@@ -159,7 +168,7 @@
     </update>
 
     <sql id="select_columns">
-        id, name, price, unit, supplier_id, birth_time, shelf_time, dead_time, min_stock, max_stock, store_id, status, created_time
+        id, name, price, amount, unit, supplier_id, birth_time, shelf_time, dead_time, min_stock, max_stock, store_id, status, created_time
     </sql>
 
     <select id="getById" parameterType="long" resultType="com.sucheng.dos.RawMaterialsDO">
@@ -189,56 +198,60 @@
 
     <sql id="where_clause">
         <if test="query != null and query.id != null">
-			id = #{id},
+			id = #{query.id}
 		</if>
 		<if test="query != null and query.name != null and query.name != ''">
-			and name = #{name},
+			and name = #{query.name}
 		</if>
 		<if test="query != null and query.price != null">
-			and price = #{price},
+			and price = #{query.price}
+		</if>
+		<if test="query != null and query.amount != null">
+			and amount = #{query.amount}
 		</if>
 		<if test="query != null and query.unit != null and query.unit != ''">
-			and unit = #{unit},
+			and unit = #{query.unit}
 		</if>
 		<if test="query != null and query.supplierId != null">
-			and supplier_id = #{supplierId},
+			and supplier_id = #{query.supplierId}
 		</if>
 		<if test="query != null and query.birthTime != null">
-			and birth_time = #{birthTime},
+			and birth_time = #{query.birthTime}
 		</if>
-		<if test="query != null and query.shelfTime != null">
-			and shelf_time = #{shelfTime},
+		<if test="query != null and query.shelfTime != null and query.shelfTime != ''">
+			and shelf_time = #{query.shelfTime}
 		</if>
 		<if test="query != null and query.deadTime != null">
-			and dead_time = #{deadTime},
+			and dead_time = #{query.deadTime}
 		</if>
 		<if test="query != null and query.minStock != null">
-			and min_stock = #{minStock},
+			and min_stock = #{query.minStock}
 		</if>
 		<if test="query != null and query.maxStock != null">
-			and max_stock = #{maxStock},
-		</if>
-		<if test="query != null and query.storeId != null">
-			and store_id = #{storeId},
+			and max_stock = #{query.maxStock}
 		</if>
 		<if test="query != null and query.status != null and query.status != ''">
-			and status = #{status},
+			and status = #{query.status}
 		</if>
 		<if test="query != null and query.createdTime != null">
-			and created_time = #{createdTime},
+			and created_time = #{query.createdTime}
 		</if>
 		
     </sql>
 
-    <select id="listPageByCondition" resultType="com.sucheng.dos.RawMaterialsDO">
-        select
-        <include refid="select_columns"/>
-        from t_raw_materials
+    <select id="listPageByCondition" resultType="com.sucheng.query.RawMaterialsQuery">
+        select raw.*, sup.name as supplierName, sup.phone from t_raw_materials raw, t_supplier sup
         <where>
             <include refid="where_clause"/>
+			<if test="true">
+				and raw.supplier_id = sup.id
+			</if>
+			<if test="query != null and query.storeId != null">
+				and raw.store_id = #{query.storeId}
+			</if>
         </where>
-        order by created_time desc
-        limit #{beginIndex}, #{pageSize}
+        order by raw.created_time desc
+        limit #{pager.beginIndex}, #{pager.pageSize}
     </select>
 
     <select id="countByCondition" parameterType="com.sucheng.query.RawMaterialsQuery" resultType="long">

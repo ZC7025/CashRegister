@@ -1,5 +1,7 @@
 package com.sucheng.vo;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.math.BigDecimal;
 import java.util.Date;
 
@@ -28,6 +30,10 @@ public class RawMaterialsVO extends BaseVO {
 	*/
 	private BigDecimal price;
 	/**
+	 * 数量
+	 */
+	private Float amount;
+	/**
 	*单位
 	*/
 	private String unit;
@@ -42,7 +48,7 @@ public class RawMaterialsVO extends BaseVO {
 	/**
 	*保质期
 	*/
-	private Date shelfTime;
+	private String shelfTime;
 	/**
 	*过期时间
 	*/
@@ -70,7 +76,7 @@ public class RawMaterialsVO extends BaseVO {
 	
     public RawMaterialsVO () {}
 
-    public RawMaterialsVO (Integer id, String name, BigDecimal price, String unit, Integer supplierId, Date birthTime, Date shelfTime, Date deadTime, Integer minStock, Integer maxStock, Integer storeId, String status, Date createdTime) {
+    public RawMaterialsVO (Integer id, String name, BigDecimal price, String unit, Integer supplierId, Date birthTime, String shelfTime, Date deadTime, Integer minStock, Integer maxStock, Integer storeId, String status, Date createdTime) {
         this.id = id;
 		this.name = name;
 		this.price = price;
@@ -103,6 +109,14 @@ public class RawMaterialsVO extends BaseVO {
 		this.name = name;
 	}
 
+	public Float getAmount() {
+		return amount;
+	}
+
+	public void setAmount(Float amount) {
+		this.amount = amount;
+	}
+
 	public BigDecimal getPrice() {
 		return price;
 	}
@@ -127,6 +141,7 @@ public class RawMaterialsVO extends BaseVO {
 		this.supplierId = supplierId;
 	}
 
+	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
 	public Date getBirthTime() {
 		return birthTime;
 	}
@@ -135,14 +150,15 @@ public class RawMaterialsVO extends BaseVO {
 		this.birthTime = birthTime;
 	}
 
-	public Date getShelfTime() {
+	public String getShelfTime() {
 		return shelfTime;
 	}
 
-	public void setShelfTime(Date shelfTime) {
+	public void setShelfTime(String shelfTime) {
 		this.shelfTime = shelfTime;
 	}
 
+	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
 	public Date getDeadTime() {
 		return deadTime;
 	}

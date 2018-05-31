@@ -9,4 +9,9 @@ package com.sucheng.service;
  * @version 1.0
  */
 public interface SupplierService extends BaseService {
+
+    /**
+     * 根据storeId来更新所有该门店下的默认供应商为非默认
+     */
+    void updateDefaultById(Integer storeId);
 }

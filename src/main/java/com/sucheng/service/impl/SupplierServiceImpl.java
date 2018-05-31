@@ -33,4 +33,9 @@ public class SupplierServiceImpl extends AbstractBaseService implements Supplier
     public void init() {
         super.init(SupplierDO.class, SupplierDTO.class);
     }
+
+    @Override
+    public void updateDefaultById(Integer storeId) {
+        supplierDAO.updateDefaultById(storeId);
+    }
 }

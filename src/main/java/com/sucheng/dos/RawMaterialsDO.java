@@ -28,6 +28,10 @@ public class RawMaterialsDO extends BaseDO {
 	*/
 	private BigDecimal price;
 	/**
+	 * 数量
+	 */
+	private Float amount;
+	/**
 	*单位
 	*/
 	private String unit;
@@ -42,7 +46,7 @@ public class RawMaterialsDO extends BaseDO {
 	/**
 	*保质期
 	*/
-	private Date shelfTime;
+	private String shelfTime;
 	/**
 	*过期时间
 	*/
@@ -70,7 +74,7 @@ public class RawMaterialsDO extends BaseDO {
 	
     public RawMaterialsDO () {}
 
-    public RawMaterialsDO (Integer id, String name, BigDecimal price, String unit, Integer supplierId, Date birthTime, Date shelfTime, Date deadTime, Integer minStock, Integer maxStock, Integer storeId, String status, Date createdTime) {
+    public RawMaterialsDO (Integer id, String name, BigDecimal price, String unit, Integer supplierId, Date birthTime, String shelfTime, Date deadTime, Integer minStock, Integer maxStock, Integer storeId, String status, Date createdTime) {
         this.id = id;
 		this.name = name;
 		this.price = price;
@@ -111,6 +115,14 @@ public class RawMaterialsDO extends BaseDO {
 		this.price = price;
 	}
 
+	public Float getAmount() {
+		return amount;
+	}
+
+	public void setAmount(Float amount) {
+		this.amount = amount;
+	}
+
 	public String getUnit() {
 		return unit;
 	}
@@ -135,11 +147,11 @@ public class RawMaterialsDO extends BaseDO {
 		this.birthTime = birthTime;
 	}
 
-	public Date getShelfTime() {
+	public String getShelfTime() {
 		return shelfTime;
 	}
 
-	public void setShelfTime(Date shelfTime) {
+	public void setShelfTime(String shelfTime) {
 		this.shelfTime = shelfTime;
 	}
 

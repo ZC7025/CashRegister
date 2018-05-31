@@ -19,6 +19,10 @@ public class SupplierVO extends BaseVO {
 	*/
 	private Integer id;
 	/**
+	 * 所属门店
+	 */
+	private Integer storeId;
+	/**
 	*
 	*/
 	private String name;
@@ -62,6 +66,14 @@ public class SupplierVO extends BaseVO {
 
 	public void setId(Integer id) {
 		this.id = id;
+	}
+
+	public Integer getStoreId() {
+		return storeId;
+	}
+
+	public void setStoreId(Integer storeId) {
+		this.storeId = storeId;
 	}
 
 	public String getName() {

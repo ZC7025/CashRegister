@@ -10,6 +10,9 @@
             <if test="id != null">
 				id,
 			</if>
+			<if test="storeId != null">
+				store_id,
+			</if>
 			<if test="name != null">
 				name,
 			</if>
@@ -33,6 +36,9 @@
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="id != null">
 				#{id},
+			</if>
+			<if test="storeId != null">
+				#{storeId},
 			</if>
 			<if test="name != null">
 				#{name},
@@ -77,6 +83,9 @@
             <if test="id != null">
 				id = #{id},
 			</if>
+			<if test="storeId != null">
+				store_id = #{storeId},
+			</if>
 			<if test="name != null">
 				name = #{name},
 			</if>
@@ -100,12 +109,16 @@
         where id = #{id}
     </update>
 
+	<update id="updateDefaultById">
+		update t_supplier set defaults = 'N' where store_id = #{storeId} and defaults = 'Y'
+	</update>
+
     <update id="updateActiveStatus" parameterType="com.sucheng.query.StatusQuery">
         update t_supplier set is_active = #{status} where id = #{id}
     </update>
 
     <sql id="select_columns">
-        id, name, phone, address, defaults, status, created_time
+        id, store_id, name, phone, address, defaults, status, created_time
     </sql>
 
     <select id="getById" parameterType="long" resultType="com.sucheng.dos.SupplierDO">
@@ -135,30 +148,33 @@
 
     <sql id="where_clause">
         <if test="query != null and query.id != null">
-			id = #{id},
+			id = #{query.id}
+		</if>
+		<if test="query != null and query.storeId != null">
+			and store_id = #{query.storeId}
 		</if>
 		<if test="query != null and query.name != null and query.name != ''">
-			and name = #{name},
+			and name = #{query.name}
 		</if>
 		<if test="query != null and query.phone != null and query.phone != ''">
-			and phone = #{phone},
+			and phone = #{query.phone}
 		</if>
 		<if test="query != null and query.address != null and query.address != ''">
-			and address = #{address},
+			and address = #{query.address}
 		</if>
 		<if test="query != null and query.defaults != null and query.defaults != ''">
-			and defaults = #{defaults},
+			and defaults = #{query.defaults}
 		</if>
 		<if test="query != null and query.status != null and query.status != ''">
-			and status = #{status},
+			and status = #{query.status}
 		</if>
 		<if test="query != null and query.createdTime != null">
-			and created_time = #{createdTime},
+			and created_time = #{query.createdTime}
 		</if>
 		
     </sql>
 
-    <select id="listPageByCondition" resultType="com.sucheng.dos.SupplierDO">
+    <select id="listPageByCondition" resultType="com.sucheng.query.SupplierQuery">
         select
         <include refid="select_columns"/>
         from t_supplier
@@ -166,7 +182,7 @@
             <include refid="where_clause"/>
         </where>
         order by created_time desc
-        limit #{beginIndex}, #{pageSize}
+        limit #{pager.beginIndex}, #{pager.pageSize}
     </select>
 
     <select id="countByCondition" parameterType="com.sucheng.query.SupplierQuery" resultType="long">

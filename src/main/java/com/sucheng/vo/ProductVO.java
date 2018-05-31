@@ -32,6 +32,10 @@ public class ProductVO extends BaseVO {
 	*/
 	private Integer tasteId;
 	/**
+	 * 商品类别id
+	 */
+	private Integer typeId;
+	/**
 	*
 	*/
 	private BigDecimal price;
@@ -112,6 +116,14 @@ public class ProductVO extends BaseVO {
 
 	public void setTasteId(Integer tasteId) {
 		this.tasteId = tasteId;
+	}
+
+	public Integer getTypeId() {
+		return typeId;
+	}
+
+	public void setTypeId(Integer typeId) {
+		this.typeId = typeId;
 	}
 
 	public BigDecimal getPrice() {

@@ -11,7 +11,9 @@ import com.sucheng.query.SupplierQuery;
 import com.sucheng.service.SupplierService;
 import com.sucheng.vo.ControllerStatusVO;
 import com.sucheng.vo.PagerVO;
+import com.sucheng.vo.StoreVO;
 import com.sucheng.vo.SupplierVO;
+import org.apache.shiro.SecurityUtils;
 import org.dozer.Mapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,7 +33,7 @@ import java.util.List;
  * @version 1.0
  */
 @Controller
-@RequestMapping("/supplier")
+@RequestMapping("/data/supplier")
 public class SupplierController extends BaseController {
 
     private static final Logger logger = LoggerFactory.getLogger(SupplierController.class);
@@ -43,8 +45,11 @@ public class SupplierController extends BaseController {
     public ControllerStatusVO save(SupplierVO supplierVO) {
         ControllerStatusVO statusVO = new ControllerStatusVO();
         try {
+            if("Y".equals(supplierVO.getDefaults())) {
+                supplierService.updateDefaultById(supplierVO.getStoreId());
+            }
             supplierService.save(getBeanMapper().map(supplierVO, SupplierDTO.class));
-            statusVO.okStatus(200, "添加成功");
+            statusVO.okStatus(0, "添加成功");
         } catch (ServiceException e) {
             logger.error("添加失败：{}", e.getMessage());
             statusVO.errorStatus(500, "添加失败");
@@ -72,7 +77,7 @@ public class SupplierController extends BaseController {
         ControllerStatusVO statusVO = new ControllerStatusVO();
         try {
             supplierService.removeById(id);
-            statusVO.okStatus(200, "删除成功");
+            statusVO.okStatus(0, "删除成功");
         } catch (ServiceException e) {
             logger.error("删除失败：{}", e.getMessage());
             statusVO.errorStatus(500, "删除失败");
@@ -99,8 +104,11 @@ public class SupplierController extends BaseController {
     public ControllerStatusVO update(SupplierVO supplierVO) {
         ControllerStatusVO statusVO = new ControllerStatusVO();
         try {
+            if("Y".equals(supplierVO.getDefaults())) {
+                supplierService.updateDefaultById(supplierVO.getStoreId());
+            }
             supplierService.update(getBeanMapper().map(supplierVO, SupplierDTO.class));
-            statusVO.okStatus(200, "更新成功");
+            statusVO.okStatus(0, "更新成功");
         } catch (ServiceException e) {
             logger.error("更新失败：{}", e.getMessage());
             statusVO.errorStatus(500, "更新失败");
@@ -165,11 +173,18 @@ public class SupplierController extends BaseController {
         return pagerVO;
     }
 
-    @RequestMapping("pageList")
+    @RequestMapping("supList")
     @ResponseBody
-    public PagerVO listPageByCondition(PageQuery pageQuery, SupplierQuery supplierQuery) {
+    public PagerVO listPageByCondition(int page, int limit, SupplierQuery supplierQuery) {
+        PageQuery pageQuery = new PageQuery(page, limit);
         PagerVO pagerVO = new PagerVO();
         try {
+            StoreVO storeVO = (StoreVO) SecurityUtils.getSubject().getSession().getAttribute("store");
+            if(storeVO == null) {
+                logger.error("session失效");
+                return pagerVO;
+            }
+            supplierQuery.setStoreId(storeVO.getId());
             PagerDTO pagerDTO = supplierService.listPageByCondition(pageQuery, supplierQuery);
             Mapper mapper = getBeanMapper();
             pagerVO = mapper.map(pagerDTO, PagerVO.class);

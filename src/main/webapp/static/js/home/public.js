@@ -48,6 +48,54 @@ function formatDateTime(value) {
     }
 }
 
+/*
+ *   功能:实现VBScript的DateAdd功能.
+ *   参数:interval,字符串表达式，表示要添加的时间间隔.
+ *   参数:number,数值表达式，表示要添加的时间间隔的个数.
+ *   参数:date,时间对象.
+ *   返回:新的时间对象.
+ */
+function DateAdd(interval, number, date) {
+    switch (interval) {
+        case "年": {
+            date.setFullYear(date.getFullYear() + number);
+            return date;
+        }
+        case "季": {
+            date.setMonth(date.getMonth() + number * 3);
+            return date;
+        }
+        case "月": {
+            date.setMonth(date.getMonth() + number);
+            return date;
+        }
+        case "周": {
+            date.setDate(date.getDate() + number * 7);
+            return date;
+        }
+        case "天": {
+            date.setDate(date.getDate() + number);
+            return date;
+        }
+        case "时": {
+            date.setHours(date.getHours() + number);
+            return date;
+        }
+        case "分": {
+            date.setMinutes(date.getMinutes() + number);
+            return date;
+        }
+        case "秒": {
+            date.setSeconds(date.getSeconds() + number);
+            return date;
+        }
+        default: {
+            date.setDate(date.getDate() + number);
+            return date;
+        }
+    }
+}
+
 /**参数说明：
  * 根据长度截取先使用字符串，超长部分追加…
  * str 对象字符串
@@ -80,6 +128,10 @@ function cutString(str, len) {
 
 function formatStatus(status) {
     return status === 'N' ? "冻结" : "激活";
+}
+
+function formatDefault(status) {
+    return status === 'N' ? "否" : "是";
 }
 
 function formatArea(value) {

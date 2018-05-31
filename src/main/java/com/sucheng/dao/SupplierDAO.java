@@ -19,4 +19,12 @@ public interface SupplierDAO extends BaseDAO {
 
     @Override
     List<Object> listPageByCondition(@Param("pager") PageQuery pageQuery, @Param("query") Object queryObj);
+
+    @Override
+    Long countByCondition(@Param("query") Object queryObj);
+
+    /**
+     * 根据storeId来更新所有该门店下的默认供应商为非默认
+     */
+    void updateDefaultById(Integer storeId);
 }

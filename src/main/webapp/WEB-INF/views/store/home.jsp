@@ -120,6 +120,17 @@
                             <dd><a href="javascript:;" kit-target
                                    data-options="{url:'<%=path %>/page/taste/tasteList',icon:'&#xe658;',title:'商品口味管理',id:'7'}"><i class="layui-icon">&#xe658;</i><span>商品口味管理</span></a>
                             </dd>
+                            <dd><a href="javascript:;" kit-target
+                                   data-options="{url:'<%=path %>/page/rawMat/rawList',icon:'&#xe658;',title:'原材料管理',id:'8'}"><i class="layui-icon">&#xe658;</i><span>原材料管理</span></a>
+                            </dd>
+                        </dl>
+                    </li>
+                    <li class="layui-nav-item">
+                        <a href="javascript:;"><span>供应商管理</span></a>
+                        <dl class="layui-nav-child">
+                            <dd><a href="javascript:;" kit-target
+                                   data-options="{url:'<%=path %>/page/supplier/supList',icon:'&#xe658;',title:'供应商管理',id:'9'}"><i class="layui-icon">&#xe658;</i><span>供应商管理</span></a>
+                            </dd>
                         </dl>
                     </li>
                     <%--&lt;%&ndash;root用户可见&ndash;%&gt;--%>
