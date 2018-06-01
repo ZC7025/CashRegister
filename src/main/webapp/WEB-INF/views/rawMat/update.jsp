@@ -124,6 +124,7 @@
         var laydate = layui.laydate;
         var dateStr = '';
         var supId = null;
+        var unitId = null;
         // 输入保质期后的失去焦点事件
         $(document).on('blur','#shelf',function(){
             timeCalc($('#birthTime').val());
@@ -174,6 +175,7 @@
                 $('#maxStock').val(data.maxStock);
                 $('#minStock').val(data.minStock);
                 supId = data.supplierId;
+                unitId = data.unitId;
                 laydate.render({
                     elem: '#birthTime'
                     , value: dateStr
@@ -183,31 +185,10 @@
                         timeCalc(value);
                     }
                 });
-                var html = "";
-                if(data.unit === 'kg') {
-                    html = "<option value='kg' selected>千克</option>\n" +
-                        "<option value='g'>克</option>\n" +
-                        "<option value='l'>升</option>\n" +
-                        "<option value='ml'>毫升</option>"
-                } else if(data.unit === 'g') {
-                    html = "<option value='kg'>千克</option>\n" +
-                        "<option value='g' selected>克</option>\n" +
-                        "<option value='l'>升</option>\n" +
-                        "<option value='ml'>毫升</option>"
-                } else if(data.unit === 'l') {
-                    html = "<option value='kg'>千克</option>\n" +
-                        "<option value='g'>克</option>\n" +
-                        "<option value='l' selected>升</option>\n" +
-                        "<option value='ml'>毫升</option>"
-                } else{
-                    html = "<option value='kg'>千克</option>\n" +
-                        "<option value='g'>克</option>\n" +
-                        "<option value='l'>升</option>\n" +
-                        "<option value='ml' selected>毫升</option>"
-                }
                 $('#unit').append(html);
                 form.render();
                 var supList = "";
+                var unitList = "";
                 if(${sessionScope.store != null}) {
                     $.ajax({
                         url: '<%=path %>/data/supplier/all',
@@ -222,6 +203,23 @@
                                 }
                             }
                             $("#sup-select").append(supList);
+                            // 重新刷新表单，新option才会出现
+                            form.render();
+                        }
+                    });
+                    $.ajax({
+                        url: '<%=path %>/data/unit/all',
+                        success: function (data) {
+                            for (var i = 0; i < data.length; i++) {
+                                if(data[i].id === unitId) {
+                                    unitList += '<option value="' + data[i].id + '" selected="selected">'
+                                        + data[i].unit + '(' + data[i].descript + ')</option>'
+                                } else {
+                                    unitList += '<option value="' + data[i].id + '">'
+                                        + data[i].unit + '(' + data[i].descript + ')</option>'
+                                }
+                            }
+                            $("#unit").append(unitList);
                             // 重新刷新表单，新option才会出现
                             form.render();
                         }

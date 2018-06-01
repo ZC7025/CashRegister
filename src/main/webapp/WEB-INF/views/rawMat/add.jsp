@@ -48,12 +48,7 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">单位</label>
                 <div class="layui-input-block">
-                    <select name="unit" id="unit" lay-verify="required">
-                        <option value="kg">千克</option>
-                        <option value="g">克</option>
-                        <option value="l">升</option>
-                        <option value="ml">毫升</option>
-                    </select>
+                    <select name="unitId" id="unit" lay-verify="required"></select>
                 </div>
             </div>
             <div class="layui-form-item">
@@ -177,6 +172,7 @@
         });
         $(function () {
             var supList = "";
+            var unitList = "";
             if(${sessionScope.store != null}) {
                 $.ajax({
                     url: '<%=path %>/data/supplier/all',
@@ -191,6 +187,19 @@
                             }
                         }
                         $("#sup-select").append(supList);
+                        // 重新刷新表单，新option才会出现
+                        form.render();
+                    }
+                });
+                $.ajax({
+                    url: '<%=path %>/data/unit/all',
+                    success: function (data) {
+                        var len = data.length;
+                        for (var i = len; i > 0 ; i--) {
+                            unitList += '<option value="' + data[i].id + '">'
+                                + data[i].unit + '(' + data[i].descript + ')</option>'
+                        }
+                        $("#unit").append(unitList);
                         // 重新刷新表单，新option才会出现
                         form.render();
                     }

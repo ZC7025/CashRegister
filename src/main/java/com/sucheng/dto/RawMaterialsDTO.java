@@ -36,6 +36,10 @@ public class RawMaterialsDTO extends BaseDTO {
 	*/
 	private String unit;
 	/**
+	 *单位
+	 */
+	private Integer unitId;
+	/**
 	*供应商id
 	*/
 	private Integer supplierId;
@@ -143,6 +147,14 @@ public class RawMaterialsDTO extends BaseDTO {
 
 	public void setUnit(String unit) {
 		this.unit = unit;
+	}
+
+	public Integer getUnitId() {
+		return unitId;
+	}
+
+	public void setUnitId(Integer unitId) {
+		this.unitId = unitId;
 	}
 
 	public Integer getSupplierId() {

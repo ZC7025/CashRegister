@@ -36,7 +36,7 @@ public class RawMaterialsVO extends BaseVO {
 	/**
 	*单位
 	*/
-	private String unit;
+	private Integer unitId;
 	/**
 	*供应商id
 	*/
@@ -76,11 +76,16 @@ public class RawMaterialsVO extends BaseVO {
 	
     public RawMaterialsVO () {}
 
-    public RawMaterialsVO (Integer id, String name, BigDecimal price, String unit, Integer supplierId, Date birthTime, String shelfTime, Date deadTime, Integer minStock, Integer maxStock, Integer storeId, String status, Date createdTime) {
-        this.id = id;
+	public RawMaterialsVO(Integer id, String name, BigDecimal price,
+						  Float amount, Integer unitId, Integer supplierId,
+						  Date birthTime, String shelfTime, Date deadTime,
+						  Integer minStock, Integer maxStock, Integer storeId,
+						  String status, Date createdTime) {
+		this.id = id;
 		this.name = name;
 		this.price = price;
-		this.unit = unit;
+		this.amount = amount;
+		this.unitId = unitId;
 		this.supplierId = supplierId;
 		this.birthTime = birthTime;
 		this.shelfTime = shelfTime;
@@ -90,10 +95,9 @@ public class RawMaterialsVO extends BaseVO {
 		this.storeId = storeId;
 		this.status = status;
 		this.createdTime = createdTime;
-		
-    }
+	}
 
-    public Integer getId() {
+	public Integer getId() {
 		return id;
 	}
 
@@ -125,12 +129,12 @@ public class RawMaterialsVO extends BaseVO {
 		this.price = price;
 	}
 
-	public String getUnit() {
-		return unit;
+	public Integer getUnitId() {
+		return unitId;
 	}
 
-	public void setUnit(String unit) {
-		this.unit = unit;
+	public void setUnitId(Integer unitId) {
+		this.unitId = unitId;
 	}
 
 	public Integer getSupplierId() {
@@ -214,7 +218,7 @@ public class RawMaterialsVO extends BaseVO {
                 "id = " + id + 
 				", name = " + name + 
 				", price = " + price + 
-				", unit = " + unit + 
+				", unitId = " + unitId +
 				", supplierId = " + supplierId + 
 				", birthTime = " + birthTime + 
 				", shelfTime = " + shelfTime + 

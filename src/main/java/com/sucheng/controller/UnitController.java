@@ -3,31 +3,29 @@ package com.sucheng.controller;
 import com.sucheng.common.DozerMapperUtils;
 import com.sucheng.common.StringUtils;
 import com.sucheng.dto.PagerDTO;
-import com.sucheng.dto.RawMaterialsDTO;
+import com.sucheng.dto.UnitDTO;
 import com.sucheng.exception.ServiceException;
 import com.sucheng.query.PageQuery;
-import com.sucheng.query.RawMaterialsQuery;
 import com.sucheng.query.StatusQuery;
-import com.sucheng.service.RawMaterialsService;
+import com.sucheng.query.UnitQuery;
+import com.sucheng.service.UnitService;
 import com.sucheng.vo.ControllerStatusVO;
 import com.sucheng.vo.PagerVO;
-import com.sucheng.vo.RawMaterialsVO;
 import com.sucheng.vo.StoreVO;
+import com.sucheng.vo.UnitVO;
 import org.apache.shiro.SecurityUtils;
 import org.dozer.Mapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
-import java.beans.Transient;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * RawMaterialsController控制器类<br/>
+ * UnitController控制器类<br/>
  *
  * 创建于2018-05-24<br/>
  *
@@ -35,27 +33,19 @@ import java.util.List;
  * @version 1.0
  */
 @Controller
-@RequestMapping("/data/rawMat")
-public class RawMaterialsController extends BaseController {
+@RequestMapping("/data/unit")
+public class UnitController extends BaseController {
 
-    private static final Logger logger = LoggerFactory.getLogger(RawMaterialsController.class);
+    private static final Logger logger = LoggerFactory.getLogger(UnitController.class);
 
-    private RawMaterialsService rawMaterialsService;
+    private UnitService unitService;
 
-    @RequestMapping("save")
+    @PostMapping("save")
     @ResponseBody
-    @Transactional
-    public ControllerStatusVO save(RawMaterialsVO rawMaterialsVO) {
+    public ControllerStatusVO save(UnitVO unitVO) {
         ControllerStatusVO statusVO = new ControllerStatusVO();
         try {
-            StoreVO storeVO = (StoreVO) SecurityUtils.getSubject().getSession().getAttribute("store");
-            if(storeVO == null) {
-                logger.error("session失效");
-                return statusVO;
-            }
-            rawMaterialsVO.setStoreId(storeVO.getId());
-            rawMaterialsService.save(getBeanMapper().map(rawMaterialsVO, RawMaterialsDTO.class));
-            // TODO 库存管理
+            unitService.save(getBeanMapper().map(unitVO, UnitDTO.class));
             statusVO.okStatus(0, "添加成功");
         } catch (ServiceException e) {
             logger.error("添加失败：{}", e.getMessage());
@@ -66,11 +56,11 @@ public class RawMaterialsController extends BaseController {
 
     @PostMapping("remove")
     @ResponseBody
-    public ControllerStatusVO remove(RawMaterialsVO rawMaterialsVO) {
+    public ControllerStatusVO remove(UnitVO unitVO) {
         ControllerStatusVO statusVO = new ControllerStatusVO();
         try {
-            rawMaterialsService.remove(getBeanMapper().map(rawMaterialsVO, RawMaterialsDTO.class));
-            statusVO.okStatus(0, "删除成功");
+            unitService.remove(getBeanMapper().map(unitVO, UnitDTO.class));
+            statusVO.okStatus(200, "删除成功");
         } catch (ServiceException e) {
             logger.error("删除失败：{}", e.getMessage());
             statusVO.errorStatus(500, "删除失败");
@@ -83,7 +73,7 @@ public class RawMaterialsController extends BaseController {
     public ControllerStatusVO removeById(@PathVariable("id") Long id) {
         ControllerStatusVO statusVO = new ControllerStatusVO();
         try {
-            rawMaterialsService.removeById(id);
+            unitService.removeById(id);
             statusVO.okStatus(0, "删除成功");
         } catch (ServiceException e) {
             logger.error("删除失败：{}", e.getMessage());
@@ -97,8 +87,8 @@ public class RawMaterialsController extends BaseController {
     public ControllerStatusVO removeByIds(String ids) {
         ControllerStatusVO statusVO = new ControllerStatusVO();
         try {
-            rawMaterialsService.removeByIds(StringUtils.strToLongArray(ids, ","));
-            statusVO.okStatus(0, "批量删除成功");
+            unitService.removeByIds(StringUtils.strToLongArray(ids, ","));
+            statusVO.okStatus(200, "批量删除成功");
         } catch (ServiceException e) {
             logger.error("批量删除失败：{}", e.getMessage());
             statusVO.errorStatus(500, "批量删除失败");
@@ -108,10 +98,10 @@ public class RawMaterialsController extends BaseController {
 
     @PostMapping("update")
     @ResponseBody
-    public ControllerStatusVO update(RawMaterialsVO rawMaterialsVO) {
+    public ControllerStatusVO update(UnitVO unitVO) {
         ControllerStatusVO statusVO = new ControllerStatusVO();
         try {
-            rawMaterialsService.update(getBeanMapper().map(rawMaterialsVO, RawMaterialsDTO.class));
+            unitService.update(getBeanMapper().map(unitVO, UnitDTO.class));
             statusVO.okStatus(0, "更新成功");
         } catch (ServiceException e) {
             logger.error("更新失败：{}", e.getMessage());
@@ -125,8 +115,8 @@ public class RawMaterialsController extends BaseController {
     public ControllerStatusVO updateActiveStatus(StatusQuery statusQuery) {
         ControllerStatusVO statusVO = new ControllerStatusVO();
         try {
-            rawMaterialsService.updateActiveStatus(statusQuery);
-            statusVO.okStatus(0, statusQuery.getStatus() == 0 ? "激活成功" : "冻结成功");
+            unitService.updateActiveStatus(statusQuery);
+            statusVO.okStatus(200, statusQuery.getStatus() == 0 ? "激活成功" : "冻结成功");
         } catch (ServiceException e) {
             logger.error("激活或冻结失败：{}", e.getMessage());
             statusVO.errorStatus(500, statusQuery.getStatus() == 0 ? "激活失败" : "冻结失败");
@@ -136,30 +126,30 @@ public class RawMaterialsController extends BaseController {
 
     @RequestMapping("one/{id}")
     @ResponseBody
-    public RawMaterialsVO getById(@PathVariable("id") Long id) {
-        RawMaterialsVO rawMaterialsVO = new RawMaterialsVO();
+    public UnitVO getById(@PathVariable("id") Long id) {
+        UnitVO unitVO = new UnitVO();
         try {
-            Object obj = rawMaterialsService.getById(id);
+            Object obj = unitService.getById(id);
             if (obj != null) {
-                rawMaterialsVO = getBeanMapper().map(obj, RawMaterialsVO.class);
+                unitVO = getBeanMapper().map(obj, UnitVO.class);
             }
         } catch (ServiceException e) {
             logger.error("返回单个对象JSON数据失败：{}", e.getMessage());
         }
-        return rawMaterialsVO;
+        return unitVO;
     }
 
     @GetMapping("all")
     @ResponseBody
-    public List<RawMaterialsVO> listAll() {
-        List<RawMaterialsVO> rawMaterialsVOList = new ArrayList<>();
+    public List<UnitVO> listAll() {
+        List<UnitVO> unitVOList = new ArrayList<>();
         try {
-            List<Object> objectList = rawMaterialsService.listAll();
-            rawMaterialsVOList =  DozerMapperUtils.map(getBeanMapper(), objectList, RawMaterialsVO.class);
+            List<Object> objectList = unitService.listAll();
+            unitVOList =  DozerMapperUtils.map(getBeanMapper(), objectList, UnitVO.class);
         } catch (ServiceException e) {
             logger.error("返回所有对象JSON数据失败：{}", e.getMessage());
         }
-        return rawMaterialsVOList;
+        return unitVOList;
     }
 
     @PostMapping("page")
@@ -167,19 +157,19 @@ public class RawMaterialsController extends BaseController {
     public PagerVO listPage(PageQuery pageQuery) {
         PagerVO pagerVO = new PagerVO();
         try {
-            PagerDTO pagerDTO = rawMaterialsService.listPage(pageQuery);
+            PagerDTO pagerDTO = unitService.listPage(pageQuery);
             Mapper mapper = getBeanMapper();
             pagerVO = mapper.map(pagerDTO, PagerVO.class);
-            pagerVO.setRows(DozerMapperUtils.mapList(mapper, pagerDTO.getRows(), RawMaterialsVO.class));
+            pagerVO.setRows(DozerMapperUtils.mapList(mapper, pagerDTO.getRows(), UnitVO.class));
         } catch (ServiceException e) {
             logger.error("返回分页对象JSON数据失败：{}", e.getMessage());
         }
         return pagerVO;
     }
 
-    @RequestMapping("rawList")
+    @RequestMapping("unitList")
     @ResponseBody
-    public PagerVO listPageByCondition(int page, int limit, RawMaterialsQuery rawMaterialsQuery) {
+    public PagerVO listPageByCondition(int page, int limit, UnitQuery unitQuery) {
         PageQuery pageQuery = new PageQuery(page, limit);
         PagerVO pagerVO = new PagerVO();
         try {
@@ -188,11 +178,11 @@ public class RawMaterialsController extends BaseController {
                 logger.error("session失效");
                 return pagerVO;
             }
-            rawMaterialsQuery.setStoreId(storeVO.getId());
-            PagerDTO pagerDTO = rawMaterialsService.listPageByCondition(pageQuery, rawMaterialsQuery);
+            unitQuery.setStoreId(storeVO.getId());
+            PagerDTO pagerDTO = unitService.listPageByCondition(pageQuery, unitQuery);
             Mapper mapper = getBeanMapper();
             pagerVO = mapper.map(pagerDTO, PagerVO.class);
-            pagerVO.setRows(DozerMapperUtils.mapList(mapper, pagerDTO.getRows(), RawMaterialsQuery.class));
+            pagerVO.setRows(DozerMapperUtils.mapList(mapper, pagerDTO.getRows(), UnitVO.class));
         } catch (ServiceException e) {
             logger.error("返回指定条件的分页对象JSON数据失败：{}", e.getMessage());
         }
@@ -200,7 +190,7 @@ public class RawMaterialsController extends BaseController {
     }
 
     @Resource
-    public void setRawMaterialsService(RawMaterialsService rawMaterialsService) {
-        this.rawMaterialsService = rawMaterialsService;
+    public void setUnitService(UnitService unitService) {
+        this.unitService = unitService;
     }
 }

@@ -34,7 +34,7 @@ public class RawMaterialsDO extends BaseDO {
 	/**
 	*单位
 	*/
-	private String unit;
+	private Integer unitId;
 	/**
 	*供应商id
 	*/
@@ -74,11 +74,11 @@ public class RawMaterialsDO extends BaseDO {
 	
     public RawMaterialsDO () {}
 
-    public RawMaterialsDO (Integer id, String name, BigDecimal price, String unit, Integer supplierId, Date birthTime, String shelfTime, Date deadTime, Integer minStock, Integer maxStock, Integer storeId, String status, Date createdTime) {
+    public RawMaterialsDO (Integer id, String name, BigDecimal price, Integer unitId, Integer supplierId, Date birthTime, String shelfTime, Date deadTime, Integer minStock, Integer maxStock, Integer storeId, String status, Date createdTime) {
         this.id = id;
 		this.name = name;
 		this.price = price;
-		this.unit = unit;
+		this.unitId = unitId;
 		this.supplierId = supplierId;
 		this.birthTime = birthTime;
 		this.shelfTime = shelfTime;
@@ -123,12 +123,12 @@ public class RawMaterialsDO extends BaseDO {
 		this.amount = amount;
 	}
 
-	public String getUnit() {
-		return unit;
+	public Integer getUnitId() {
+		return unitId;
 	}
 
-	public void setUnit(String unit) {
-		this.unit = unit;
+	public void setUnitId(Integer unitId) {
+		this.unitId = unitId;
 	}
 
 	public Integer getSupplierId() {
@@ -210,7 +210,7 @@ public class RawMaterialsDO extends BaseDO {
                 "id = " + id + 
 				", name = " + name + 
 				", price = " + price + 
-				", unit = " + unit + 
+				", unitId = " + unitId +
 				", supplierId = " + supplierId + 
 				", birthTime = " + birthTime + 
 				", shelfTime = " + shelfTime + 
