@@ -196,8 +196,8 @@
                     success: function (data) {
                         var len = data.length;
                         for (var i = len; i > 0 ; i--) {
-                            unitList += '<option value="' + data[i].id + '">'
-                                + data[i].unit + '(' + data[i].descript + ')</option>'
+                            unitList += '<option value="' + data[i-1].id + '">'
+                                + data[i-1].unit + '(' + data[i-1].descript + ')</option>'
                         }
                         $("#unit").append(unitList);
                         // 重新刷新表单，新option才会出现

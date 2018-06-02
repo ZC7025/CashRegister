@@ -35,6 +35,14 @@ public class StockOperatingDO extends BaseDO {
 	*/
 	private String unit;
 	/**
+	 *
+	 */
+	private Integer unitId;
+	/**
+	 *
+	 */
+	private Integer storeId;
+	/**
 	*出入库员工
 	*/
 	private String empName;
@@ -99,6 +107,22 @@ public class StockOperatingDO extends BaseDO {
 
 	public void setUnit(String unit) {
 		this.unit = unit;
+	}
+
+	public Integer getUnitId() {
+		return unitId;
+	}
+
+	public void setUnitId(Integer unitId) {
+		this.unitId = unitId;
+	}
+
+	public Integer getStoreId() {
+		return storeId;
+	}
+
+	public void setStoreId(Integer storeId) {
+		this.storeId = storeId;
 	}
 
 	public String getEmpName() {

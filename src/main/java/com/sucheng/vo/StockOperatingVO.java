@@ -33,7 +33,11 @@ public class StockOperatingVO extends BaseVO {
 	/**
 	*单位
 	*/
-	private String unit;
+	private Integer unitId;
+	/**
+	 *
+	 */
+	private Integer storeId;
 	/**
 	*出入库员工
 	*/
@@ -49,12 +53,12 @@ public class StockOperatingVO extends BaseVO {
 	
     public StockOperatingVO () {}
 
-    public StockOperatingVO (Integer id, Integer rawId, Float inStockCount, Float outStockCount, String unit, String empName, Date operatingTime, String descript) {
+    public StockOperatingVO (Integer id, Integer rawId, Float inStockCount, Float outStockCount, Integer unitId, String empName, Date operatingTime, String descript) {
         this.id = id;
 		this.rawId = rawId;
 		this.inStockCount = inStockCount;
 		this.outStockCount = outStockCount;
-		this.unit = unit;
+		this.unitId = unitId;
 		this.empName = empName;
 		this.operatingTime = operatingTime;
 		this.descript = descript;
@@ -93,12 +97,20 @@ public class StockOperatingVO extends BaseVO {
 		this.outStockCount = outStockCount;
 	}
 
-	public String getUnit() {
-		return unit;
+	public Integer getUnitId() {
+		return unitId;
 	}
 
-	public void setUnit(String unit) {
-		this.unit = unit;
+	public void setUnitId(Integer unitId) {
+		this.unitId = unitId;
+	}
+
+	public Integer getStoreId() {
+		return storeId;
+	}
+
+	public void setStoreId(Integer storeId) {
+		this.storeId = storeId;
 	}
 
 	public String getEmpName() {
@@ -133,7 +145,7 @@ public class StockOperatingVO extends BaseVO {
 				", rawId = " + rawId + 
 				", inStockCount = " + inStockCount + 
 				", outStockCount = " + outStockCount + 
-				", unit = " + unit + 
+				", unitId = " + unitId +
 				", empName = " + empName + 
 				", operatingTime = " + operatingTime + 
 				", descript = " + descript + 

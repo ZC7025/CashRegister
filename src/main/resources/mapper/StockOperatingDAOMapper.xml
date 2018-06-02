@@ -19,8 +19,8 @@
 			<if test="outStockCount != null">
 				out_stock_count,
 			</if>
-			<if test="unit != null">
-				unit,
+			<if test="unitId != null">
+				unit_id,
 			</if>
 			<if test="empName != null">
 				emp_name,
@@ -46,8 +46,8 @@
 			<if test="outStockCount != null">
 				#{outStockCount},
 			</if>
-			<if test="unit != null">
-				#{unit},
+			<if test="unitId != null">
+				#{unitId},
 			</if>
 			<if test="empName != null">
 				#{empName},
@@ -92,8 +92,8 @@
 			<if test="outStockCount != null">
 				out_stock_count = #{outStockCount},
 			</if>
-			<if test="unit != null">
-				unit = #{unit},
+			<if test="unitId != null">
+				unit_id = #{unitId},
 			</if>
 			<if test="empName != null">
 				emp_name = #{empName},
@@ -114,7 +114,7 @@
     </update>
 
     <sql id="select_columns">
-        id, raw_id, in_stock_count, out_stock_count, unit, emp_name, operating_time, descript
+        id, raw_id, in_stock_count, out_stock_count, unit_id, emp_name, operating_time, descript
     </sql>
 
     <select id="getById" parameterType="long" resultType="com.sucheng.dos.StockOperatingDO">
@@ -144,41 +144,45 @@
 
     <sql id="where_clause">
         <if test="query != null and query.id != null">
-			id = #{id},
+			id = #{query.id}
 		</if>
 		<if test="query != null and query.rawId != null">
-			and raw_id = #{rawId},
+			and raw_id = #{query.rawId}
 		</if>
 		<if test="query != null and query.inStockCount != null">
-			and in_stock_count = #{inStockCount},
+			and in_stock_count = #{query.inStockCount}
 		</if>
 		<if test="query != null and query.outStockCount != null">
-			and out_stock_count = #{outStockCount},
+			and out_stock_count = #{query.outStockCount}
 		</if>
-		<if test="query != null and query.unit != null and query.unit != ''">
-			and unit = #{unit},
+		<if test="query != null and query.unitId != null and query.unitId != ''">
+			and unit_id = #{query.unitId}
 		</if>
 		<if test="query != null and query.empName != null and query.empName != ''">
-			and emp_name = #{empName},
+			and emp_name = #{query.empName}
 		</if>
 		<if test="query != null and query.operatingTime != null">
-			and operating_time = #{operatingTime},
+			and operating_time = #{query.operatingTime}
 		</if>
 		<if test="query != null and query.descript != null and query.descript != ''">
-			and descript = #{descript},
+			and descript = #{query.descript}
 		</if>
 		
     </sql>
 
-    <select id="listPageByCondition" resultType="com.sucheng.dos.StockOperatingDO">
-        select
-        <include refid="select_columns"/>
-        from t_stock_operating
+    <select id="listPageByCondition" resultType="com.sucheng.query.StockOperatingQuery">
+        select so.*, u.unit, raw.name from t_stock_operating so, t_unit u, t_raw_materials raw
         <where>
             <include refid="where_clause"/>
+			<if test="true">
+				and so.unit_id = u.id and so.raw_id = raw.id
+			</if>
+			<if test="query != null and query.storeId != null">
+				and raw.store_id = #{query.storeId}
+			</if>
         </where>
-        order by created_time desc
-        limit #{beginIndex}, #{pageSize}
+        order by so.operating_time desc
+        limit #{pager.beginIndex}, #{pager.pageSize}
     </select>
 
     <select id="countByCondition" parameterType="com.sucheng.query.StockOperatingQuery" resultType="long">

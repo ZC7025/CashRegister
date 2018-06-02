@@ -185,8 +185,6 @@
                         timeCalc(value);
                     }
                 });
-                $('#unit').append(html);
-                form.render();
                 var supList = "";
                 var unitList = "";
                 if(${sessionScope.store != null}) {

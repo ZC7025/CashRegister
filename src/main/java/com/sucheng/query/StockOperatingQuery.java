@@ -35,6 +35,14 @@ public class StockOperatingQuery extends BaseQuery {
 	*/
 	private String unit;
 	/**
+	 *
+	 */
+	private Integer unitId;
+	/**
+	 *
+	 */
+	private Integer storeId;
+	/**
 	*出入库员工
 	*/
 	private String empName;
@@ -46,6 +54,10 @@ public class StockOperatingQuery extends BaseQuery {
 	*
 	*/
 	private String descript;
+	/**
+	 * 原料名
+	 */
+	private String name;
 	
     public StockOperatingQuery () {}
 
@@ -101,6 +113,22 @@ public class StockOperatingQuery extends BaseQuery {
 		this.unit = unit;
 	}
 
+	public Integer getUnitId() {
+		return unitId;
+	}
+
+	public void setUnitId(Integer unitId) {
+		this.unitId = unitId;
+	}
+
+	public Integer getStoreId() {
+		return storeId;
+	}
+
+	public void setStoreId(Integer storeId) {
+		this.storeId = storeId;
+	}
+
 	public String getEmpName() {
 		return empName;
 	}
@@ -125,8 +153,15 @@ public class StockOperatingQuery extends BaseQuery {
 		this.descript = descript;
 	}
 
-	
-    @Override
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	@Override
     public String toString() {
         return "StockOperatingDO{" +
                 "}";

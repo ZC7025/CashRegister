@@ -31,7 +31,7 @@ import java.util.List;
  * @version 1.0
  */
 @Controller
-@RequestMapping("/stock")
+@RequestMapping("/data/stock")
 public class StockController extends BaseController {
 
     private static final Logger logger = LoggerFactory.getLogger(StockController.class);
@@ -44,7 +44,7 @@ public class StockController extends BaseController {
         ControllerStatusVO statusVO = new ControllerStatusVO();
         try {
             stockService.save(getBeanMapper().map(stockVO, StockDTO.class));
-            statusVO.okStatus(200, "添加成功");
+            statusVO.okStatus(0, "添加成功");
         } catch (ServiceException e) {
             logger.error("添加失败：{}", e.getMessage());
             statusVO.errorStatus(500, "添加失败");
@@ -173,7 +173,7 @@ public class StockController extends BaseController {
             PagerDTO pagerDTO = stockService.listPageByCondition(pageQuery, stockQuery);
             Mapper mapper = getBeanMapper();
             pagerVO = mapper.map(pagerDTO, PagerVO.class);
-            pagerVO.setRows(DozerMapperUtils.mapList(mapper, pagerDTO.getRows(), StockVO.class));
+            pagerVO.setRows(DozerMapperUtils.mapList(mapper, pagerDTO.getRows(), StockQuery.class));
         } catch (ServiceException e) {
             logger.error("返回指定条件的分页对象JSON数据失败：{}", e.getMessage());
         }

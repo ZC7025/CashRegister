@@ -19,8 +19,8 @@
 			<if test="count != null">
 				count,
 			</if>
-			<if test="unit != null">
-				unit,
+			<if test="unitId != null">
+				unit_id,
 			</if>
 			<if test="price != null">
 				price,
@@ -46,8 +46,8 @@
 			<if test="count != null">
 				#{count},
 			</if>
-			<if test="unit != null">
-				#{unit},
+			<if test="unitId != null">
+				#{unitId},
 			</if>
 			<if test="price != null">
 				#{price},
@@ -92,8 +92,8 @@
 			<if test="count != null">
 				count = #{count},
 			</if>
-			<if test="unit != null">
-				unit = #{unit},
+			<if test="unitId != null">
+				unit_id = #{unitId},
 			</if>
 			<if test="price != null">
 				price = #{price},
@@ -114,7 +114,7 @@
     </update>
 
     <sql id="select_columns">
-        id, raw_id, type, count, unit, price, created_time, update_time
+        id, raw_id, type, count, unit_id, price, created_time, update_time
     </sql>
 
     <select id="getById" parameterType="long" resultType="com.sucheng.dos.StockDO">
@@ -144,33 +144,33 @@
 
     <sql id="where_clause">
         <if test="query != null and query.id != null">
-			id = #{id},
+			id = #{query.id}
 		</if>
 		<if test="query != null and query.rawId != null">
-			and raw_id = #{rawId},
+			and raw_id = #{query.rawId}
 		</if>
 		<if test="query != null and query.type != null and query.type != ''">
-			and type = #{type},
+			and type = #{query.type}
 		</if>
 		<if test="query != null and query.count != null">
-			and count = #{count},
+			and count = #{query.count}
 		</if>
-		<if test="query != null and query.unit != null and query.unit != ''">
-			and unit = #{unit},
+		<if test="query != null and query.unitId != null and query.unitId != ''">
+			and unit_id = #{query.unitId}
 		</if>
 		<if test="query != null and query.price != null">
-			and price = #{price},
+			and price = #{query.price}
 		</if>
 		<if test="query != null and query.createdTime != null">
-			and created_time = #{createdTime},
+			and created_time = #{query.createdTime}
 		</if>
 		<if test="query != null and query.updateTime != null">
-			and update_time = #{updateTime},
+			and update_time = #{query.updateTime}
 		</if>
 		
     </sql>
 
-    <select id="listPageByCondition" resultType="com.sucheng.dos.StockDO">
+    <select id="listPageByCondition" resultType="com.sucheng.query.StockQuery">
         select
         <include refid="select_columns"/>
         from t_stock
@@ -178,7 +178,7 @@
             <include refid="where_clause"/>
         </where>
         order by created_time desc
-        limit #{beginIndex}, #{pageSize}
+        limit #{pager.beginIndex}, #{pager.pageSize}
     </select>
 
     <select id="countByCondition" parameterType="com.sucheng.query.StockQuery" resultType="long">

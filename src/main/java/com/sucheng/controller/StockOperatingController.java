@@ -12,6 +12,8 @@ import com.sucheng.service.StockOperatingService;
 import com.sucheng.vo.ControllerStatusVO;
 import com.sucheng.vo.PagerVO;
 import com.sucheng.vo.StockOperatingVO;
+import com.sucheng.vo.StoreVO;
+import org.apache.shiro.SecurityUtils;
 import org.dozer.Mapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,7 +33,7 @@ import java.util.List;
  * @version 1.0
  */
 @Controller
-@RequestMapping("/stock-operating")
+@RequestMapping("/data/stockLog")
 public class StockOperatingController extends BaseController {
 
     private static final Logger logger = LoggerFactory.getLogger(StockOperatingController.class);
@@ -165,15 +167,22 @@ public class StockOperatingController extends BaseController {
         return pagerVO;
     }
 
-    @RequestMapping("pageList")
+    @RequestMapping("stockList")
     @ResponseBody
-    public PagerVO listPageByCondition(PageQuery pageQuery, StockOperatingQuery stockOperatingQuery) {
+    public PagerVO listPageByCondition(int page, int limit, StockOperatingQuery stockOperatingQuery) {
+        PageQuery pageQuery = new PageQuery(page, limit);
         PagerVO pagerVO = new PagerVO();
         try {
+            StoreVO storeVO = (StoreVO) SecurityUtils.getSubject().getSession().getAttribute("store");
+            if(storeVO == null) {
+                logger.error("session失效");
+                return pagerVO;
+            }
+            stockOperatingQuery.setStoreId(storeVO.getId());
             PagerDTO pagerDTO = stockOperatingService.listPageByCondition(pageQuery, stockOperatingQuery);
             Mapper mapper = getBeanMapper();
             pagerVO = mapper.map(pagerDTO, PagerVO.class);
-            pagerVO.setRows(DozerMapperUtils.mapList(mapper, pagerDTO.getRows(), StockOperatingVO.class));
+            pagerVO.setRows(DozerMapperUtils.mapList(mapper, pagerDTO.getRows(), StockOperatingQuery.class));
         } catch (ServiceException e) {
             logger.error("返回指定条件的分页对象JSON数据失败：{}", e.getMessage());
         }

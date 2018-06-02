@@ -34,6 +34,10 @@ public class StockQuery extends BaseQuery {
 	/**
 	*单位
 	*/
+	private Integer unitId;
+	/**
+	 *
+	 */
 	private String unit;
 	/**
 	*入库价
@@ -50,12 +54,12 @@ public class StockQuery extends BaseQuery {
 	
     public StockQuery () {}
 
-    public StockQuery (Integer id, Integer rawId, String type, Float count, String unit, BigDecimal price, Date createdTime, Date updateTime) {
+    public StockQuery (Integer id, Integer rawId, String type, Float count, Integer unitId, BigDecimal price, Date createdTime, Date updateTime) {
         this.id = id;
 		this.rawId = rawId;
 		this.type = type;
 		this.count = count;
-		this.unit = unit;
+		this.unitId = unitId;
 		this.price = price;
 		this.createdTime = createdTime;
 		this.updateTime = updateTime;
@@ -92,6 +96,14 @@ public class StockQuery extends BaseQuery {
 
 	public void setCount(Float count) {
 		this.count = count;
+	}
+
+	public Integer getUnitId() {
+		return unitId;
+	}
+
+	public void setUnitId(Integer unitId) {
+		this.unitId = unitId;
 	}
 
 	public String getUnit() {

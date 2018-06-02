@@ -9,20 +9,15 @@ import com.sucheng.query.PageQuery;
 import com.sucheng.query.RawMaterialsQuery;
 import com.sucheng.query.StatusQuery;
 import com.sucheng.service.RawMaterialsService;
-import com.sucheng.vo.ControllerStatusVO;
-import com.sucheng.vo.PagerVO;
-import com.sucheng.vo.RawMaterialsVO;
-import com.sucheng.vo.StoreVO;
+import com.sucheng.vo.*;
 import org.apache.shiro.SecurityUtils;
 import org.dozer.Mapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
-import java.beans.Transient;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -44,7 +39,6 @@ public class RawMaterialsController extends BaseController {
 
     @RequestMapping("save")
     @ResponseBody
-    @Transactional
     public ControllerStatusVO save(RawMaterialsVO rawMaterialsVO) {
         ControllerStatusVO statusVO = new ControllerStatusVO();
         try {
@@ -55,7 +49,6 @@ public class RawMaterialsController extends BaseController {
             }
             rawMaterialsVO.setStoreId(storeVO.getId());
             rawMaterialsService.save(getBeanMapper().map(rawMaterialsVO, RawMaterialsDTO.class));
-            // TODO 库存管理
             statusVO.okStatus(0, "添加成功");
         } catch (ServiceException e) {
             logger.error("添加失败：{}", e.getMessage());

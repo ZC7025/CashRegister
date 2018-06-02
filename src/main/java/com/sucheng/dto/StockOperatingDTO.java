@@ -33,7 +33,13 @@ public class StockOperatingDTO extends BaseDTO {
 	/**
 	*单位
 	*/
+	private Integer unitId;
+
 	private String unit;
+	/**
+	 *
+	 */
+	private Integer storeId;
 	/**
 	*出入库员工
 	*/
@@ -43,18 +49,22 @@ public class StockOperatingDTO extends BaseDTO {
 	*/
 	private Date operatingTime;
 	/**
-	*
+	*简介
 	*/
 	private String descript;
+	/**
+	 * 原料名
+	 */
+	private String name;
 	
     public StockOperatingDTO () {}
 
-    public StockOperatingDTO (Integer id, Integer rawId, Float inStockCount, Float outStockCount, String unit, String empName, Date operatingTime, String descript) {
+    public StockOperatingDTO (Integer id, Integer rawId, Float inStockCount, Float outStockCount, Integer unitId, String empName, Date operatingTime, String descript) {
         this.id = id;
 		this.rawId = rawId;
 		this.inStockCount = inStockCount;
 		this.outStockCount = outStockCount;
-		this.unit = unit;
+		this.unitId = unitId;
 		this.empName = empName;
 		this.operatingTime = operatingTime;
 		this.descript = descript;
@@ -93,12 +103,28 @@ public class StockOperatingDTO extends BaseDTO {
 		this.outStockCount = outStockCount;
 	}
 
+	public Integer getUnitId() {
+		return unitId;
+	}
+
+	public void setUnitId(Integer unitId) {
+		this.unitId = unitId;
+	}
+
 	public String getUnit() {
 		return unit;
 	}
 
 	public void setUnit(String unit) {
 		this.unit = unit;
+	}
+
+	public Integer getStoreId() {
+		return storeId;
+	}
+
+	public void setStoreId(Integer storeId) {
+		this.storeId = storeId;
 	}
 
 	public String getEmpName() {
@@ -125,15 +151,22 @@ public class StockOperatingDTO extends BaseDTO {
 		this.descript = descript;
 	}
 
-	
-    @Override
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	@Override
     public String toString() {
         return "StockOperatingDO{" +
                 "id = " + id + 
 				", rawId = " + rawId + 
 				", inStockCount = " + inStockCount + 
 				", outStockCount = " + outStockCount + 
-				", unit = " + unit + 
+				", unitId = " + unitId +
 				", empName = " + empName + 
 				", operatingTime = " + operatingTime + 
 				", descript = " + descript + 

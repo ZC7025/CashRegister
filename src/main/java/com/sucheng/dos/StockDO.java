@@ -34,7 +34,7 @@ public class StockDO extends BaseDO {
 	/**
 	*单位
 	*/
-	private String unit;
+	private Integer unitId;
 	/**
 	*入库价
 	*/
@@ -50,12 +50,12 @@ public class StockDO extends BaseDO {
 	
     public StockDO () {}
 
-    public StockDO (Integer id, Integer rawId, String type, Float count, String unit, BigDecimal price, Date createdTime, Date updateTime) {
+    public StockDO (Integer id, Integer rawId, String type, Float count, Integer unitId, BigDecimal price, Date createdTime, Date updateTime) {
         this.id = id;
 		this.rawId = rawId;
 		this.type = type;
 		this.count = count;
-		this.unit = unit;
+		this.unitId = unitId;
 		this.price = price;
 		this.createdTime = createdTime;
 		this.updateTime = updateTime;
@@ -94,12 +94,12 @@ public class StockDO extends BaseDO {
 		this.count = count;
 	}
 
-	public String getUnit() {
-		return unit;
+	public Integer getUnitId() {
+		return unitId;
 	}
 
-	public void setUnit(String unit) {
-		this.unit = unit;
+	public void setUnitId(Integer unitId) {
+		this.unitId = unitId;
 	}
 
 	public BigDecimal getPrice() {
@@ -134,7 +134,7 @@ public class StockDO extends BaseDO {
 				", rawId = " + rawId + 
 				", type = " + type + 
 				", count = " + count + 
-				", unit = " + unit + 
+				", unitId = " + unitId +
 				", price = " + price + 
 				", createdTime = " + createdTime + 
 				", updateTime = " + updateTime + 

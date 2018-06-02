@@ -36,6 +36,10 @@ public class StockDTO extends BaseDTO {
 	*/
 	private String unit;
 	/**
+	 *
+	 */
+	private Integer unitId;
+	/**
 	*入库价
 	*/
 	private BigDecimal price;
@@ -92,6 +96,14 @@ public class StockDTO extends BaseDTO {
 
 	public void setCount(Float count) {
 		this.count = count;
+	}
+
+	public Integer getUnitId() {
+		return unitId;
+	}
+
+	public void setUnitId(Integer unitId) {
+		this.unitId = unitId;
 	}
 
 	public String getUnit() {

@@ -4,7 +4,10 @@
 
 <mapper namespace="com.sucheng.dao.RawMaterialsDAO">
 
-    <insert id="save" parameterType="com.sucheng.dos.RawMaterialsDO">
+    <insert id="save" parameterType="com.sucheng.dto.RawMaterialsDTO">
+		<selectKey keyColumn="id" keyProperty="id" resultType="integer" order="AFTER">
+			SELECT LAST_INSERT_ID() as id
+		</selectKey>
         insert into t_raw_materials
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="id != null">
@@ -244,10 +247,7 @@
         <where>
             <include refid="where_clause"/>
 			<if test="true">
-				and raw.supplier_id = sup.id
-			</if>
-			<if test="true">
-				and raw.unit_id = un.id
+				and raw.supplier_id = sup.id and raw.unit_id = un.id
 			</if>
 			<if test="query != null and query.storeId != null">
 				and raw.store_id = #{query.storeId}
@@ -261,6 +261,9 @@
         select count(*) from t_raw_materials
         <where>
             <include refid="where_clause"/>
+			<if test="query != null and query.storeId != null">
+				and store_id = #{query.storeId}
+			</if>
         </where>
     </select>
 
