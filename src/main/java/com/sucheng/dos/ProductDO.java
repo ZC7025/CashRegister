@@ -67,6 +67,8 @@ public class ProductDO extends BaseDO {
 	*
 	*/
 	private Date createdTime;
+
+	private Integer unitId;
 	
     public ProductDO () {}
 
@@ -190,8 +192,15 @@ public class ProductDO extends BaseDO {
 		this.createdTime = createdTime;
 	}
 
-	
-    @Override
+	public Integer getUnitId() {
+		return unitId;
+	}
+
+	public void setUnitId(Integer unitId) {
+		this.unitId = unitId;
+	}
+
+	@Override
     public String toString() {
         return "ProductDO{" +
                 "id = " + id + 

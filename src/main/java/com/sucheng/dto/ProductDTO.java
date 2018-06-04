@@ -67,6 +67,11 @@ public class ProductDTO extends BaseDTO {
 	*
 	*/
 	private Date createdTime;
+
+	private String typeName;
+	private String taste;
+	private String unit;
+	private Integer unitId;
 	
     public ProductDTO () {}
 
@@ -190,8 +195,39 @@ public class ProductDTO extends BaseDTO {
 		this.createdTime = createdTime;
 	}
 
-	
-    @Override
+	public String getTypeName() {
+		return typeName;
+	}
+
+	public void setTypeName(String typeName) {
+		this.typeName = typeName;
+	}
+
+	public String getTaste() {
+		return taste;
+	}
+
+	public void setTaste(String taste) {
+		this.taste = taste;
+	}
+
+	public String getUnit() {
+		return unit;
+	}
+
+	public void setUnit(String unit) {
+		this.unit = unit;
+	}
+
+	public Integer getUnitId() {
+		return unitId;
+	}
+
+	public void setUnitId(Integer unitId) {
+		this.unitId = unitId;
+	}
+
+	@Override
     public String toString() {
         return "ProductDO{" +
                 "id = " + id + 

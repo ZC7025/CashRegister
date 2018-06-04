@@ -12,6 +12,8 @@ import com.sucheng.service.ProductService;
 import com.sucheng.vo.ControllerStatusVO;
 import com.sucheng.vo.PagerVO;
 import com.sucheng.vo.ProductVO;
+import com.sucheng.vo.StoreVO;
+import org.apache.shiro.SecurityUtils;
 import org.dozer.Mapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,7 +33,7 @@ import java.util.List;
  * @version 1.0
  */
 @Controller
-@RequestMapping("/product")
+@RequestMapping("/data/product")
 public class ProductController extends BaseController {
 
     private static final Logger logger = LoggerFactory.getLogger(ProductController.class);
@@ -44,7 +46,7 @@ public class ProductController extends BaseController {
         ControllerStatusVO statusVO = new ControllerStatusVO();
         try {
             productService.save(getBeanMapper().map(productVO, ProductDTO.class));
-            statusVO.okStatus(200, "添加成功");
+            statusVO.okStatus(0, "添加成功");
         } catch (ServiceException e) {
             logger.error("添加失败：{}", e.getMessage());
             statusVO.errorStatus(500, "添加失败");
@@ -165,15 +167,22 @@ public class ProductController extends BaseController {
         return pagerVO;
     }
 
-    @RequestMapping("pageList")
+    @RequestMapping("proList")
     @ResponseBody
-    public PagerVO listPageByCondition(PageQuery pageQuery, ProductQuery productQuery) {
+    public PagerVO listPageByCondition(int page, int limit, ProductQuery productQuery) {
+        PageQuery pageQuery = new PageQuery(page, limit);
         PagerVO pagerVO = new PagerVO();
         try {
+            StoreVO storeVO = (StoreVO) SecurityUtils.getSubject().getSession().getAttribute("store");
+            if(storeVO == null) {
+                logger.error("session失效");
+                return pagerVO;
+            }
+            productQuery.setStoreId(storeVO.getId());
             PagerDTO pagerDTO = productService.listPageByCondition(pageQuery, productQuery);
             Mapper mapper = getBeanMapper();
             pagerVO = mapper.map(pagerDTO, PagerVO.class);
-            pagerVO.setRows(DozerMapperUtils.mapList(mapper, pagerDTO.getRows(), ProductVO.class));
+            pagerVO.setRows(DozerMapperUtils.mapList(mapper, pagerDTO.getRows(), ProductQuery.class));
         } catch (ServiceException e) {
             logger.error("返回指定条件的分页对象JSON数据失败：{}", e.getMessage());
         }

@@ -36,6 +36,10 @@ public class ProductVO extends BaseVO {
 	 */
 	private Integer typeId;
 	/**
+	 *
+	 */
+	private Integer unitId;
+	/**
 	*
 	*/
 	private BigDecimal price;
@@ -124,6 +128,14 @@ public class ProductVO extends BaseVO {
 
 	public void setTypeId(Integer typeId) {
 		this.typeId = typeId;
+	}
+
+	public Integer getUnitId() {
+		return unitId;
+	}
+
+	public void setUnitId(Integer unitId) {
+		this.unitId = unitId;
 	}
 
 	public BigDecimal getPrice() {

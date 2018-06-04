@@ -19,6 +19,12 @@
 			<if test="tasteId != null">
 				taste_id,
 			</if>
+			<if test="typeId != null">
+				type_id,
+			</if>
+			<if test="unitId != null">
+				unit_id,
+			</if>
 			<if test="price != null">
 				price,
 			</if>
@@ -57,6 +63,12 @@
 			</if>
 			<if test="tasteId != null">
 				#{tasteId},
+			</if>
+			<if test="typeId != null">
+				#{typeId},
+			</if>
+			<if test="unitId != null">
+				#{unitId},
 			</if>
 			<if test="price != null">
 				#{price},
@@ -116,6 +128,12 @@
 			<if test="tasteId != null">
 				taste_id = #{tasteId},
 			</if>
+			<if test="typeId != null">
+				type_id = #{typeId},
+			</if>
+			<if test="unitId != null">
+				unit_id = #{unitId},
+			</if>
 			<if test="price != null">
 				price = #{price},
 			</if>
@@ -150,7 +168,7 @@
     </update>
 
     <sql id="select_columns">
-        id, name, store_id, taste_id, price, pro_img1, pro_img2, pro_img3, pro_img4, priority, status, created_time
+        id, name, store_id, taste_id, unit_id, type_id, price, pro_img1, pro_img2, pro_img3, pro_img4, priority, status, created_time
     </sql>
 
     <select id="getById" parameterType="long" resultType="com.sucheng.dos.ProductDO">
@@ -180,59 +198,70 @@
 
     <sql id="where_clause">
         <if test="query != null and query.id != null">
-			id = #{id},
+			id = #{query.id}
 		</if>
 		<if test="query != null and query.name != null and query.name != ''">
-			and name = #{name},
-		</if>
-		<if test="query != null and query.storeId != null">
-			and store_id = #{storeId},
+			and name = #{query.name}
 		</if>
 		<if test="query != null and query.tasteId != null">
-			and taste_id = #{tasteId},
+			and taste_id = #{query.tasteId}
+		</if>
+		<if test="query != null and query.typeId != null">
+			and type_id = #{query.typeId}
+		</if>
+		<if test="query != null and query.unitId != null">
+			and unit_id = #{query.unitId}
 		</if>
 		<if test="query != null and query.price != null">
-			and price = #{price},
+			and price = #{query.price}
 		</if>
 		<if test="query != null and query.proImg1 != null and query.proImg1 != ''">
-			and pro_img1 = #{proImg1},
+			and pro_img1 = #{query.proImg1}
 		</if>
 		<if test="query != null and query.proImg2 != null and query.proImg2 != ''">
-			and pro_img2 = #{proImg2},
+			and pro_img2 = #{query.proImg2}
 		</if>
 		<if test="query != null and query.proImg3 != null and query.proImg3 != ''">
-			and pro_img3 = #{proImg3},
+			and pro_img3 = #{query.proImg3}
 		</if>
 		<if test="query != null and query.proImg4 != null and query.proImg4 != ''">
-			and pro_img4 = #{proImg4},
+			and pro_img4 = #{query.proImg4}
 		</if>
 		<if test="query != null and query.priority != null">
-			and priority = #{priority},
+			and priority = #{query.priority}
 		</if>
 		<if test="query != null and query.status != null and query.status != ''">
-			and status = #{status},
+			and status = #{query.status}
 		</if>
 		<if test="query != null and query.createdTime != null">
-			and created_time = #{createdTime},
+			and created_time = #{query.createdTime}
 		</if>
 		
     </sql>
 
-    <select id="listPageByCondition" resultType="com.sucheng.dos.ProductDO">
-        select
-        <include refid="select_columns"/>
-        from t_product
+    <select id="listPageByCondition" resultType="com.sucheng.query.ProductQuery">
+        select p.*, pt.name as typeName,u.unit, ta.taste
+		from t_product p, t_pro_type pt, t_unit u, t_taste ta
         <where>
             <include refid="where_clause"/>
+			<if test="true">
+				and p.unit_id = u.id and p.type_id = pt.id and p.taste_id = ta.id
+			</if>
+			<if test="query != null and query.storeId != null">
+				and p.store_id = #{query.storeId}
+			</if>
         </where>
-        order by created_time desc
-        limit #{beginIndex}, #{pageSize}
+        order by p.created_time desc
+        limit #{pager.beginIndex}, #{pager.pageSize}
     </select>
 
     <select id="countByCondition" parameterType="com.sucheng.query.ProductQuery" resultType="long">
         select count(*) from t_product
         <where>
             <include refid="where_clause"/>
+			<if test="query != null and query.storeId != null">
+				and store_id = #{query.storeId}
+			</if>
         </where>
     </select>
 
