@@ -25,7 +25,6 @@
         <hr/>
         <form class="layui-form" id="store">
             <div class="layui-form-item" style="margin-top: 20px;">
-                <label class="layui-form-label"></label>
                 <div class="layui-input-block">
                     <input type="hidden" name="id" id="id" lay-verify="id" autocomplete="off"
                            class="layui-input" readonly/>

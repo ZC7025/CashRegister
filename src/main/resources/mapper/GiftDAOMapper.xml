@@ -2,22 +2,25 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.sucheng.dao.HalfProDAO">
+<mapper namespace="com.sucheng.dao.GiftDAO">
 
-    <insert id="save" parameterType="com.sucheng.dos.HalfProDO">
-        insert into t_half_pro
+    <insert id="save" parameterType="com.sucheng.dos.GiftDO">
+        insert into t_gift
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="id != null">
 				id,
 			</if>
+			<if test="storeId != null">
+				store_id,
+			</if>
 			<if test="name != null">
 				name,
 			</if>
-			<if test="count != null">
-				count,
+			<if test="price != null">
+				price,
 			</if>
-			<if test="unit != null">
-				unit,
+			<if test="descript != null">
+				descript,
 			</if>
 			<if test="status != null">
 				status,
@@ -31,14 +34,17 @@
             <if test="id != null">
 				#{id},
 			</if>
+			<if test="storeId != null">
+				#{storeId},
+			</if>
 			<if test="name != null">
 				#{name},
 			</if>
-			<if test="count != null">
-				#{count},
+			<if test="price != null">
+				#{price},
 			</if>
-			<if test="unit != null">
-				#{unit},
+			<if test="descript != null">
+				#{descript},
 			</if>
 			<if test="status != null">
 				#{status},
@@ -50,35 +56,38 @@
         </trim>
     </insert>
 
-    <delete id="remove" parameterType="com.sucheng.dos.HalfProDO">
-        delete from t_half_pro where id = #{id}
+    <delete id="remove" parameterType="com.sucheng.dos.GiftDO">
+        delete from t_gift where id = #{id}
     </delete>
 
     <delete id="removeById" parameterType="long">
-        delete from t_half_pro where id = #{id}
+        delete from t_gift where id = #{id}
     </delete>
 
     <delete id="removeByIds">
-        delete from t_half_pro where id in
+        delete from t_gift where id in
         <foreach item="id" collection="array" separator="," open="(" close=")">
             #{id}
         </foreach>
     </delete>
 
-    <update id="update" parameterType="com.sucheng.dos.HalfProDO">
-        update t_half_pro
+    <update id="update" parameterType="com.sucheng.dos.GiftDO">
+        update t_gift
         <set>
             <if test="id != null">
 				id = #{id},
 			</if>
+			<if test="storeId != null">
+				store_id = #{storeId},
+			</if>
 			<if test="name != null">
 				name = #{name},
 			</if>
-			<if test="count != null">
-				count = #{count},
+			<if test="price != null">
+				price = #{price},
 			</if>
-			<if test="unit != null">
-				unit = #{unit},
+			<if test="descript != null">
+				descript = #{descript},
 			</if>
 			<if test="status != null">
 				status = #{status},
@@ -92,73 +101,76 @@
     </update>
 
     <update id="updateActiveStatus" parameterType="com.sucheng.query.StatusQuery">
-        update t_half_pro set status = #{status} where id = #{id}
+        update t_gift set status = #{status} where id = #{id}
     </update>
 
     <sql id="select_columns">
-        id, name, count, unit, status, created_time
+        id, store_id, name, price, descript, status, created_time
     </sql>
 
-    <select id="getById" parameterType="long" resultType="com.sucheng.dos.HalfProDO">
+    <select id="getById" parameterType="long" resultType="com.sucheng.dos.GiftDO">
         select
         <include refid="select_columns"/>
-        from t_half_pro where id = #{id}
+        from t_gift where id = #{id}
     </select>
 
-    <select id="listAll" resultType="com.sucheng.dos.HalfProDO">
+    <select id="listAll" resultType="com.sucheng.dos.GiftDO">
         select
         <include refid="select_columns"/>
-        from t_half_pro
+        from t_gift
         order by created_time desc
     </select>
 
-    <select id="listPage" parameterType="com.sucheng.query.PageQuery" resultType="com.sucheng.dos.HalfProDO">
+    <select id="listPage" parameterType="com.sucheng.query.PageQuery" resultType="com.sucheng.dos.GiftDO">
         select
         <include refid="select_columns"/>
-        from t_half_pro
+        from t_gift
         order by created_time desc
         limit #{beginIndex}, #{pageSize}
     </select>
 
     <select id="count" resultType="long">
-        select count(*) from t_half_pro
+        select count(*) from t_gift
     </select>
 
     <sql id="where_clause">
         <if test="query != null and query.id != null">
-			id = #{id},
+			id = #{query.id}
+		</if>
+		<if test="query != null and query.storeId != null">
+			and store_id = #{query.storeId}
 		</if>
 		<if test="query != null and query.name != null and query.name != ''">
-			and name = #{name},
+			and name = #{query.name}
 		</if>
-		<if test="query != null and query.count != null">
-			and count = #{count},
+		<if test="query != null and query.price != null">
+			and price = #{query.price}
 		</if>
-		<if test="query != null and query.unit != null and query.unit != ''">
-			and unit = #{unit},
+		<if test="query != null and query.descript != null and query.descript != ''">
+			and descript = #{query.descript}
 		</if>
 		<if test="query != null and query.status != null and query.status != ''">
-			and status = #{status},
+			and status = #{query.status}
 		</if>
 		<if test="query != null and query.createdTime != null">
-			and created_time = #{createdTime},
+			and created_time = #{query.createdTime}
 		</if>
 		
     </sql>
 
-    <select id="listPageByCondition" resultType="com.sucheng.dos.HalfProDO">
+    <select id="listPageByCondition" resultType="com.sucheng.query.GiftQuery">
         select
         <include refid="select_columns"/>
-        from t_half_pro
+        from t_gift
         <where>
             <include refid="where_clause"/>
         </where>
         order by created_time desc
-        limit #{beginIndex}, #{pageSize}
+        limit #{pager.beginIndex}, #{pager.pageSize}
     </select>
 
-    <select id="countByCondition" parameterType="com.sucheng.query.HalfProQuery" resultType="long">
-        select count(*) from t_half_pro
+    <select id="countByCondition" parameterType="com.sucheng.query.GiftQuery" resultType="long">
+        select count(*) from t_gift
         <where>
             <include refid="where_clause"/>
         </where>

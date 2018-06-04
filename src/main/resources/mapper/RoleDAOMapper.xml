@@ -74,7 +74,7 @@
     </update>
 
     <update id="updateActiveStatus" parameterType="com.sucheng.query.StatusQuery">
-        update t_role set is_active = #{status} where id = #{id}
+        update t_role set status = #{status} where id = #{id}
     </update>
 
     <sql id="select_columns">

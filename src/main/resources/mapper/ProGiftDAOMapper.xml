@@ -2,25 +2,22 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.sucheng.dao.StoreOrderDetailDAO">
+<mapper namespace="com.sucheng.dao.ProGiftDAO">
 
-    <insert id="save" parameterType="com.sucheng.dos.StoreOrderDetailDO">
-        insert into t_store_order_detail
+    <insert id="save" parameterType="com.sucheng.dos.ProGiftDO">
+        insert into t_pro_gift
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="id != null">
 				id,
 			</if>
-			<if test="orderId != null">
-				order_id,
-			</if>
 			<if test="proId != null">
 				pro_id,
 			</if>
+			<if test="giftId != null">
+				gift_id,
+			</if>
 			<if test="count != null">
 				count,
-			</if>
-			<if test="totalMoney != null">
-				total_money,
 			</if>
 			
         </trim>
@@ -28,54 +25,48 @@
             <if test="id != null">
 				#{id},
 			</if>
-			<if test="orderId != null">
-				#{orderId},
-			</if>
 			<if test="proId != null">
 				#{proId},
 			</if>
+			<if test="giftId != null">
+				#{giftId},
+			</if>
 			<if test="count != null">
 				#{count},
-			</if>
-			<if test="totalMoney != null">
-				#{totalMoney},
 			</if>
 			
         </trim>
     </insert>
 
-    <delete id="remove" parameterType="com.sucheng.dos.StoreOrderDetailDO">
-        delete from t_store_order_detail where id = #{id}
+    <delete id="remove" parameterType="com.sucheng.dos.ProGiftDO">
+        delete from t_pro_gift where id = #{id}
     </delete>
 
     <delete id="removeById" parameterType="long">
-        delete from t_store_order_detail where id = #{id}
+        delete from t_pro_gift where id = #{id}
     </delete>
 
     <delete id="removeByIds">
-        delete from t_store_order_detail where id in
+        delete from t_pro_gift where id in
         <foreach item="id" collection="array" separator="," open="(" close=")">
             #{id}
         </foreach>
     </delete>
 
-    <update id="update" parameterType="com.sucheng.dos.StoreOrderDetailDO">
-        update t_store_order_detail
+    <update id="update" parameterType="com.sucheng.dos.ProGiftDO">
+        update t_pro_gift
         <set>
             <if test="id != null">
 				id = #{id},
 			</if>
-			<if test="orderId != null">
-				order_id = #{orderId},
-			</if>
 			<if test="proId != null">
 				pro_id = #{proId},
 			</if>
+			<if test="giftId != null">
+				gift_id = #{giftId},
+			</if>
 			<if test="count != null">
 				count = #{count},
-			</if>
-			<if test="totalMoney != null">
-				total_money = #{totalMoney},
 			</if>
 			
         </set>
@@ -83,70 +74,67 @@
     </update>
 
     <update id="updateActiveStatus" parameterType="com.sucheng.query.StatusQuery">
-        update t_store_order_detail set status = #{status} where id = #{id}
+        update t_pro_gift set status = #{status} where id = #{id}
     </update>
 
     <sql id="select_columns">
-        id, order_id, pro_id, count, total_money
+        id, pro_id, gift_id, count
     </sql>
 
-    <select id="getById" parameterType="long" resultType="com.sucheng.dos.StoreOrderDetailDO">
+    <select id="getById" parameterType="long" resultType="com.sucheng.dos.ProGiftDO">
         select
         <include refid="select_columns"/>
-        from t_store_order_detail where id = #{id}
+        from t_pro_gift where id = #{id}
     </select>
 
-    <select id="listAll" resultType="com.sucheng.dos.StoreOrderDetailDO">
+    <select id="listAll" resultType="com.sucheng.dos.ProGiftDO">
         select
         <include refid="select_columns"/>
-        from t_store_order_detail
-        order by created_time desc
+        from t_pro_gift
+        order by update_time desc, created_time desc
     </select>
 
-    <select id="listPage" parameterType="com.sucheng.query.PageQuery" resultType="com.sucheng.dos.StoreOrderDetailDO">
+    <select id="listPage" parameterType="com.sucheng.query.PageQuery" resultType="com.sucheng.dos.ProGiftDO">
         select
         <include refid="select_columns"/>
-        from t_store_order_detail
-        order by created_time desc
+        from t_pro_gift
+        order by update_time desc, created_time desc
         limit #{beginIndex}, #{pageSize}
     </select>
 
     <select id="count" resultType="long">
-        select count(*) from t_store_order_detail
+        select count(*) from t_pro_gift
     </select>
 
     <sql id="where_clause">
         <if test="query != null and query.id != null">
 			id = #{id},
 		</if>
-		<if test="query != null and query.orderId != null">
-			and order_id = #{orderId},
-		</if>
 		<if test="query != null and query.proId != null">
 			and pro_id = #{proId},
+		</if>
+		<if test="query != null and query.giftId != null">
+			and gift_id = #{giftId},
 		</if>
 		<if test="query != null and query.count != null">
 			and count = #{count},
 		</if>
-		<if test="query != null and query.totalMoney != null">
-			and total_money = #{totalMoney},
-		</if>
 		
     </sql>
 
-    <select id="listPageByCondition" resultType="com.sucheng.dos.StoreOrderDetailDO">
+    <select id="listPageByCondition" resultType="com.sucheng.dos.ProGiftDO">
         select
         <include refid="select_columns"/>
-        from t_store_order_detail
+        from t_pro_gift
         <where>
             <include refid="where_clause"/>
         </where>
-        order by created_time desc
+        order by update_time desc, created_time desc
         limit #{beginIndex}, #{pageSize}
     </select>
 
-    <select id="countByCondition" parameterType="com.sucheng.query.StoreOrderDetailQuery" resultType="long">
-        select count(*) from t_store_order_detail
+    <select id="countByCondition" parameterType="com.sucheng.query.ProGiftQuery" resultType="long">
+        select count(*) from t_pro_gift
         <where>
             <include refid="where_clause"/>
         </where>

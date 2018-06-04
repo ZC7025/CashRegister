@@ -129,13 +129,16 @@
                             <dd><a href="javascript:;" kit-target
                                    data-options="{url:'<%=path %>/page/product/proList',icon:'&#xe658;',title:'商品管理',id:'10'}"><i class="layui-icon">&#xe658;</i><span>商品管理</span></a>
                             </dd>
+                            <dd><a href="javascript:;" kit-target
+                                   data-options="{url:'<%=path %>/page/gift/giftList',icon:'&#xe658;',title:'商品套餐管理',id:'11'}"><i class="layui-icon">&#xe658;</i><span>商品套餐管理</span></a>
+                            </dd>
                         </dl>
                     </li>
                     <li class="layui-nav-item">
                         <a href="javascript:;"><span>供应商管理</span></a>
                         <dl class="layui-nav-child">
                             <dd><a href="javascript:;" kit-target
-                                   data-options="{url:'<%=path %>/page/supplier/supList',icon:'&#xe658;',title:'供应商管理',id:'11'}"><i class="layui-icon">&#xe658;</i><span>供应商管理</span></a>
+                                   data-options="{url:'<%=path %>/page/supplier/supList',icon:'&#xe658;',title:'供应商管理',id:'12'}"><i class="layui-icon">&#xe658;</i><span>供应商管理</span></a>
                             </dd>
                         </dl>
                     </li>
@@ -143,10 +146,10 @@
                         <a href="javascript:;"><span>库存管理</span></a>
                         <dl class="layui-nav-child">
                             <dd><a href="javascript:;" kit-target
-                                   data-options="{url:'<%=path %>/page/stock/stockList',icon:'&#xe658;',title:'库存管理',id:'12'}"><i class="layui-icon">&#xe658;</i><span>库存管理</span></a>
+                                   data-options="{url:'<%=path %>/page/stock/stockList',icon:'&#xe658;',title:'库存管理',id:'13'}"><i class="layui-icon">&#xe658;</i><span>库存管理</span></a>
                             </dd>
                             <dd><a href="javascript:;" kit-target
-                                   data-options="{url:'<%=path %>/page/stockLog/stockList',icon:'&#xe658;',title:'库存记录管理',id:'13'}"><i class="layui-icon">&#xe658;</i><span>库存记录管理</span></a>
+                                   data-options="{url:'<%=path %>/page/stockLog/stockList',icon:'&#xe658;',title:'库存记录管理',id:'14'}"><i class="layui-icon">&#xe658;</i><span>库存记录管理</span></a>
                             </dd>
                         </dl>
                     </li>

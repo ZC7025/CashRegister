@@ -2,16 +2,16 @@ package com.sucheng.controller;
 
 import com.sucheng.common.DozerMapperUtils;
 import com.sucheng.common.StringUtils;
+import com.sucheng.dto.GiftDTO;
 import com.sucheng.dto.PagerDTO;
-import com.sucheng.dto.ProductDTO;
 import com.sucheng.exception.ServiceException;
+import com.sucheng.query.GiftQuery;
 import com.sucheng.query.PageQuery;
-import com.sucheng.query.ProductQuery;
 import com.sucheng.query.StatusQuery;
-import com.sucheng.service.ProductService;
+import com.sucheng.service.GiftService;
 import com.sucheng.vo.ControllerStatusVO;
+import com.sucheng.vo.GiftVO;
 import com.sucheng.vo.PagerVO;
-import com.sucheng.vo.ProductVO;
 import com.sucheng.vo.StoreVO;
 import org.apache.shiro.SecurityUtils;
 import org.dozer.Mapper;
@@ -25,31 +25,27 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * ProductController控制器类<br/>
+ * GiftController控制器类<br/>
+ * 商品套餐
+ * 创建于2018-06-04<br/>
  *
- * 创建于2018-05-24<br/>
  *
- * @author 7025
  * @version 1.0
  */
 @Controller
-@RequestMapping("/data/product")
-public class ProductController extends BaseController {
+@RequestMapping("/data/gift")
+public class GiftController extends BaseController {
 
-    private static final Logger logger = LoggerFactory.getLogger(ProductController.class);
+    private static final Logger logger = LoggerFactory.getLogger(GiftController.class);
 
-    private ProductService productService;
+    private GiftService giftService;
 
     @PostMapping("save")
     @ResponseBody
-    public ControllerStatusVO save(ProductVO productVO) {
+    public ControllerStatusVO save(GiftVO giftVO) {
         ControllerStatusVO statusVO = new ControllerStatusVO();
         try {
-            productVO.setProImg1(checkImgNull(productVO.getProImg1()));
-            productVO.setProImg2(checkImgNull(productVO.getProImg2()));
-            productVO.setProImg3(checkImgNull(productVO.getProImg3()));
-            productVO.setProImg4(checkImgNull(productVO.getProImg4()));
-            productService.save(getBeanMapper().map(productVO, ProductDTO.class));
+            giftService.save(getBeanMapper().map(giftVO, GiftDTO.class));
             statusVO.okStatus(0, "添加成功");
         } catch (ServiceException e) {
             logger.error("添加失败：{}", e.getMessage());
@@ -60,11 +56,11 @@ public class ProductController extends BaseController {
 
     @PostMapping("remove")
     @ResponseBody
-    public ControllerStatusVO remove(ProductVO productVO) {
+    public ControllerStatusVO remove(GiftVO giftVO) {
         ControllerStatusVO statusVO = new ControllerStatusVO();
         try {
-            productService.remove(getBeanMapper().map(productVO, ProductDTO.class));
-            statusVO.okStatus(0, "删除成功");
+            giftService.remove(getBeanMapper().map(giftVO, GiftDTO.class));
+            statusVO.okStatus(200, "删除成功");
         } catch (ServiceException e) {
             logger.error("删除失败：{}", e.getMessage());
             statusVO.errorStatus(500, "删除失败");
@@ -77,7 +73,7 @@ public class ProductController extends BaseController {
     public ControllerStatusVO removeById(@PathVariable("id") Long id) {
         ControllerStatusVO statusVO = new ControllerStatusVO();
         try {
-            productService.removeById(id);
+            giftService.removeById(id);
             statusVO.okStatus(0, "删除成功");
         } catch (ServiceException e) {
             logger.error("删除失败：{}", e.getMessage());
@@ -91,7 +87,7 @@ public class ProductController extends BaseController {
     public ControllerStatusVO removeByIds(String ids) {
         ControllerStatusVO statusVO = new ControllerStatusVO();
         try {
-            productService.removeByIds(StringUtils.strToLongArray(ids, ","));
+            giftService.removeByIds(StringUtils.strToLongArray(ids, ","));
             statusVO.okStatus(200, "批量删除成功");
         } catch (ServiceException e) {
             logger.error("批量删除失败：{}", e.getMessage());
@@ -102,14 +98,10 @@ public class ProductController extends BaseController {
 
     @PostMapping("update")
     @ResponseBody
-    public ControllerStatusVO update(ProductVO productVO) {
+    public ControllerStatusVO update(GiftVO giftVO) {
         ControllerStatusVO statusVO = new ControllerStatusVO();
         try {
-            productVO.setProImg1(checkImgNull(productVO.getProImg1()));
-            productVO.setProImg2(checkImgNull(productVO.getProImg2()));
-            productVO.setProImg3(checkImgNull(productVO.getProImg3()));
-            productVO.setProImg4(checkImgNull(productVO.getProImg4()));
-            productService.update(getBeanMapper().map(productVO, ProductDTO.class));
+            giftService.update(getBeanMapper().map(giftVO, GiftDTO.class));
             statusVO.okStatus(0, "更新成功");
         } catch (ServiceException e) {
             logger.error("更新失败：{}", e.getMessage());
@@ -123,7 +115,7 @@ public class ProductController extends BaseController {
     public ControllerStatusVO updateActiveStatus(StatusQuery statusQuery) {
         ControllerStatusVO statusVO = new ControllerStatusVO();
         try {
-            productService.updateActiveStatus(statusQuery);
+            giftService.updateActiveStatus(statusQuery);
             statusVO.okStatus(200, statusQuery.getStatus() == 0 ? "激活成功" : "冻结成功");
         } catch (ServiceException e) {
             logger.error("激活或冻结失败：{}", e.getMessage());
@@ -134,35 +126,50 @@ public class ProductController extends BaseController {
 
     @RequestMapping("one/{id}")
     @ResponseBody
-    public ProductVO getById(@PathVariable("id") Long id) {
-        ProductVO productVO = new ProductVO();
+    public GiftVO getById(@PathVariable("id") Long id) {
+        GiftVO giftVO = new GiftVO();
         try {
-            Object obj = productService.getById(id);
+            Object obj = giftService.getById(id);
             if (obj != null) {
-                productVO = getBeanMapper().map(obj, ProductVO.class);
+                giftVO = getBeanMapper().map(obj, GiftVO.class);
             }
         } catch (ServiceException e) {
             logger.error("返回单个对象JSON数据失败：{}", e.getMessage());
         }
-        return productVO;
+        return giftVO;
     }
 
     @GetMapping("all")
     @ResponseBody
-    public List<ProductVO> listAll() {
-        List<ProductVO> productVOList = new ArrayList<>();
+    public List<GiftVO> listAll() {
+        List<GiftVO> giftVOList = new ArrayList<>();
         try {
-            List<Object> objectList = productService.listAll();
-            productVOList =  DozerMapperUtils.map(getBeanMapper(), objectList, ProductVO.class);
+            List<Object> objectList = giftService.listAll();
+            giftVOList =  DozerMapperUtils.map(getBeanMapper(), objectList, GiftVO.class);
         } catch (ServiceException e) {
             logger.error("返回所有对象JSON数据失败：{}", e.getMessage());
         }
-        return productVOList;
+        return giftVOList;
     }
 
-    @RequestMapping("proList")
+    @PostMapping("page")
     @ResponseBody
-    public PagerVO listPageByCondition(int page, int limit, ProductQuery productQuery) {
+    public PagerVO listPage(PageQuery pageQuery) {
+        PagerVO pagerVO = new PagerVO();
+        try {
+            PagerDTO pagerDTO = giftService.listPage(pageQuery);
+            Mapper mapper = getBeanMapper();
+            pagerVO = mapper.map(pagerDTO, PagerVO.class);
+            pagerVO.setRows(DozerMapperUtils.mapList(mapper, pagerDTO.getRows(), GiftVO.class));
+        } catch (ServiceException e) {
+            logger.error("返回分页对象JSON数据失败：{}", e.getMessage());
+        }
+        return pagerVO;
+    }
+
+    @RequestMapping("giftList")
+    @ResponseBody
+    public PagerVO listPageByCondition(int page, int limit, GiftQuery giftQuery) {
         PageQuery pageQuery = new PageQuery(page, limit);
         PagerVO pagerVO = new PagerVO();
         try {
@@ -171,32 +178,19 @@ public class ProductController extends BaseController {
                 logger.error("session失效");
                 return pagerVO;
             }
-            productQuery.setStoreId(storeVO.getId());
-            PagerDTO pagerDTO = productService.listPageByCondition(pageQuery, productQuery);
+            giftQuery.setStoreId(storeVO.getId());
+            PagerDTO pagerDTO = giftService.listPageByCondition(pageQuery, giftQuery);
             Mapper mapper = getBeanMapper();
             pagerVO = mapper.map(pagerDTO, PagerVO.class);
-            pagerVO.setRows(DozerMapperUtils.mapList(mapper, pagerDTO.getRows(), ProductQuery.class));
+            pagerVO.setRows(DozerMapperUtils.mapList(mapper, pagerDTO.getRows(), GiftQuery.class));
         } catch (ServiceException e) {
             logger.error("返回指定条件的分页对象JSON数据失败：{}", e.getMessage());
         }
         return pagerVO;
     }
 
-    /**
-     * 判断图片路径是否为空串，是则返回null
-     * @param imgPath 值
-     * @return
-     */
-    private String checkImgNull(String imgPath) {
-        if("".equals(imgPath)) {
-            return null;
-        } else {
-            return  imgPath;
-        }
-    }
-
     @Resource
-    public void setProductService(ProductService productService) {
-        this.productService = productService;
+    public void setGiftService(GiftService giftService) {
+        this.giftService = giftService;
     }
 }

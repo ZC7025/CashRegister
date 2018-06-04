@@ -89,7 +89,7 @@
     </update>
 
     <update id="updateActiveStatus" parameterType="com.sucheng.query.StatusQuery">
-        update t_unit set is_active = #{status} where id = #{id}
+        update t_unit set status = #{status} where id = #{id}
     </update>
 
     <sql id="select_columns">

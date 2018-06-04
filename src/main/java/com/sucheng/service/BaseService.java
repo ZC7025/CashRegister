@@ -48,7 +48,7 @@ public interface BaseService {
     void update(Object dataTransferObj);
 
     /**
-     * 根据StatusQuery查询对象更新is_active状态值
+     * 根据StatusQuery查询对象更新status状态值
      * @param statusQuery 状态查询对象，包括id和status
      */
     void updateActiveStatus(StatusQuery statusQuery);
