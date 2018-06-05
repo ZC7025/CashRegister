@@ -130,7 +130,12 @@ public class ProTypeController extends BaseController {
     public List<ProTypeVO> listAll() {
         List<ProTypeVO> proTypeVOList = new ArrayList<>();
         try {
-            List<Object> objectList = proTypeService.listAll();
+            StoreVO storeVO = (StoreVO) SecurityUtils.getSubject().getSession().getAttribute("store");
+            if(storeVO == null) {
+                logger.error("session失效");
+                return proTypeVOList;
+            }
+            List<Object> objectList = proTypeService.listAllById(storeVO.getId());
             proTypeVOList =  DozerMapperUtils.map(getBeanMapper(), objectList, ProTypeVO.class);
         } catch (ServiceException e) {
             logger.error("返回所有对象JSON数据失败：{}", e.getMessage());

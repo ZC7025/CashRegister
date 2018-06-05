@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
+import java.util.List;
 
 /**
  * TasteServiceImpl服务接口实现类<br/>
@@ -32,5 +33,10 @@ public class UnitServiceImpl extends AbstractBaseService implements UnitService 
     @PostConstruct
     public void init() {
         super.init(UnitDO.class, UnitDTO.class);
+    }
+
+    @Override
+    public List<Object> listAllById(Integer storeId) {
+        return unitDAO.listAllById(storeId);
     }
 }

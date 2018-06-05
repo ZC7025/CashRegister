@@ -152,7 +152,12 @@ public class ProductController extends BaseController {
     public List<ProductVO> listAll() {
         List<ProductVO> productVOList = new ArrayList<>();
         try {
-            List<Object> objectList = productService.listAll();
+            StoreVO storeVO = (StoreVO) SecurityUtils.getSubject().getSession().getAttribute("store");
+            if(storeVO == null) {
+                logger.error("session失效");
+                return productVOList;
+            }
+            List<Object> objectList = productService.listAllById(storeVO.getId());
             productVOList =  DozerMapperUtils.map(getBeanMapper(), objectList, ProductVO.class);
         } catch (ServiceException e) {
             logger.error("返回所有对象JSON数据失败：{}", e.getMessage());

@@ -1,5 +1,7 @@
 package com.sucheng.service;
 
+import java.util.List;
+
 /**
  * UnitService服务接口<br/>
  *
@@ -9,4 +11,6 @@ package com.sucheng.service;
  * @version 1.0
  */
 public interface UnitService extends BaseService {
+
+    List<Object> listAllById(Integer storeId);
 }

@@ -144,7 +144,12 @@ public class TasteController extends BaseController {
     public List<TasteVO> listAll() {
         List<TasteVO> tasteVOList = new ArrayList<>();
         try {
-            List<Object> objectList = tasteService.listAll();
+            StoreVO storeVO = (StoreVO) SecurityUtils.getSubject().getSession().getAttribute("store");
+            if(storeVO == null) {
+                logger.error("session失效");
+                return tasteVOList;
+            }
+            List<Object> objectList = tasteService.listAllById(storeVO.getId());
             tasteVOList =  DozerMapperUtils.map(getBeanMapper(), objectList, TasteVO.class);
         } catch (ServiceException e) {
             logger.error("返回所有对象JSON数据失败：{}", e.getMessage());

@@ -144,7 +144,12 @@ public class UnitController extends BaseController {
     public List<UnitVO> listAll() {
         List<UnitVO> unitVOList = new ArrayList<>();
         try {
-            List<Object> objectList = unitService.listAll();
+            StoreVO storeVO = (StoreVO) SecurityUtils.getSubject().getSession().getAttribute("store");
+            if(storeVO == null) {
+                logger.error("session失效");
+                return unitVOList;
+            }
+            List<Object> objectList = unitService.listAllById(storeVO.getId());
             unitVOList =  DozerMapperUtils.map(getBeanMapper(), objectList, UnitVO.class);
         } catch (ServiceException e) {
             logger.error("返回所有对象JSON数据失败：{}", e.getMessage());

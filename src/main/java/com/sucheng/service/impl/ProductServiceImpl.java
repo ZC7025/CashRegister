@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.PostConstruct;
+import java.util.List;
 
 /**
  * ProductServiceImpl服务接口实现类<br/>
@@ -58,5 +59,10 @@ public class ProductServiceImpl extends AbstractBaseService implements ProductSe
                         productDTO.getId(), Float.valueOf(pros[1]),pros[2]));
             }
         }
+    }
+
+    @Override
+    public List<Object> listAllById(Integer storeId) {
+        return productDAO.listAllById(storeId);
     }
 }

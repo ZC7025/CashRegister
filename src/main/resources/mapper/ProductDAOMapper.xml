@@ -187,6 +187,13 @@
         order by created_time desc
     </select>
 
+	<select id="listAllById" resultType="com.sucheng.dos.ProductDO">
+		select
+		<include refid="select_columns"/>
+		from t_product where store_id = #{storeId}
+		order by created_time desc
+	</select>
+
     <select id="listPage" parameterType="com.sucheng.query.PageQuery" resultType="com.sucheng.dos.ProductDO">
         select
         <include refid="select_columns"/>

@@ -22,4 +22,6 @@ public interface ProductDAO extends BaseDAO {
 
     @Override
     Long countByCondition(@Param("query") Object queryObj);
+
+    List<Object> listAllById(Integer storeId);
 }

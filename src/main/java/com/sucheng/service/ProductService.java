@@ -2,6 +2,8 @@ package com.sucheng.service;
 
 import com.sucheng.dto.ProductDTO;
 
+import java.util.List;
+
 /**
  * ProductService服务接口<br/>
  *
@@ -13,4 +15,6 @@ import com.sucheng.dto.ProductDTO;
 public interface ProductService extends BaseService {
 
     void save(ProductDTO productDTO, String formulaIds);
+
+    List<Object> listAllById(Integer storeId);
 }
