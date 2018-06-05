@@ -187,6 +187,12 @@
         order by created_time desc
     </select>
 
+	<select id="listAllLess" resultType="com.sucheng.query.RawMaterialsQuery">
+		select rm.id, rm.name, u.unit from t_raw_materials rm, t_unit u
+		where rm.unit_id = u.id and rm.store_id = #{storeId}
+		order by rm.created_time desc
+	</select>
+
     <select id="listPage" parameterType="com.sucheng.query.PageQuery" resultType="com.sucheng.dos.RawMaterialsDO">
         select
         <include refid="select_columns"/>

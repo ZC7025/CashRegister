@@ -66,7 +66,7 @@
                 <label class="layui-form-label">显示优先级</label>
                 <div class="layui-input-block">
                     <input type="text" id="priority" name="priority" lay-verify="isNumberPlus" maxlength="2" autocomplete="off"
-                           placeholder="请输入显示优先级，数字越大商品越靠前显示,默认最高优先" class="layui-input">
+                           placeholder="请输入显示优先级，数字越大商品越靠前显示,默认最高优先" value="99" class="layui-input">
                 </div>
             </div>
             <div class="layui-form-item">
@@ -114,6 +114,57 @@
                     </div>
                 </div>
             </div>
+            <div id="proAppender">
+                <div class="layui-form-item">
+                    <div class="layui-inline">
+                        <label class="layui-form-label">原料</label>
+                        <div class="layui-input-block">
+                            <select name="rawId" class="raw" id="raw1" lay-verify="required"></select>
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label">数量</label>
+                        <div class="layui-input-block">
+                            <input type="number" id="count1" name="count" lay-verify="required|isNumber" autocomplete="off"
+                                   placeholder="请输入数量" maxlength="11" class="layui-input">
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">配方简介</label>
+                    <div class="layui-input-block">
+                    <textarea id="descript1" name="descript" class="layui-textarea"
+                              placeholder="请输入配方简介"></textarea>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <div class="layui-inline">
+                        <label class="layui-form-label">原料</label>
+                        <div class="layui-input-block">
+                            <select name="rawId" class="raw" id="raw2" lay-verify="required"></select>
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label">数量</label>
+                        <div class="layui-input-block">
+                            <input type="number" id="count2" name="count" lay-verify="required|isNumber" autocomplete="off"
+                                   placeholder="请输入数量" maxlength="11" class="layui-input">
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">配方简介</label>
+                    <div class="layui-input-block">
+                    <textarea id="descript2" name="descript" class="layui-textarea"
+                              placeholder="请输入配方简介"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <div class="layui-input-block">
+                    <input type="button" class="layui-btn" id="appender" value="添加商品原料">
+                </div>
+            </div>
             <div class="layui-form-item">
                 <label class="layui-form-label"></label>
                 <div class="layui-input-block">
@@ -128,11 +179,40 @@
 <script type="text/javascript" src="<%=path %>/static/layui/layui.js"></script>
 <script type="text/javascript" src="<%=path %>/static/js/home/public.js"></script>
 <script>
+    function appenderDiv(clickCount) {
+        return "<div class=\"layui-form-item\">\n" +
+            "                    <div class=\"layui-inline\">\n" +
+            "                        <label class=\"layui-form-label\">原料</label>\n" +
+            "                        <div class=\"layui-input-block\">\n" +
+            "                            <select name=\"rawId\" class=\"raw\" id='raw"+ clickCount +"' lay-verify=\"required\"></select>\n" +
+            "                        </div>\n" +
+            "                    </div>\n" +
+            "                    <div class=\"layui-inline\">\n" +
+            "                        <label class=\"layui-form-label\">数量</label>\n" +
+            "                        <div class=\"layui-input-block\">\n" +
+            "                            <input type=\"number\" id='count"+ clickCount + "' name=\"count\" lay-verify=\"required|isNumber\" autocomplete=\"off\"\n" +
+            "                                   placeholder=\"请输入数量\" maxlength=\"11\" class=\"layui-input\">\n" +
+            "                        </div>\n" +
+            "                    </div>\n" +
+            "                </div>\n" +
+            "                <div class=\"layui-form-item\">\n" +
+            "                    <label class=\"layui-form-label\">配方简介</label>\n" +
+            "                    <div class=\"layui-input-block\">\n" +
+            "                    <textarea id='descript"+ clickCount + "' name=\"descript\" class=\"layui-textarea\"\n" +
+            "                              placeholder=\"请输入配方简介\"></textarea>\n" +
+            "                    </div>\n" +
+            "                </div>";
+    }
     layui.use(['form', 'upload'], function () {
         var form = layui.form;
         var $ = layui.jquery;
         var upload = layui.upload;
         var layer = layui.layer;
+        var clickCount = 2;
+        var supList = "";
+        var unitList = "";
+        var typeList = "";
+        var rawList = "";
 
         uploadImg(upload, 'proImg1', '<%=path %>/file/firist', 'proImg1Demo', 'proImg1Img', 'proImg1Text');
         uploadImg(upload, 'proImg2', '<%=path %>/file/firist', 'proImg2Demo', 'proImg2Img', 'proImg2Text');
@@ -145,10 +225,8 @@
         form.verify({
             isNumberPlus: [/^\+?[1-9][0-9]*$/, '必须是正整数']
         });
+
         $(function () {
-            var supList = "";
-            var unitList = "";
-            var typeList = "";
             if(${sessionScope.store != null}) {
                 $.ajax({
                     url: '<%=path %>/data/proType/all',
@@ -187,11 +265,42 @@
                         form.render();
                     }
                 });
+                $.ajax({
+                    url: '<%=path %>/data/rawMat/allLess',
+                    success: function (data) {
+                        var len = data.length;
+                        for (var i = len; i > 0 ; i--) {
+                            rawList += '<option value="' + data[i-1].id + '">'
+                                + data[i-1].name + '(' + data[i-1].unit + ')</option>'
+                        }
+                        $("#raw1").append(rawList);
+                        $("#raw2").append(rawList);
+                        // 重新刷新表单，新option才会出现
+                        form.render();
+                    }
+                });
+            }
+        });
+        $(document).on('click','#appender',function(){
+            if(clickCount < 20) {
+                $('#proAppender').append(appenderDiv(++clickCount));
+                $("#raw"+ clickCount).append(rawList);
+                form.render();
+            } else {
+                layer.msg('商品最多添加20种配方原料');
             }
         });
 
         form.on('submit(add)', function (data) {
-            $.post('<%=path %>/data/product/save',
+            var ids = "";
+            for(var i =1; i <= clickCount; i++) {
+                var a = $("#raw" + i).val();
+                var b = $("#count" + i).val();
+                var c = $("#descript" + i).val();
+                ids += a + '-' + b + '-' + c + ',';
+            }
+            console.log(ids);
+            $.post('<%=path %>/data/product/save?formulaIds='+ids,
                 $('#product').serialize(),
                 function (res) {
                     if (res.code === 0) {

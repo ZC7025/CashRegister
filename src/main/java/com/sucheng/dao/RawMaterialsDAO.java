@@ -22,4 +22,6 @@ public interface RawMaterialsDAO extends BaseDAO {
 
     @Override
     Long countByCondition(@Param("query") Object queryObj);
+
+    List<Object> listAllLess(Integer storeId);
 }

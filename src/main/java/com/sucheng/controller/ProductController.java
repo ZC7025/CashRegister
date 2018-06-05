@@ -42,14 +42,14 @@ public class ProductController extends BaseController {
 
     @PostMapping("save")
     @ResponseBody
-    public ControllerStatusVO save(ProductVO productVO) {
+    public ControllerStatusVO save(ProductVO productVO, String formulaIds) {
         ControllerStatusVO statusVO = new ControllerStatusVO();
         try {
             productVO.setProImg1(checkImgNull(productVO.getProImg1()));
             productVO.setProImg2(checkImgNull(productVO.getProImg2()));
             productVO.setProImg3(checkImgNull(productVO.getProImg3()));
             productVO.setProImg4(checkImgNull(productVO.getProImg4()));
-            productService.save(getBeanMapper().map(productVO, ProductDTO.class));
+            productService.save(getBeanMapper().map(productVO, ProductDTO.class), formulaIds);
             statusVO.okStatus(0, "添加成功");
         } catch (ServiceException e) {
             logger.error("添加失败：{}", e.getMessage());

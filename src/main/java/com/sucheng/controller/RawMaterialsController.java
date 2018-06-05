@@ -155,6 +155,24 @@ public class RawMaterialsController extends BaseController {
         return rawMaterialsVOList;
     }
 
+    @GetMapping("allLess")
+    @ResponseBody
+    public List<RawMaterialsQuery> listAllLess() {
+        List<RawMaterialsQuery> rawMaterialsVOList = new ArrayList<>();
+        try {
+            StoreVO storeVO = (StoreVO) SecurityUtils.getSubject().getSession().getAttribute("store");
+            if(storeVO == null) {
+                logger.error("session失效");
+                return rawMaterialsVOList;
+            }
+            List<Object> objectList = rawMaterialsService.listAllLess(storeVO.getId());
+            rawMaterialsVOList =  DozerMapperUtils.map(getBeanMapper(), objectList, RawMaterialsQuery.class);
+        } catch (ServiceException e) {
+            logger.error("返回所有对象JSON数据失败：{}", e.getMessage());
+        }
+        return rawMaterialsVOList;
+    }
+
     @PostMapping("page")
     @ResponseBody
     public PagerVO listPage(PageQuery pageQuery) {

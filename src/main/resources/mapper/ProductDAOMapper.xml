@@ -5,6 +5,9 @@
 <mapper namespace="com.sucheng.dao.ProductDAO">
 
     <insert id="save" parameterType="com.sucheng.dos.ProductDO">
+		<selectKey keyColumn="id" keyProperty="id" resultType="integer" order="AFTER">
+			SELECT LAST_INSERT_ID() as id
+		</selectKey>
         insert into t_product
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="id != null">

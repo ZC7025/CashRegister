@@ -10,14 +10,14 @@
             <if test="id != null">
 				id,
 			</if>
-			<if test="name != null">
-				name,
-			</if>
-			<if test="unit != null">
-				unit,
+			<if test="rawId != null">
+				raw_id,
 			</if>
 			<if test="proId != null">
 				pro_id,
+			</if>
+			<if test="count != null">
+				count,
 			</if>
 			<if test="descript != null">
 				descript,
@@ -34,14 +34,14 @@
             <if test="id != null">
 				#{id},
 			</if>
-			<if test="name != null">
-				#{name},
-			</if>
-			<if test="unit != null">
-				#{unit},
+			<if test="rawId != null">
+				#{rawId},
 			</if>
 			<if test="proId != null">
 				#{proId},
+			</if>
+			<if test="count != null">
+				#{count},
 			</if>
 			<if test="descript != null">
 				#{descript},
@@ -77,14 +77,14 @@
             <if test="id != null">
 				id = #{id},
 			</if>
-			<if test="name != null">
-				name = #{name},
-			</if>
-			<if test="unit != null">
-				unit = #{unit},
+			<if test="rawId != null">
+				raw_id = #{rawId},
 			</if>
 			<if test="proId != null">
 				pro_id = #{proId},
+			</if>
+			<if test="count != null">
+				count = #{count},
 			</if>
 			<if test="descript != null">
 				descript = #{descript},
@@ -101,11 +101,11 @@
     </update>
 
     <update id="updateActiveStatus" parameterType="com.sucheng.query.StatusQuery">
-        update t_formula set status = #{status} where id = #{id}
+        update t_formula set is_active = #{status} where id = #{id}
     </update>
 
     <sql id="select_columns">
-        id, name, unit, pro_id, descript, status, created_time
+        id, raw_id, pro_id, count, descript, status, created_time
     </sql>
 
     <select id="getById" parameterType="long" resultType="com.sucheng.dos.FormulaDO">
@@ -135,38 +135,46 @@
 
     <sql id="where_clause">
         <if test="query != null and query.id != null">
-			id = #{id},
+			id = #{query.id}
 		</if>
-		<if test="query != null and query.name != null and query.name != ''">
-			and name = #{name},
-		</if>
-		<if test="query != null and query.unit != null and query.unit != ''">
-			and unit = #{unit},
+		<if test="query != null and query.rawId != null">
+			and raw_id = #{query.rawId}
 		</if>
 		<if test="query != null and query.proId != null">
-			and pro_id = #{proId},
+			and pro_id = #{query.proId}
+		</if>
+		<if test="query != null and query.count != null">
+			and count = #{query.count}
 		</if>
 		<if test="query != null and query.descript != null and query.descript != ''">
-			and descript = #{descript},
+			and descript = #{query.descript}
 		</if>
 		<if test="query != null and query.status != null and query.status != ''">
-			and status = #{status},
+			and status = #{query.status}
 		</if>
 		<if test="query != null and query.createdTime != null">
-			and created_time = #{createdTime},
+			and created_time = #{query.createdTime}
 		</if>
 		
     </sql>
 
-    <select id="listPageByCondition" resultType="com.sucheng.dos.FormulaDO">
-        select
-        <include refid="select_columns"/>
-        from t_formula
+    <select id="listPageByCondition" resultType="com.sucheng.query.FormulaQuery">
+        select fo.id, fo.count, fo.descript, raw.name, u.unit
+		from t_formula fo, t_raw_materials raw, t_unit u
         <where>
             <include refid="where_clause"/>
+			<if test="true">
+				and fo.raw_id = raw.id and raw.unit_id = u.id
+			</if>
+			<if test="query != null and query.storeId != null">
+				and raw.store_id = #{query.storeId}
+			</if>
+			<if test="query != null and query.proId != null">
+				and fo.pro_id = #{query.proId}
+			</if>
         </where>
-        order by created_time desc
-        limit #{beginIndex}, #{pageSize}
+        order by fo.created_time desc
+        limit #{pager.beginIndex}, #{pager.pageSize}
     </select>
 
     <select id="countByCondition" parameterType="com.sucheng.query.FormulaQuery" resultType="long">

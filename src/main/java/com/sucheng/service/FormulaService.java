@@ -3,9 +3,9 @@ package com.sucheng.service;
 /**
  * FormulaService服务接口<br/>
  *
- * 创建于2018-05-24<br/>
+ * 创建于2018-06-05<br/>
  *
- * @author 7025
+ *
  * @version 1.0
  */
 public interface FormulaService extends BaseService {

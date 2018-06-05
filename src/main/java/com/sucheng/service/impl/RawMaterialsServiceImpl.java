@@ -19,6 +19,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.PostConstruct;
+import java.util.List;
 
 /**
  * RawMaterialsServiceImpl服务接口实现类<br/>
@@ -84,5 +85,10 @@ public class RawMaterialsServiceImpl extends AbstractBaseService implements RawM
     @PostConstruct
     public void init() {
         super.init(RawMaterialsDO.class, RawMaterialsDTO.class);
+    }
+
+    @Override
+    public List<Object> listAllLess(Integer storeId) {
+        return rawMaterialsDAO.listAllLess(storeId);
     }
 }

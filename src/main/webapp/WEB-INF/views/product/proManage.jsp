@@ -13,12 +13,21 @@
 
 <div class="layui-btn-group demoTable" >
     <button class="layui-btn" data-type="add">新增商品</button>
+    <a href="javascript:void(0);" class="layui-btn" id="proShow" data-type="edit">查看商品配方</a>
     <button class="layui-btn" data-type="update">修改商品信息</button>
     <button class="layui-btn" data-type="delete">删除商品</button>
     <button class="layui-btn" data-type="refresh">刷新</button>
 </div>
 
 <table id="product_table" lay-filter="demo"></table>
+
+<%--商品配方列表弹窗--%>
+<div style="display: none;" id="proListShow">
+    <div class="layui-btn-group proTable" >
+        <button class="layui-btn" data-type="deleteFormula">删除商品配方</button>
+    </div>
+    <table id="proList"></table>
+</div>
 
 <script type="text/javascript" src="<%=path %>/static/layui/layui.js"></script>
 <script type="text/javascript" src="<%=path %>/static/js/home/public.js"></script>
@@ -90,6 +99,52 @@
             active[type] ? active[type].call(this) : '';
         });
 
+        $('.proTable .layui-btn').on('click', function(){
+            var type = $(this).data('type');
+            active[type] ? active[type].call(this) : '';
+        });
+
+        $('#proShow').on('click', function () {
+            var checkStatus = table.checkStatus('idTest')
+                ,data = checkStatus.data;
+            if(data.length === 1) {
+                layer.open({
+                    type: 1,                //弹窗类型
+                    title: '商品配方',     //显示标题
+                    closeBtn: 1,         //是否显示关闭按钮
+                    shadeClose: true, //显示模态窗口
+                    fixed:false,    //层是否固定在可视区域
+                    offset: 't',//快捷设置顶部坐标
+                    move: true,//禁止拖拽
+                    area: ['890px', '560px'], //宽高
+                    content: $("#proListShow")  //弹窗内容
+                });
+                table.render({
+                    elem: '#proList'
+                    ,url: '<%=path %>/data/formula/formulaList?proId='+data[0].id
+                    ,cols: [[
+                        {checkbox: true, fixed: true}
+                        ,{field:'name', title:'原料名', width:90}
+                        ,{field:'unit', title:'单位', width:150}
+                        ,{field:'count', title:'数量', width:150}
+                        ,{field:'descript', title:'介绍', width:300}
+                    ]]
+                    ,id: 'proId'
+                    ,page: true
+                    ,height: 500
+                    ,response: {
+                        statusName: 'status'
+                        ,statusCode: 0
+                        ,msgName: 'message'
+                        ,countName: 'total'
+                        ,dataName: 'rows'
+                    }
+                });
+            } else {
+                layer.msg('请选中一行！', {time:1500});
+            }
+        });
+
         var active = {
             delete:function () {
                 var checkStatus = table.checkStatus('idTest')
@@ -107,8 +162,23 @@
                 } else {
                     layer.msg('请选中一行！', {time:1500});
                 }
-            }
-            ,add: function(){ //行业类型添加
+            },deleteFormula:function () {
+                var checkStatus = table.checkStatus('proId')
+                    ,data = checkStatus.data;
+                if(data.length === 1) {
+                    $.get('<%=path %>/data/formula/remove/' + data[0].id,
+                        function (data) {
+                            if(data.code===0){
+                                layer.msg("删除成功！");
+                                location.reload(true);
+                            }else {
+                                layer.msg("删除失败！");
+                            }
+                        });
+                } else {
+                    layer.msg('请选中一行！', {time:1500});
+                }
+            },add: function(){ //行业类型添加
                 layer.open({
                     type: 2,
                     title: '添加商品',
@@ -116,8 +186,7 @@
                     maxmin:true,
                     content: '<%=path %>/page/product/add'
                 });
-            }
-            ,update: function(){ //验证是否全选
+            },update: function(){ //验证是否全选
                 var checkStatus = table.checkStatus('idTest')
                     ,data = checkStatus.data;
                 if(data.length === 1) {
@@ -131,8 +200,7 @@
                     layer.msg("请选择一行！");
                 }
 
-            },
-            refresh:function () {
+            }, refresh:function () {
                 location.reload(true);
             }
         };

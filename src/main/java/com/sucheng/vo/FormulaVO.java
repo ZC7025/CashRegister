@@ -5,31 +5,31 @@ import java.util.Date;
 /**
  * FormulaVO值对象类<br/>
  *
- * 创建于2018-05-24<br/>
+ * 创建于2018-06-05<br/>
  *
- * @author 7025
+ *
  * @version 1.0
  */
 public class FormulaVO extends BaseVO {
 
-    private static final long serialVersionUID = -9223372035216472471L;
+    private static final long serialVersionUID = -9223372036445828772L;
 
     /**
 	*
 	*/
 	private Integer id;
 	/**
-	*原材料名
+	*配方名
 	*/
-	private String name;
-	/**
-	*单位
-	*/
-	private String unit;
+	private Integer rawId;
 	/**
 	*商品id
 	*/
 	private Integer proId;
+	/**
+	*
+	*/
+	private Float count;
 	/**
 	*描述
 	*/
@@ -43,17 +43,14 @@ public class FormulaVO extends BaseVO {
 	*/
 	private Date createdTime;
 	
-    public FormulaVO () {}
+    public FormulaVO() {}
 
-    public FormulaVO (Integer id, String name, String unit, Integer proId, String descript, String status, Date createdTime) {
+    public FormulaVO(Integer id, Integer rawId, Integer proId, Float count, String descript) {
         this.id = id;
-		this.name = name;
-		this.unit = unit;
+		this.rawId = rawId;
 		this.proId = proId;
+		this.count = count;
 		this.descript = descript;
-		this.status = status;
-		this.createdTime = createdTime;
-		
     }
 
     public Integer getId() {
@@ -64,20 +61,12 @@ public class FormulaVO extends BaseVO {
 		this.id = id;
 	}
 
-	public String getName() {
-		return name;
+	public Integer getRawId() {
+		return rawId;
 	}
 
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getUnit() {
-		return unit;
-	}
-
-	public void setUnit(String unit) {
-		this.unit = unit;
+	public void setRawId(Integer rawId) {
+		this.rawId = rawId;
 	}
 
 	public Integer getProId() {
@@ -86,6 +75,14 @@ public class FormulaVO extends BaseVO {
 
 	public void setProId(Integer proId) {
 		this.proId = proId;
+	}
+
+	public Float getCount() {
+		return count;
+	}
+
+	public void setCount(Float count) {
+		this.count = count;
 	}
 
 	public String getDescript() {
@@ -117,9 +114,9 @@ public class FormulaVO extends BaseVO {
     public String toString() {
         return "FormulaDO{" +
                 "id = " + id + 
-				", name = " + name + 
-				", unit = " + unit + 
+				", rawId = " + rawId + 
 				", proId = " + proId + 
+				", count = " + count + 
 				", descript = " + descript + 
 				", status = " + status + 
 				", createdTime = " + createdTime + 
