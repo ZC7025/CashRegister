@@ -27,7 +27,9 @@ public class AdminFilter implements Filter{
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         String uri = request.getRequestURI();
-        if (isFilter(uri)) {
+        if(uri.contains("/page/admin/login")) {
+            filterChain.doFilter(servletRequest, servletResponse);
+        } else if (isFilter(uri)) {
             HttpSession session = request.getSession();
             Object admin = session.getAttribute(Constants.ADMIN_IN_SESSION);
             if (admin != null) {
@@ -47,6 +49,6 @@ public class AdminFilter implements Filter{
     }
 
     private boolean isFilter(String uri) {
-        return uri.contains("/page/home/");
+        return uri.contains("/page/admin/");
     }
 }

@@ -12,7 +12,6 @@
 
 
 <div class="layui-btn-group demoTable" >
-    <button class="layui-btn" data-type="add">新增商品</button>
     <a href="javascript:void(0);" class="layui-btn" id="proShow" data-type="edit">查看商品配方</a>
     <button class="layui-btn" data-type="update">修改商品信息</button>
     <button class="layui-btn" data-type="delete">删除商品</button>
@@ -178,14 +177,6 @@
                 } else {
                     layer.msg('请选中一行！', {time:1500});
                 }
-            },add: function(){ //行业类型添加
-                layer.open({
-                    type: 2,
-                    title: '添加商品',
-                    area: ['80%', '80%'],
-                    maxmin:true,
-                    content: '<%=path %>/page/product/add'
-                });
             },update: function(){ //验证是否全选
                 var checkStatus = table.checkStatus('idTest')
                     ,data = checkStatus.data;

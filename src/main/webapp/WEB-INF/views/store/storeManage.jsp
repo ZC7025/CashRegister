@@ -12,7 +12,6 @@
 
 
 <div class="layui-btn-group demoTable" >
-    <button class="layui-btn" data-type="add">新增门店</button>
     <button class="layui-btn" data-type="update">修改门店信息</button>
     <button class="layui-btn" data-type="delete">删除门店</button>
     <button class="layui-btn" data-type="refresh">刷新</button>
@@ -79,15 +78,6 @@
                 } else {
                     layer.msg('请选中一行！', {time:1500});
                 }
-            }
-            ,add: function(){ //行业类型添加
-                layer.open({
-                    type: 2,
-                    title: '添加门店',
-                    area: ['80%', '80%'],
-                    maxmin:true,
-                    content: '<%=path %>/page/store/add'
-                });
             }
             ,update: function(){ //验证是否全选
                 var checkStatus = table.checkStatus('idTest')

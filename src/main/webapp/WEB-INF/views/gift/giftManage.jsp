@@ -12,7 +12,6 @@
 
 
 <div class="layui-btn-group demoTable" >
-    <button class="layui-btn" data-type="add">新增套餐</button>
     <a href="javascript:void(0);" class="layui-btn" id="proShow" data-type="edit">查看套餐内商品</a>
     <button class="layui-btn" data-type="delete">删除套餐</button>
     <button class="layui-btn" data-type="refresh">刷新</button>
@@ -143,17 +142,7 @@
                 } else {
                     layer.msg('请选中一行！', {time:1500});
                 }
-            }
-            ,add: function(){ //行业类型添加
-                layer.open({
-                    type: 2,
-                    title: '添加套餐',
-                    area: ['80%', '80%'],
-                    maxmin:true,
-                    content: '<%=path %>/page/gift/add'
-                });
-            }
-            , refresh:function () {
+            }, refresh:function () {
                 location.reload(true);
             }
         };

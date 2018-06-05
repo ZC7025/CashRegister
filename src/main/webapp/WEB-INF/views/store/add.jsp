@@ -151,6 +151,28 @@
             $.ajax({
                 url: '<%=path %>/data/industry/all',
                 success: function (data) {
+                    if(data.length === 0) {
+                        layer.open({
+                            type: 1
+                            ,title: false //不显示标题栏
+                            ,closeBtn: false
+                            ,area: '300px;'
+                            ,shade: 0.8
+                            ,id: 'LAY_layuipro' //设定一个id，防止重复弹出
+                            ,resize: false
+                            ,btn: ['前往添加', '取消']
+                            ,btnAlign: 'c'
+                            ,moveType: 0 //拖拽模式，0或者1
+                            ,content: '<div style="padding: 50px; line-height: 22px;' +
+                            ' background-color: #393D49; color: #fff; font-weight: 300;">没有行业类型哦，请前往添加</div>'
+                            ,success: function(layero){
+                                var btn = layero.find('.layui-layer-btn');
+                                btn.find('.layui-layer-btn0').attr({
+                                    href: '<%=path %>/page/industry/add'
+                                });
+                            }
+                        });
+                    }
                     //加载数据
                     for (var i = 0; i < data.length; i++) {
                         html += '<option value="' + data[i].id + '">' + data[i].name + '</option>'
@@ -202,7 +224,7 @@
                         layer.msg('添加成功', {
                             time: 1000 //2秒关闭（如果不配置，默认是3秒）
                         }, function () {
-                            parent.location.reload(true);
+                            location.reload(true);
                         });
                         layer.closeAll(index);
                     } else {

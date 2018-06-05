@@ -12,7 +12,6 @@
 
 
 <div class="layui-btn-group demoTable" >
-    <button class="layui-btn" data-type="add">新增原材料</button>
     <button class="layui-btn" data-type="update">修改原材料信息</button>
     <button class="layui-btn" data-type="delete">删除原材料</button>
     <button class="layui-btn" data-type="refresh">刷新</button>
@@ -80,17 +79,7 @@
                 } else {
                     layer.msg('请选中一行！', {time:1500});
                 }
-            }
-            ,add: function(){ //行业类型添加
-                layer.open({
-                    type: 2,
-                    title: '添加原材料',
-                    area: ['80%', '80%'],
-                    maxmin:true,
-                    content: '<%=path %>/page/rawMat/add'
-                });
-            }
-            ,update: function(){ //验证是否全选
+            },update: function(){ //验证是否全选
                 var checkStatus = table.checkStatus('idTest')
                     ,data = checkStatus.data;
                 if(data.length === 1) {
