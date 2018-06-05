@@ -12,6 +12,8 @@ import com.sucheng.service.ProGiftService;
 import com.sucheng.vo.ControllerStatusVO;
 import com.sucheng.vo.PagerVO;
 import com.sucheng.vo.ProGiftVO;
+import com.sucheng.vo.StoreVO;
+import org.apache.shiro.SecurityUtils;
 import org.dozer.Mapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,7 +33,7 @@ import java.util.List;
  * @version 1.0
  */
 @Controller
-@RequestMapping("/pro-gift")
+@RequestMapping("/data/proGift")
 public class ProGiftController extends BaseController {
 
     private static final Logger logger = LoggerFactory.getLogger(ProGiftController.class);
@@ -44,7 +46,7 @@ public class ProGiftController extends BaseController {
         ControllerStatusVO statusVO = new ControllerStatusVO();
         try {
             proGiftService.save(getBeanMapper().map(proGiftVO, ProGiftDTO.class));
-            statusVO.okStatus(200, "添加成功");
+            statusVO.okStatus(0, "添加成功");
         } catch (ServiceException e) {
             logger.error("添加失败：{}", e.getMessage());
             statusVO.errorStatus(500, "添加失败");
@@ -72,7 +74,7 @@ public class ProGiftController extends BaseController {
         ControllerStatusVO statusVO = new ControllerStatusVO();
         try {
             proGiftService.removeById(id);
-            statusVO.okStatus(200, "删除成功");
+            statusVO.okStatus(0, "删除成功");
         } catch (ServiceException e) {
             logger.error("删除失败：{}", e.getMessage());
             statusVO.errorStatus(500, "删除失败");
@@ -100,24 +102,10 @@ public class ProGiftController extends BaseController {
         ControllerStatusVO statusVO = new ControllerStatusVO();
         try {
             proGiftService.update(getBeanMapper().map(proGiftVO, ProGiftDTO.class));
-            statusVO.okStatus(200, "更新成功");
+            statusVO.okStatus(0, "更新成功");
         } catch (ServiceException e) {
             logger.error("更新失败：{}", e.getMessage());
             statusVO.errorStatus(500, "更新失败");
-        }
-        return statusVO;
-    }
-
-    @PostMapping("active")
-    @ResponseBody
-    public ControllerStatusVO updateActiveStatus(StatusQuery statusQuery) {
-        ControllerStatusVO statusVO = new ControllerStatusVO();
-        try {
-            proGiftService.updateActiveStatus(statusQuery);
-            statusVO.okStatus(200, statusQuery.getStatus() == 0 ? "激活成功" : "冻结成功");
-        } catch (ServiceException e) {
-            logger.error("激活或冻结失败：{}", e.getMessage());
-            statusVO.errorStatus(500, statusQuery.getStatus() == 0 ? "激活失败" : "冻结失败");
         }
         return statusVO;
     }
@@ -150,30 +138,22 @@ public class ProGiftController extends BaseController {
         return proGiftVOList;
     }
 
-    @PostMapping("page")
+    @RequestMapping("proGiftList")
     @ResponseBody
-    public PagerVO listPage(PageQuery pageQuery) {
+    public PagerVO listPageByCondition(int page, int limit, ProGiftQuery proGiftQuery) {
+        PageQuery pageQuery = new PageQuery(page, limit);
         PagerVO pagerVO = new PagerVO();
         try {
-            PagerDTO pagerDTO = proGiftService.listPage(pageQuery);
-            Mapper mapper = getBeanMapper();
-            pagerVO = mapper.map(pagerDTO, PagerVO.class);
-            pagerVO.setRows(DozerMapperUtils.mapList(mapper, pagerDTO.getRows(), ProGiftVO.class));
-        } catch (ServiceException e) {
-            logger.error("返回分页对象JSON数据失败：{}", e.getMessage());
-        }
-        return pagerVO;
-    }
-
-    @PostMapping("page-cond")
-    @ResponseBody
-    public PagerVO listPageByCondition(PageQuery pageQuery, ProGiftQuery proGiftQuery) {
-        PagerVO pagerVO = new PagerVO();
-        try {
+            StoreVO storeVO = (StoreVO) SecurityUtils.getSubject().getSession().getAttribute("store");
+            if(storeVO == null) {
+                logger.error("session失效");
+                return pagerVO;
+            }
+            proGiftQuery.setStoreId(storeVO.getId());
             PagerDTO pagerDTO = proGiftService.listPageByCondition(pageQuery, proGiftQuery);
             Mapper mapper = getBeanMapper();
             pagerVO = mapper.map(pagerDTO, PagerVO.class);
-            pagerVO.setRows(DozerMapperUtils.mapList(mapper, pagerDTO.getRows(), ProGiftVO.class));
+            pagerVO.setRows(DozerMapperUtils.mapList(mapper, pagerDTO.getRows(), ProGiftQuery.class));
         } catch (ServiceException e) {
             logger.error("返回指定条件的分页对象JSON数据失败：{}", e.getMessage());
         }

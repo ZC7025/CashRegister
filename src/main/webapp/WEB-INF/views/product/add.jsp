@@ -65,7 +65,7 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">显示优先级</label>
                 <div class="layui-input-block">
-                    <input type="text" id="priority" name="priority" lay-verify="required|isNumberPlus" maxlength="2" autocomplete="off"
+                    <input type="text" id="priority" name="priority" lay-verify="isNumberPlus" maxlength="2" autocomplete="off"
                            placeholder="请输入显示优先级，数字越大商品越靠前显示,默认最高优先" class="layui-input">
                 </div>
             </div>

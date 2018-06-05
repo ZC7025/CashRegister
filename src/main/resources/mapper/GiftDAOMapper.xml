@@ -5,6 +5,9 @@
 <mapper namespace="com.sucheng.dao.GiftDAO">
 
     <insert id="save" parameterType="com.sucheng.dos.GiftDO">
+		<selectKey keyColumn="id" keyProperty="id" resultType="integer" order="AFTER">
+			SELECT LAST_INSERT_ID() as id
+		</selectKey>
         insert into t_gift
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="id != null">

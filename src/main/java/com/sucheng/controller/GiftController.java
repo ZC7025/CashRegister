@@ -42,10 +42,16 @@ public class GiftController extends BaseController {
 
     @PostMapping("save")
     @ResponseBody
-    public ControllerStatusVO save(GiftVO giftVO) {
+    public ControllerStatusVO save(GiftVO giftVO, String proIds) {
         ControllerStatusVO statusVO = new ControllerStatusVO();
         try {
-            giftService.save(getBeanMapper().map(giftVO, GiftDTO.class));
+            StoreVO storeVO = (StoreVO) SecurityUtils.getSubject().getSession().getAttribute("store");
+            if(storeVO == null) {
+                logger.error("session失效");
+                return statusVO;
+            }
+            giftVO.setStoreId(storeVO.getId());
+            giftService.save(giftVO, proIds);
             statusVO.okStatus(0, "添加成功");
         } catch (ServiceException e) {
             logger.error("添加失败：{}", e.getMessage());

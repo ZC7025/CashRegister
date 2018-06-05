@@ -1,5 +1,7 @@
 package com.sucheng.dto;
 
+import java.math.BigDecimal;
+
 /**
  * ProGiftDTO数据传输对象类<br/>
  *
@@ -28,6 +30,10 @@ public class ProGiftDTO extends BaseDTO {
 	*
 	*/
 	private Float count;
+
+	private String name;
+	private BigDecimal price;
+	private Integer storeId;
 	
     public ProGiftDTO () {}
 
@@ -71,8 +77,31 @@ public class ProGiftDTO extends BaseDTO {
 		this.count = count;
 	}
 
-	
-    @Override
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public BigDecimal getPrice() {
+		return price;
+	}
+
+	public void setPrice(BigDecimal price) {
+		this.price = price;
+	}
+
+	public Integer getStoreId() {
+		return storeId;
+	}
+
+	public void setStoreId(Integer storeId) {
+		this.storeId = storeId;
+	}
+
+	@Override
     public String toString() {
         return "ProGiftDO{" +
                 "id = " + id + 

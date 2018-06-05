@@ -39,7 +39,7 @@
     </insert>
 
     <delete id="remove" parameterType="com.sucheng.dos.ProGiftDO">
-        delete from t_pro_gift where id = #{id}
+        delete from t_pro_gift where gift_id = #{giftId}
     </delete>
 
     <delete id="removeById" parameterType="long">
@@ -91,14 +91,14 @@
         select
         <include refid="select_columns"/>
         from t_pro_gift
-        order by update_time desc, created_time desc
+        order by created_time desc
     </select>
 
     <select id="listPage" parameterType="com.sucheng.query.PageQuery" resultType="com.sucheng.dos.ProGiftDO">
         select
         <include refid="select_columns"/>
         from t_pro_gift
-        order by update_time desc, created_time desc
+        order by created_time desc
         limit #{beginIndex}, #{pageSize}
     </select>
 
@@ -108,29 +108,35 @@
 
     <sql id="where_clause">
         <if test="query != null and query.id != null">
-			id = #{id},
+			id = #{query.id}
 		</if>
 		<if test="query != null and query.proId != null">
-			and pro_id = #{proId},
+			and pro_id = #{query.proId}
 		</if>
 		<if test="query != null and query.giftId != null">
-			and gift_id = #{giftId},
+			and gift_id = #{query.giftId}
 		</if>
 		<if test="query != null and query.count != null">
-			and count = #{count},
+			and count = #{query.count}
 		</if>
 		
     </sql>
 
-    <select id="listPageByCondition" resultType="com.sucheng.dos.ProGiftDO">
-        select
-        <include refid="select_columns"/>
-        from t_pro_gift
+    <select id="listPageByCondition" resultType="com.sucheng.query.ProGiftQuery">
+        select pg.*, p.name, p.price from t_pro_gift pg, t_product p
         <where>
             <include refid="where_clause"/>
+            <if test="true">
+                and pg.pro_id = p.id
+            </if>
+            <if test="query != null and query.storeId != null">
+                and p.store_id = #{query.storeId}
+            </if>
+            <if test="query != null and query.giftId != null">
+                and pg.gift_id = #{query.giftId}
+            </if>
         </where>
-        order by update_time desc, created_time desc
-        limit #{beginIndex}, #{pageSize}
+        limit #{pager.beginIndex}, #{pager.pageSize}
     </select>
 
     <select id="countByCondition" parameterType="com.sucheng.query.ProGiftQuery" resultType="long">
