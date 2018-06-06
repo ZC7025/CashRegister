@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
+import java.util.List;
 
 /**
  * SupplierServiceImpl服务接口实现类<br/>
@@ -37,5 +38,10 @@ public class SupplierServiceImpl extends AbstractBaseService implements Supplier
     @Override
     public void updateDefaultById(Integer storeId) {
         supplierDAO.updateDefaultById(storeId);
+    }
+
+    @Override
+    public List<Object> listAllById(Integer storeId) {
+        return supplierDAO.listAllById(storeId);
     }
 }

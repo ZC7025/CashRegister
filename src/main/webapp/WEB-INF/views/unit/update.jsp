@@ -5,6 +5,7 @@
   Time: 15:55
   To change this template use File | Settings | File Templates.
 --%>
+<!DOCTYPE html>
 <%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%

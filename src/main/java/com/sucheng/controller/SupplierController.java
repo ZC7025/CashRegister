@@ -150,7 +150,12 @@ public class SupplierController extends BaseController {
     public List<SupplierVO> listAll() {
         List<SupplierVO> supplierVOList = new ArrayList<>();
         try {
-            List<Object> objectList = supplierService.listAll();
+            StoreVO storeVO = (StoreVO) SecurityUtils.getSubject().getSession().getAttribute("store");
+            if(storeVO == null) {
+                logger.error("session失效");
+                return supplierVOList;
+            }
+            List<Object> objectList = supplierService.listAllById(storeVO.getId());
             supplierVOList =  DozerMapperUtils.map(getBeanMapper(), objectList, SupplierVO.class);
         } catch (ServiceException e) {
             logger.error("返回所有对象JSON数据失败：{}", e.getMessage());

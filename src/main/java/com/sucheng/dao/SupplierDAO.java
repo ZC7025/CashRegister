@@ -27,4 +27,6 @@ public interface SupplierDAO extends BaseDAO {
      * 根据storeId来更新所有该门店下的默认供应商为非默认
      */
     void updateDefaultById(Integer storeId);
+
+    List<Object> listAllById(Integer storeId);
 }
