@@ -26,6 +26,7 @@ public class StoreQuery extends BaseQuery {
 	*
 	*/
 	private String name;
+	private String manager;
 	/**
 	*
 	*/
@@ -123,6 +124,14 @@ public class StoreQuery extends BaseQuery {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public String getManager() {
+		return manager;
+	}
+
+	public void setManager(String manager) {
+		this.manager = manager;
 	}
 
 	public String getPhone() {

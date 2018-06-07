@@ -46,7 +46,7 @@ public class StockOperatingController extends BaseController {
         ControllerStatusVO statusVO = new ControllerStatusVO();
         try {
             stockOperatingService.save(getBeanMapper().map(stockOperatingVO, StockOperatingDTO.class));
-            statusVO.okStatus(200, "添加成功");
+            statusVO.okStatus(0, "添加成功");
         } catch (ServiceException e) {
             logger.error("添加失败：{}", e.getMessage());
             statusVO.errorStatus(500, "添加失败");
@@ -60,7 +60,7 @@ public class StockOperatingController extends BaseController {
         ControllerStatusVO statusVO = new ControllerStatusVO();
         try {
             stockOperatingService.remove(getBeanMapper().map(stockOperatingVO, StockOperatingDTO.class));
-            statusVO.okStatus(200, "删除成功");
+            statusVO.okStatus(0, "删除成功");
         } catch (ServiceException e) {
             logger.error("删除失败：{}", e.getMessage());
             statusVO.errorStatus(500, "删除失败");
@@ -74,24 +74,10 @@ public class StockOperatingController extends BaseController {
         ControllerStatusVO statusVO = new ControllerStatusVO();
         try {
             stockOperatingService.removeById(id);
-            statusVO.okStatus(200, "删除成功");
+            statusVO.okStatus(0, "删除成功");
         } catch (ServiceException e) {
             logger.error("删除失败：{}", e.getMessage());
             statusVO.errorStatus(500, "删除失败");
-        }
-        return statusVO;
-    }
-
-    @PostMapping("batch-remove")
-    @ResponseBody
-    public ControllerStatusVO removeByIds(String ids) {
-        ControllerStatusVO statusVO = new ControllerStatusVO();
-        try {
-            stockOperatingService.removeByIds(StringUtils.strToLongArray(ids, ","));
-            statusVO.okStatus(200, "批量删除成功");
-        } catch (ServiceException e) {
-            logger.error("批量删除失败：{}", e.getMessage());
-            statusVO.errorStatus(500, "批量删除失败");
         }
         return statusVO;
     }
@@ -102,7 +88,7 @@ public class StockOperatingController extends BaseController {
         ControllerStatusVO statusVO = new ControllerStatusVO();
         try {
             stockOperatingService.update(getBeanMapper().map(stockOperatingVO, StockOperatingDTO.class));
-            statusVO.okStatus(200, "更新成功");
+            statusVO.okStatus(0, "更新成功");
         } catch (ServiceException e) {
             logger.error("更新失败：{}", e.getMessage());
             statusVO.errorStatus(500, "更新失败");
@@ -116,7 +102,7 @@ public class StockOperatingController extends BaseController {
         ControllerStatusVO statusVO = new ControllerStatusVO();
         try {
             stockOperatingService.updateActiveStatus(statusQuery);
-            statusVO.okStatus(200, statusQuery.getStatus() == 0 ? "激活成功" : "冻结成功");
+            statusVO.okStatus(0, statusQuery.getStatus() == 0 ? "激活成功" : "冻结成功");
         } catch (ServiceException e) {
             logger.error("激活或冻结失败：{}", e.getMessage());
             statusVO.errorStatus(500, statusQuery.getStatus() == 0 ? "激活失败" : "冻结失败");

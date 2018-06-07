@@ -187,11 +187,11 @@
         order by created_time desc
     </select>
 
-	<select id="listAllById" resultType="com.sucheng.dos.ProductDO">
-		select
-		<include refid="select_columns"/>
-		from t_product where store_id = #{storeId}
-		order by created_time desc
+	<select id="listAllById" resultType="com.sucheng.query.ProductQuery">
+		select p.*, pt.name as typeName,u.unit, ta.taste
+		from t_product p, t_pro_type pt, t_unit u, t_taste ta where p.store_id = #{storeId}
+		and p.unit_id = u.id and p.type_id = pt.id and p.taste_id = ta.id
+		order by p.created_time desc
 	</select>
 
     <select id="listPage" parameterType="com.sucheng.query.PageQuery" resultType="com.sucheng.dos.ProductDO">

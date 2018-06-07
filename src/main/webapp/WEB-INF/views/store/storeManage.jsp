@@ -34,6 +34,7 @@
                 {checkbox: true, fixed: true}
                 ,{field:'storeId', title:'门店编号', width:150}
                 ,{field:'name', title:'门店名称', width:150}
+                ,{field:'manager', title:'店长', width:150}
                 ,{field:'phone', title:'联系号码', width:150}
                 ,{field:'email', title:'邮箱', width:150}
                 ,{field:'province', title:'省', width:150,templet:'<div>{{formatArea(d.province)}}</div>'}

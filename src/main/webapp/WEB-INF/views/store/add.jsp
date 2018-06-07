@@ -40,6 +40,13 @@
                 </div>
             </div>
             <div class="layui-form-item">
+                <label class="layui-form-label">店长名称</label>
+                <div class="layui-input-block">
+                    <input type="text" name="manager" lay-verify="required" autocomplete="off"
+                           placeholder="请输入店长名称" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
                 <label class="layui-form-label">手机号码</label>
                 <div class="layui-input-block">
                     <input type="text" name="phone" lay-verify="required" autocomplete="off"

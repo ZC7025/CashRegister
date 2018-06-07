@@ -2,6 +2,7 @@ package com.sucheng.service;
 
 import com.sucheng.dto.ProductDTO;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
@@ -17,4 +18,6 @@ public interface ProductService extends BaseService {
     void save(ProductDTO productDTO, String formulaIds);
 
     List<Object> listAllById(Integer storeId);
+
+    Integer proExport(Integer storeId, HttpServletRequest request);
 }

@@ -16,6 +16,9 @@
 			<if test="name != null">
 				name,
 			</if>
+			<if test="manager != null">
+				manager,
+			</if>
 			<if test="phone != null">
 				phone,
 			</if>
@@ -63,6 +66,9 @@
 			</if>
 			<if test="name != null">
 				#{name},
+			</if>
+			<if test="manager != null">
+				#{manager},
 			</if>
 			<if test="phone != null">
 				#{phone},
@@ -128,6 +134,9 @@
 			<if test="name != null">
 				name = #{name},
 			</if>
+			<if test="manager != null">
+				manager = #{manager},
+			</if>
 			<if test="phone != null">
 				phone = #{phone},
 			</if>
@@ -180,7 +189,7 @@
     </update>
 
     <sql id="select_columns">
-        id, store_id, name, phone, pwd, email, province, city, county, address, license_img, industry_id, general_id, status, created_time
+        id, store_id, name, manager, phone, pwd, email, province, city, county, address, license_img, industry_id, general_id, status, created_time
     </sql>
 
     <select id="getById" parameterType="long" resultType="com.sucheng.dos.StoreDO">
@@ -216,6 +225,9 @@
 		</if>
 		<if test="query != null and query.name != null and query.name != ''">
 			and name = #{query.name}
+		</if>
+		<if test="query != null and query.manager != null and query.manager != ''">
+			and manager = #{query.manager}
 		</if>
 		<if test="query != null and query.phone != null and query.phone != ''">
 			and phone = #{query.phone}

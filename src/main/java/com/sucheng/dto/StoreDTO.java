@@ -26,6 +26,7 @@ public class StoreDTO extends BaseDTO {
 	 *
 	 */
 	private String name;
+	private String manager;
 	/**
 	 *
 	 */
@@ -126,6 +127,14 @@ public class StoreDTO extends BaseDTO {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public String getManager() {
+		return manager;
+	}
+
+	public void setManager(String manager) {
+		this.manager = manager;
 	}
 
 	public String getPhone() {

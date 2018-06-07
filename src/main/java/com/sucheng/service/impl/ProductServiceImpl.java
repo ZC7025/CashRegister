@@ -1,9 +1,12 @@
 package com.sucheng.service.impl;
 
+import com.sucheng.common.BeanCopyUtils;
 import com.sucheng.dao.FormulaDAO;
 import com.sucheng.dao.ProductDAO;
 import com.sucheng.dos.ProductDO;
 import com.sucheng.dto.ProductDTO;
+import com.sucheng.poi.ProductPoiImpl;
+import com.sucheng.query.ProductQuery;
 import com.sucheng.service.AbstractBaseService;
 import com.sucheng.service.ProductService;
 import com.sucheng.vo.FormulaVO;
@@ -12,6 +15,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.PostConstruct;
+import javax.servlet.http.HttpServletRequest;
+import javax.swing.filechooser.FileSystemView;
+import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -64,5 +71,30 @@ public class ProductServiceImpl extends AbstractBaseService implements ProductSe
     @Override
     public List<Object> listAllById(Integer storeId) {
         return productDAO.listAllById(storeId);
+    }
+
+    @Override
+    public Integer proExport(Integer storeId, HttpServletRequest request) {
+        try {
+            List<ProductQuery> productQueryList = new ArrayList<>();
+            List<Object> products = productDAO.listAllById(storeId);
+            if(products.size() == 0) {
+                return 0;
+            }
+            for(Object object : products) {
+                productQueryList.add((ProductQuery) object);
+            }
+            ProductPoiImpl productPoi = new ProductPoiImpl();
+            String[] headStr = new String[]{"商品id","商品名称", "口味", "商品类型", "单位", "价格"
+                    , "图片1", "图片2", "图片3", "图片4", "优先级", "状态", "添加时间"};
+            FileSystemView fsv = FileSystemView.getFileSystemView();
+            //读取桌面路径的方法
+            File com=fsv.getHomeDirectory();
+            productPoi.writeExcel(request,com.getPath() + "/商品列表.xlsx", productQueryList, "商品列表", headStr);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return 0;
+        }
+        return 1;
     }
 }

@@ -14,7 +14,8 @@
 
 <div class="layui-btn-group demoTable" >
     <a href="javascript:void(0);" class="layui-btn" id="proShow" data-type="edit">查看商品配方</a>
-    <button class="layui-btn" data-type="update">修改商品信息</button>
+    <button class="layui-btn" data-type="update">修改商品信息</button>>
+    <button class="layui-btn" data-type="explort">导出商品信息</button>>
     <button class="layui-btn" data-type="delete">删除商品</button>
     <button class="layui-btn" data-type="refresh">刷新</button>
 </div>
@@ -192,6 +193,15 @@
                     layer.msg("请选择一行！");
                 }
 
+            },explort: function(){
+                $.get('<%=path %>/data/product/proExplort',
+                    function (data) {
+                        if(data.code===0){
+                            layer.msg("导出成功！");
+                        }else {
+                            layer.msg("导出失败！");
+                        }
+                    });
             }, refresh:function () {
                 location.reload(true);
             }

@@ -26,6 +26,7 @@ public class StoreDO extends BaseDO {
 	 *
 	 */
 	private String name;
+	private String manager;
 	/**
 	 *
 	 */
@@ -118,6 +119,14 @@ public class StoreDO extends BaseDO {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public String getManager() {
+		return manager;
+	}
+
+	public void setManager(String manager) {
+		this.manager = manager;
 	}
 
 	public String getPhone() {

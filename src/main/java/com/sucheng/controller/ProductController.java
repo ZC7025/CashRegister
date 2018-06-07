@@ -21,6 +21,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -163,6 +164,29 @@ public class ProductController extends BaseController {
             logger.error("返回所有对象JSON数据失败：{}", e.getMessage());
         }
         return productVOList;
+    }
+
+    @RequestMapping("proExplort")
+    @ResponseBody
+    public ControllerStatusVO proExplort(HttpServletRequest request) {
+        ControllerStatusVO statusVO = new ControllerStatusVO();
+        StoreVO storeVO = (StoreVO) SecurityUtils.getSubject().getSession().getAttribute("store");
+        if(storeVO == null) {
+            logger.error("session失效");
+            statusVO.errorStatus(500, "session失效");
+            return statusVO;
+        }
+        try {
+            int number = productService.proExport(storeVO.getId(), request);
+            if(number != 1) {
+                statusVO.errorStatus(500, "导出数据失败");
+                return statusVO;
+            }
+            statusVO.okStatus(0, "导出成功");
+        } catch (ServiceException e) {
+            logger.error("导出数据失败：{}", e.getMessage());
+        }
+        return statusVO;
     }
 
     @RequestMapping("proList")

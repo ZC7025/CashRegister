@@ -28,7 +28,8 @@ public class LoginFilter implements Filter {
         } else if (isFilter(uri)) {
             HttpSession session = request.getSession();
             Object user = session.getAttribute(Constants.STORE_IN_SESSION);
-            if (user != null) {
+            Object admin = session.getAttribute(Constants.ADMIN_IN_SESSION);
+            if (user != null || admin != null) {
                 filterChain.doFilter(servletRequest, servletResponse);
             } else {
                 HttpServletResponse response = (HttpServletResponse) servletResponse;

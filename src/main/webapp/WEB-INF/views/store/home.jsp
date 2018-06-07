@@ -162,6 +162,17 @@
                             </dd>
                         </dl>
                     </li>
+                    <li class="layui-nav-item">
+                        <a href="javascript:;"><span>出入库管理</span></a>
+                        <dl class="layui-nav-child">
+                            <dd><a href="javascript:;" kit-target
+                                   data-options="{url:'<%=path %>/page/stock/stockList',icon:'&#xe658;',title:'库存管理',id:'18'}"><i class="layui-icon">&#xe658;</i><span>库存管理</span></a>
+                            </dd>
+                            <dd><a href="javascript:;" kit-target
+                                   data-options="{url:'<%=path %>/page/stockLog/stockList',icon:'&#xe658;',title:'库存记录管理',id:'19'}"><i class="layui-icon">&#xe658;</i><span>库存记录管理</span></a>
+                            </dd>
+                        </dl>
+                    </li>
                     <%--&lt;%&ndash;root用户可见&ndash;%&gt;--%>
                     <%--<shiro:hasPermission name="root">--%>
                         <%--<li class="layui-nav-item">--%>

@@ -68,19 +68,6 @@ public class StoreController extends BaseController {
         return statusVO;
     }
 
-    @PostMapping("remove")
-    @ResponseBody
-    public ControllerStatusVO remove(StoreVO storeVO) {
-        ControllerStatusVO statusVO = new ControllerStatusVO();
-        try {
-            storeService.remove(getBeanMapper().map(storeVO, StoreDTO.class));
-            statusVO.okStatus(200, "删除成功");
-        } catch (ServiceException e) {
-            logger.error("删除失败：{}", e.getMessage());
-            statusVO.errorStatus(500, "删除失败");
-        }
-        return statusVO;
-    }
 
     @GetMapping("remove/{id}")
     @ResponseBody
