@@ -127,6 +127,13 @@
         order by created_time desc
     </select>
 
+	<select id="listAllById" resultType="com.sucheng.dos.EmployeeDO">
+		select
+		<include refid="select_columns"/>
+		from t_employee where store_id = #{storeId}
+		order by created_time desc
+	</select>
+
     <select id="listPage" parameterType="com.sucheng.query.PageQuery" resultType="com.sucheng.dos.EmployeeDO">
         select
         <include refid="select_columns"/>
@@ -138,6 +145,10 @@
     <select id="count" resultType="long">
         select count(*) from t_employee
     </select>
+
+	<select id="hasPhoneEmail" resultType="integer">
+		select count(*) from t_employee where phone = #{phone} or email = #{email}
+	</select>
 
     <sql id="where_clause">
         <if test="query != null and query.id != null">

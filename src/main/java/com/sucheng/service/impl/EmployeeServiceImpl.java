@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
+import java.util.List;
 
 /**
  * EmployeeServiceImpl服务接口实现类<br/>
@@ -33,4 +34,16 @@ public class EmployeeServiceImpl extends AbstractBaseService implements Employee
     public void init() {
         super.init(EmployeeDO.class, EmployeeDTO.class);
     }
+
+    @Override
+    public Integer hasPhoneEmail(String phone, String email) {
+        return employeeDAO.hasPhoneEmail(phone, email);
+    }
+
+    @Override
+    public List<Object> listAllById(Integer storeId) {
+        return employeeDAO.listAllById(storeId);
+    }
+
+
 }

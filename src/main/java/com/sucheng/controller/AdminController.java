@@ -55,13 +55,13 @@ public class AdminController extends BaseController {
         try {
             Subject subject = SecurityUtils.getSubject();
             subject.login(new UsernamePasswordToken(adminVO.getPhone(), HashUtils.md5(adminVO.getPwd(),Constants.SALT, HashEncodeEnum.HEX)));
-            AdminVO adminVO1 =adminService.getByPhonePwd(adminVO.getPhone(), HashUtils.md5(adminVO.getPwd(), Constants.SALT, HashEncodeEnum.HEX));
+            AdminVO adminVO1 = adminService.getByPhonePwd(adminVO.getPhone(), HashUtils.md5(adminVO.getPwd(), Constants.SALT, HashEncodeEnum.HEX));
             Session session = subject.getSession();
             session.setAttribute("admin",adminVO1);
             statusVO.okStatus(0,"登录成功");
         } catch (ServiceException | AuthenticationException e) {
             logger.error("登录失败：{}", e.getMessage());
-            statusVO.errorStatus(500, "登录失败");
+            statusVO.errorStatus(500, "手机号或密码错误");
         }
         return statusVO;
     }

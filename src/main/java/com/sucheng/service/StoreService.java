@@ -12,4 +12,5 @@ import com.sucheng.vo.StoreVO;
  */
 public interface StoreService extends BaseService {
     StoreVO getByPhonePwd(String phone, String pwd);
+    Integer hasPhoneEmail(String phone, String email);
 }

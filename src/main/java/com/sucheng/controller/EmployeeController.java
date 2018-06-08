@@ -48,13 +48,17 @@ public class EmployeeController extends BaseController {
     public ControllerStatusVO save(EmployeeVO employeeVO) {
         ControllerStatusVO statusVO = new ControllerStatusVO();
         try {
-            // TODO 验证手机号邮箱唯一
+            int checked = employeeService.hasPhoneEmail(employeeVO.getPhone(), employeeVO.getEmail());
+            if(checked != 0) {
+                statusVO.errorStatus(500, "手机号码或邮箱已存在");
+                return statusVO;
+            }
             employeeVO.setPwd(HashUtils.md5(employeeVO.getPwd(), Constants.SALT, HashEncodeEnum.HEX));
             employeeService.save(getBeanMapper().map(employeeVO, EmployeeDTO.class));
-            statusVO.okStatus(0, "添加成功");
+            statusVO.okStatus(0, "注册成功");
         } catch (ServiceException e) {
-            logger.error("添加失败：{}", e.getMessage());
-            statusVO.errorStatus(500, "添加失败");
+            logger.error("注册失败：{}", e.getMessage());
+            statusVO.errorStatus(500, "注册失败");
         }
         return statusVO;
     }
@@ -135,7 +139,12 @@ public class EmployeeController extends BaseController {
     public List<EmployeeVO> listAll() {
         List<EmployeeVO> employeeVOList = new ArrayList<>();
         try {
-            List<Object> objectList = employeeService.listAll();
+            StoreVO storeVO = (StoreVO) SecurityUtils.getSubject().getSession().getAttribute("store");
+            if(storeVO == null) {
+                logger.error("session失效");
+                return employeeVOList;
+            }
+            List<Object> objectList = employeeService.listAllById(storeVO.getId());
             employeeVOList =  DozerMapperUtils.map(getBeanMapper(), objectList, EmployeeVO.class);
         } catch (ServiceException e) {
             logger.error("返回所有对象JSON数据失败：{}", e.getMessage());

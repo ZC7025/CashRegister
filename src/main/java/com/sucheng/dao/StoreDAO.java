@@ -25,4 +25,6 @@ public interface StoreDAO extends BaseDAO {
     Long countByCondition(@Param("query") Object queryObj);
 
     StoreVO getByPhonePwd(@Param("phone") String phone, @Param("pwd") String pwd);
+
+    Integer hasPhoneEmail(@Param("phone")String phone, @Param("email")String email);
 }

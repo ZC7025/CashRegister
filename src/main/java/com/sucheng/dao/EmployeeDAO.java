@@ -22,4 +22,8 @@ public interface EmployeeDAO extends BaseDAO {
 
     @Override
     Long countByCondition(@Param("query") Object queryObj);
+
+    Integer hasPhoneEmail(@Param("phone")String phone, @Param("email")String email);
+
+    List<Object> listAllById(Integer storeId);
 }

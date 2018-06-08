@@ -39,4 +39,9 @@ public class StoreServiceImpl extends AbstractBaseService implements StoreServic
     public StoreVO getByPhonePwd(String phone, String pwd) {
         return storeDAO.getByPhonePwd(phone, pwd);
     }
+
+    @Override
+    public Integer hasPhoneEmail(String phone, String email) {
+        return storeDAO.hasPhoneEmail(phone, email);
+    }
 }

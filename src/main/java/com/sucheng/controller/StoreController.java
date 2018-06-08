@@ -53,7 +53,12 @@ public class StoreController extends BaseController {
     public ControllerStatusVO save(StoreVO storeVO) {
         ControllerStatusVO statusVO = new ControllerStatusVO();
         try {
-            // TODO 判断手机号和邮箱唯一 门店金额初始化
+            // TODO  门店金额初始化
+            int checked = storeService.hasPhoneEmail(storeVO.getPhone(), storeVO.getEmail());
+            if(checked != 0) {
+                statusVO.errorStatus(500, "号码或邮箱已存在");
+                return statusVO;
+            }
             storeVO.setPwd(HashUtils.md5(storeVO.getPwd(), Constants.SALT, HashEncodeEnum.HEX));
             StoreVO storeVO1 = (StoreVO) SecurityUtils.getSubject().getSession().getAttribute("store");
             if(storeVO1 != null) {
@@ -110,7 +115,7 @@ public class StoreController extends BaseController {
             statusVO.okStatus(0,"登录成功");
         } catch (ServiceException | AuthenticationException e) {
             logger.error("登录失败：{}", e.getMessage());
-            statusVO.errorStatus(500, "登录失败");
+            statusVO.errorStatus(500, "手机号或密码错误");
         }
         return statusVO;
     }
@@ -157,7 +162,7 @@ public class StoreController extends BaseController {
                 //删除登录凭证，重新登录
                 SecurityUtils.getSubject().getSession().removeAttribute("store");
             } else {
-                statusVO.errorStatus(500, "密码错误");
+                statusVO.errorStatus(500, "原密码错误");
                 logger.error("更新失败：{密码错误}",storeVO.getPhone());
             }
         } catch (ServiceException e) {
