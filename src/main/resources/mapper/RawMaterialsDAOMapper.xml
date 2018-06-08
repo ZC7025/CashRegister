@@ -119,9 +119,6 @@
     <update id="update" parameterType="com.sucheng.dos.RawMaterialsDO">
         update t_raw_materials
         <set>
-            <if test="id != null">
-				id = #{id},
-			</if>
 			<if test="name != null">
 				name = #{name},
 			</if>

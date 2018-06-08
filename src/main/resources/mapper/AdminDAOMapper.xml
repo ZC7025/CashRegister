@@ -80,9 +80,6 @@
     <update id="update" parameterType="com.sucheng.dos.AdminDO">
         update t_admin
         <set>
-            <if test="id != null">
-				id = #{id},
-			</if>
 			<if test="phone != null">
 				phone = #{phone},
 			</if>

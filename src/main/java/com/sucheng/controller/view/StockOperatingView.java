@@ -7,6 +7,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/page/stockLog")
 public class StockOperatingView {
 
+    @RequestMapping("outStock")
+    public String add() {
+        return "stockOperating/outStock";
+    }
+
     @RequestMapping("stockList")
     public String stockList() {
         return "stockOperating/stockManage";

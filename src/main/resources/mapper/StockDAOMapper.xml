@@ -66,7 +66,7 @@
         delete from t_stock where id = #{id}
     </delete>
 
-    <delete id="removeById" parameterType="long">
+    <delete id="removeById" parameterType="integer">
         delete from t_stock where id = #{id}
     </delete>
 
@@ -80,9 +80,6 @@
     <update id="update" parameterType="com.sucheng.dos.StockDO">
         update t_stock
         <set>
-            <if test="id != null">
-				id = #{id},
-			</if>
 			<if test="rawId != null">
 				raw_id = #{rawId},
 			</if>
@@ -104,7 +101,7 @@
 			<if test="updateTime != null">
 				update_time = #{updateTime},
 			</if>
-			
+
         </set>
         where id = #{id}
     </update>
@@ -117,10 +114,10 @@
         id, raw_id, type, count, unit_id, price, created_time, update_time
     </sql>
 
-    <select id="getById" parameterType="long" resultType="com.sucheng.dos.StockDO">
+    <select id="getById" parameterType="integer" resultType="com.sucheng.dos.StockDO">
         select
         <include refid="select_columns"/>
-        from t_stock where id = #{id}
+        from t_stock where raw_id = #{id}
     </select>
 
     <select id="listAll" resultType="com.sucheng.dos.StockDO">

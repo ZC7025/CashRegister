@@ -40,16 +40,15 @@ public class StockOperatingController extends BaseController {
 
     private StockOperatingService stockOperatingService;
 
-    @PostMapping("save")
+    @RequestMapping("save")
     @ResponseBody
-    public ControllerStatusVO save(StockOperatingVO stockOperatingVO) {
+    public ControllerStatusVO save(StockOperatingVO stockOperatingVO, String ids) {
         ControllerStatusVO statusVO = new ControllerStatusVO();
         try {
-            stockOperatingService.save(getBeanMapper().map(stockOperatingVO, StockOperatingDTO.class));
-            statusVO.okStatus(0, "添加成功");
+            return stockOperatingService.save(stockOperatingVO, ids);
         } catch (ServiceException e) {
-            logger.error("添加失败：{}", e.getMessage());
-            statusVO.errorStatus(500, "添加失败");
+            logger.error("领用失败：{}", e.getMessage());
+            statusVO.errorStatus(500, "领用失败");
         }
         return statusVO;
     }

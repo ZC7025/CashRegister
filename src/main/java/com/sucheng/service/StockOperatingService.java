@@ -1,5 +1,8 @@
 package com.sucheng.service;
 
+import com.sucheng.vo.ControllerStatusVO;
+import com.sucheng.vo.StockOperatingVO;
+
 /**
  * StockOperatingService服务接口<br/>
  *
@@ -9,4 +12,6 @@ package com.sucheng.service;
  * @version 1.0
  */
 public interface StockOperatingService extends BaseService {
+
+    ControllerStatusVO save(StockOperatingVO stockOperatingVO, String ids);
 }

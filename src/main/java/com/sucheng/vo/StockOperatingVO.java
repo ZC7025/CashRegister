@@ -53,14 +53,13 @@ public class StockOperatingVO extends BaseVO {
 	
     public StockOperatingVO () {}
 
-    public StockOperatingVO (Integer id, Integer rawId, Float inStockCount, Float outStockCount, Integer unitId, String empName, Date operatingTime, String descript) {
+    public StockOperatingVO (Integer id, Integer rawId, Float inStockCount, Float outStockCount, Integer unitId, String empName, String descript) {
         this.id = id;
 		this.rawId = rawId;
 		this.inStockCount = inStockCount;
 		this.outStockCount = outStockCount;
 		this.unitId = unitId;
 		this.empName = empName;
-		this.operatingTime = operatingTime;
 		this.descript = descript;
 		
     }
