@@ -6,8 +6,6 @@ package com.sucheng.enums;
  *
  * @author 7025
  * @version 1.0
- * @see org.apache.http.entity.ContentType
- * @see top.zywork.enums.MIMETypeEnum
  */
 public enum ContentTypeEnum {
 

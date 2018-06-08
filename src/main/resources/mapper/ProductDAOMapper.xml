@@ -211,7 +211,7 @@
 			id = #{query.id}
 		</if>
 		<if test="query != null and query.name != null and query.name != ''">
-			and name = #{query.name}
+			and name like concat('%',#{query.name}, '%')
 		</if>
 		<if test="query != null and query.tasteId != null">
 			and taste_id = #{query.tasteId}
@@ -225,18 +225,6 @@
 		<if test="query != null and query.price != null">
 			and price = #{query.price}
 		</if>
-		<if test="query != null and query.proImg1 != null and query.proImg1 != ''">
-			and pro_img1 = #{query.proImg1}
-		</if>
-		<if test="query != null and query.proImg2 != null and query.proImg2 != ''">
-			and pro_img2 = #{query.proImg2}
-		</if>
-		<if test="query != null and query.proImg3 != null and query.proImg3 != ''">
-			and pro_img3 = #{query.proImg3}
-		</if>
-		<if test="query != null and query.proImg4 != null and query.proImg4 != ''">
-			and pro_img4 = #{query.proImg4}
-		</if>
 		<if test="query != null and query.priority != null">
 			and priority = #{query.priority}
 		</if>
@@ -246,14 +234,37 @@
 		<if test="query != null and query.createdTime != null">
 			and created_time = #{query.createdTime}
 		</if>
-		
     </sql>
+
+	<sql id="where_clause_list">
+		<if test="query != null and query.name != null and query.name != ''">
+			and p.name like concat('%', #{query.name}, '%')
+		</if>
+		<if test="query != null and query.tasteId != null">
+			and p.taste_id = #{query.tasteId}
+		</if>
+		<if test="query != null and query.typeId != null">
+			and p.type_id = #{query.typeId}
+		</if>
+		<if test="query != null and query.unitId != null">
+			and p.unit_id = #{query.unitId}
+		</if>
+		<if test="query != null and query.price != null">
+			and p.price = #{query.price}
+		</if>
+		<if test="query != null and query.priority != null">
+			and p.priority = #{query.priority}
+		</if>
+		<if test="query != null and query.status != null and query.status != ''">
+			and p.status = #{query.status}
+		</if>
+	</sql>
 
     <select id="listPageByCondition" resultType="com.sucheng.query.ProductQuery">
         select p.*, pt.name as typeName,u.unit, ta.taste
 		from t_product p, t_pro_type pt, t_unit u, t_taste ta
         <where>
-            <include refid="where_clause"/>
+            <include refid="where_clause_list"/>
 			<if test="true">
 				and p.unit_id = u.id and p.type_id = pt.id and p.taste_id = ta.id
 			</if>

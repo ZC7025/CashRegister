@@ -191,7 +191,9 @@ public class ProductController extends BaseController {
 
     @RequestMapping("proList")
     @ResponseBody
-    public PagerVO listPageByCondition(int page, int limit, ProductQuery productQuery) {
+    public PagerVO listPageByCondition(int page, int limit, ProductQuery productQuery,
+                                       String name, Integer unitId, Integer typeId, Integer tasteId) {
+        productQuery = checkCondition(productQuery, name, unitId, typeId, tasteId);
         PageQuery pageQuery = new PageQuery(page, limit);
         PagerVO pagerVO = new PagerVO();
         try {
@@ -209,6 +211,29 @@ public class ProductController extends BaseController {
             logger.error("返回指定条件的分页对象JSON数据失败：{}", e.getMessage());
         }
         return pagerVO;
+    }
+
+    /**
+     * 将传过来的值进行过滤
+     */
+    private ProductQuery checkCondition(ProductQuery productQuery,
+                                        String name, Integer unitId, Integer typeId, Integer tasteId) {
+        if(productQuery == null) {
+            productQuery = new ProductQuery();
+        }
+        if(!"".equals(name) && name != null) {
+            productQuery.setName(name);
+        }
+        if(unitId != null) {
+            productQuery.setUnitId(unitId);
+        }
+        if(typeId != null) {
+            productQuery.setTypeId(typeId);
+        }
+        if(tasteId != null) {
+            productQuery.setTypeId(tasteId);
+        }
+        return productQuery;
     }
 
     /**
