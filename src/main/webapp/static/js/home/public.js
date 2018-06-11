@@ -130,6 +130,10 @@ function formatStatus(status) {
     return status === 'N' ? "冻结" : "激活";
 }
 
+function formatStart(status) {
+    return status === 'N' ? "已暂停" : "运行中";
+}
+
 function formatDefault(status) {
     return status === 'N' ? "否" : "是";
 }

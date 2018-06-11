@@ -1,0 +1,190 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.sucheng.dao.TaskPlanDAO">
+
+    <insert id="save" parameterType="com.sucheng.dos.TaskPlanDO">
+        insert into t_task_plan
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+				id,
+			</if>
+			<if test="className != null">
+				class_name,
+			</if>
+			<if test="jobName != null">
+				job_name,
+			</if>
+			<if test="cronExpression != null">
+				cron_expression,
+			</if>
+			<if test="isStart != null">
+				is_start,
+			</if>
+			<if test="descript != null">
+				descript,
+			</if>
+			<if test="status != null">
+				status,
+			</if>
+			<if test="updateTime != null">
+				update_time,
+			</if>
+			<if test="createdTime != null">
+				created_time,
+			</if>
+			
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+				#{id},
+			</if>
+			<if test="className != null">
+				#{className},
+			</if>
+			<if test="jobName != null">
+				#{jobName},
+			</if>
+			<if test="cronExpression != null">
+				#{cronExpression},
+			</if>
+			<if test="isStart != null">
+				#{isStart},
+			</if>
+			<if test="descript != null">
+				#{descript},
+			</if>
+			<if test="status != null">
+				#{status},
+			</if>
+			<if test="updateTime != null">
+				#{updateTime},
+			</if>
+			<if test="createdTime != null">
+				#{createdTime},
+			</if>
+        </trim>
+    </insert>
+
+    <delete id="remove" parameterType="com.sucheng.dos.TaskPlanDO">
+        delete from t_task_plan where id = #{id}
+    </delete>
+
+    <delete id="removeById">
+        delete from t_task_plan where id = #{id}
+    </delete>
+
+    <delete id="removeByIds">
+        delete from t_task_plan where id in
+        <foreach item="id" collection="array" separator="," open="(" close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <update id="update" parameterType="com.sucheng.dos.TaskPlanDO">
+        update t_task_plan
+        <set>
+			<if test="className != null">
+				class_name = #{className},
+			</if>
+			<if test="jobName != null">
+				job_name = #{jobName},
+			</if>
+			<if test="cronExpression != null">
+				cron_expression = #{cronExpression},
+			</if>
+			<if test="isStart != null">
+				is_start = #{isStart},
+			</if>
+			<if test="descript != null">
+				descript = #{descript},
+			</if>
+			<if test="status != null">
+				status = #{status},
+			</if>
+			<if test="updateTime != null">
+				update_time = #{updateTime},
+			</if>
+			<if test="createdTime != null">
+				created_time = #{createdTime},
+			</if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <update id="updateActiveStatus">
+        update t_task_plan set is_start = #{status} where id = #{id}
+    </update>
+
+    <sql id="select_columns">
+        id, class_name, job_name, cron_expression, is_start, descript, status, update_time, created_time
+    </sql>
+
+    <select id="getById" parameterType="integer" resultType="com.sucheng.vo.TaskPlanVO">
+        select
+        <include refid="select_columns"/>
+        from t_task_plan where id = #{id}
+    </select>
+
+    <select id="listAll" resultType="com.sucheng.dos.TaskPlanDO">
+        select
+        <include refid="select_columns"/>
+        from t_task_plan
+        order by update_time desc, created_time desc
+    </select>
+
+    <select id="count" resultType="long">
+        select count(*) from t_task_plan
+    </select>
+
+    <sql id="where_clause">
+        <if test="query != null and query.id != null">
+			id = #{query.id}
+		</if>
+		<if test="query != null and query.className != null and query.className != ''">
+			and class_name = #{query.className}
+		</if>
+		<if test="query != null and query.jobName != null and query.jobName != ''">
+			and job_name = #{query.jobName}
+		</if>
+		<if test="query != null and query.cronExpression != null and query.cronExpression != ''">
+			and cron_expression = #{query.cronExpression}
+		</if>
+		<if test="query != null and query.isStart != null and query.isStart != ''">
+			and is_start = #{query.isStart}
+		</if>
+		<if test="query != null and query.descript != null and query.descript != ''">
+			and descript = #{query.descript}
+		</if>
+		<if test="query != null and query.status != null and query.status != ''">
+			and status = #{query.status}
+		</if>
+		<if test="query != null and query.updateTime != null">
+			and update_time = #{query.updateTime}
+		</if>
+		<if test="query != null and query.createdTime != null">
+			and created_time = #{query.createdTime}
+		</if>
+		
+    </sql>
+
+    <select id="listPageByCondition" resultType="com.sucheng.query.TaskPlanQuery">
+        select
+        <include refid="select_columns"/>
+        from t_task_plan
+        <where>
+            <include refid="where_clause"/>
+        </where>
+        order by update_time desc, created_time desc
+        limit #{pager.beginIndex}, #{pager.pageSize}
+    </select>
+
+    <select id="countByCondition" parameterType="com.sucheng.query.TaskPlanQuery" resultType="long">
+        select count(*) from t_task_plan
+        <where>
+            <include refid="where_clause"/>
+        </where>
+    </select>
+
+</mapper>

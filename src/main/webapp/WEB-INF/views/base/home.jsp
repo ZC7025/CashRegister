@@ -79,51 +79,33 @@
             <div class="kit-side-fold"><i class="layui-icon" aria-hidden="true">&#xe603;</i></div>
             <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
             <ul class="layui-nav layui-nav-tree" lay-filter="kitNavbar" kit-navbar>
-                <%--&lt;%&ndash;设置奖励和审核&ndash;%&gt;--%>
-                <%--<shiro:hasPermission name="manage">--%>
-                    <li class="layui-nav-item">
-                        <a href="javascript:;"><span>门店管理</span></a>
-                        <dl class="layui-nav-child">
-                            <dd><a href="javascript:;" kit-target
-                                   data-options="{url:'<%=path %>/page/store/add',icon:'&#xe658;',title:'门店添加',id:'1'}"><i class="layui-icon">&#xe658;</i><span>门店添加</span></a>
-                            </dd>
-                            <dd><a href="javascript:;" kit-target
-                                   data-options="{url:'<%=path %>/page/store/storeList',icon:'&#xe658;',title:'门店管理',id:'2'}"><i class="layui-icon">&#xe658;</i><span>门店管理</span></a>
-                            </dd>
-                        </dl>
-                    </li>
-                    <li class="layui-nav-item">
-                        <a href="javascript:;"><span>行业类别管理</span></a>
-                        <dl class="layui-nav-child">
-                            <dd><a href="javascript:;" kit-target
-                                   data-options="{url:'<%=path %>/page/industry/typeList',icon:'&#xe658;',title:'行业类别管理',id:'3'}"><i class="layui-icon">&#xe658;</i><span>行业类别管理</span></a>
-                            </dd>
-                        </dl>
-                    </li>
-                    <%--<li class="layui-nav-item">--%>
-                        <%--<a href="javascript:;"><span>认证管理</span></a>--%>
-                        <%--<dl class="layui-nav-child">--%>
-                            <%--<dd><a href="javascript:;" kit-target--%>
-                                   <%--data-options="{url:'<%=path %>/page/vip/userVipPage',icon:'&#xe658;',title:'用户',id:'20'}"><i class="layui-icon">&#xe658;</i><span>用户</span></a>--%>
-                            <%--</dd>--%>
-                        <%--</dl>--%>
-                    <%--</li>--%>
-                <%--</shiro:hasPermission>--%>
-                    <%--&lt;%&ndash;root用户可见&ndash;%&gt;--%>
-                    <%--<shiro:hasPermission name="root">--%>
-                        <%--<li class="layui-nav-item">--%>
-                            <%--<a href="javascript:;"><span>角色权限管理</span></a>--%>
-                            <%--<dl class="layui-nav-child">--%>
-                                <%--<dd><a href="javascript:;" kit-target--%>
-                                       <%--data-options="{url:'<%=path%>/page/Jur/List',icon:'&#xe658;',title:'权限管理',id:'47'}"><i class="layui-icon">&#xe658;</i><span>权限管理</span></a>--%>
-                                <%--</dd>--%>
-                                <%--<dd><a href="javascript:;" kit-target--%>
-                                       <%--data-options="{url:'<%=path%>/page/Role/List',icon:'&#xe658;',title:'角色管理',id:'49'}"><i class="layui-icon">&#xe658;</i><span>角色管理</span></a>--%>
-                                <%--</dd>--%>
-                            <%--</dl>--%>
-                        <%--</li>--%>
-                    <%--</shiro:hasPermission>--%>
-                <%--root用户可见--%>
+                <li class="layui-nav-item">
+                    <a href="javascript:;"><span>门店管理</span></a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="javascript:;" kit-target
+                               data-options="{url:'<%=path %>/page/store/add',icon:'&#xe658;',title:'门店添加',id:'1'}"><i class="layui-icon">&#xe658;</i><span>门店添加</span></a>
+                        </dd>
+                        <dd><a href="javascript:;" kit-target
+                               data-options="{url:'<%=path %>/page/store/storeList',icon:'&#xe658;',title:'门店管理',id:'2'}"><i class="layui-icon">&#xe658;</i><span>门店管理</span></a>
+                        </dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item">
+                    <a href="javascript:;"><span>行业类别管理</span></a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="javascript:;" kit-target
+                               data-options="{url:'<%=path %>/page/industry/typeList',icon:'&#xe658;',title:'行业类别管理',id:'3'}"><i class="layui-icon">&#xe658;</i><span>行业类别管理</span></a>
+                        </dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item">
+                    <a href="javascript:;"><span>计划任务管理</span></a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="javascript:;" kit-target
+                               data-options="{url:'<%=path %>/page/taskPlan/taskList',icon:'&#xe658;',title:'计划任务管理',id:'4'}"><i class="layui-icon">&#xe658;</i><span>计划任务管理</span></a>
+                        </dd>
+                    </dl>
+                </li>
             </ul>
         </div>
     </div>
@@ -139,59 +121,6 @@
 
     </div>
 </div>
-
-<%--<div style="display: none;" id="editIndexMsg">--%>
-    <%--<form class="layui-form" id="huserForm">--%>
-        <%--<div class="layui-form-item">--%>
-            <%--<label class="layui-form-label">昵称</label>--%>
-            <%--<div class="layui-input-block">--%>
-                <%--<input type="text" name="rname" autocomplete="off" placeholder="请输入昵称" class="layui-input"--%>
-                       <%--value="${admin.rname}">--%>
-            <%--</div>--%>
-        <%--</div>--%>
-        <%--<div class="layui-form-item">--%>
-            <%--<label class="layui-form-label">性别</label>--%>
-            <%--<div class="layui-input-block">--%>
-                <%--<input type="hidden" name="sex" value=0 checked/>--%>
-                <%--<input type="radio" name="sex" value=1 title="男"/>--%>
-                <%--<input type="radio" name="sex" value=2 title="女"/>--%>
-            <%--</div>--%>
-        <%--</div>--%>
-        <%--<div class="layui-form-item">--%>
-            <%--<label class="layui-form-label">手机号</label>--%>
-            <%--<div class="layui-input-block">--%>
-                <%--<input type="text" name="phone" autocomplete="off" placeholder="请输入手机号" class="layui-input"--%>
-                       <%--value="${admin.phone}">--%>
-            <%--</div>--%>
-        <%--</div>--%>
-        <%--<div class="layui-form-item">--%>
-            <%--<label class="layui-form-label">真实姓名</label>--%>
-            <%--<div class="layui-input-block">--%>
-                <%--<input type="text" name="huname" autocomplete="off" placeholder="请输入真实姓名" class="layui-input"--%>
-                       <%--value="${admin.huname}">--%>
-            <%--</div>--%>
-        <%--</div>--%>
-        <%--<div class="layui-form-item">--%>
-            <%--<label class="layui-form-label">邮箱</label>--%>
-            <%--<div class="layui-input-block">--%>
-                <%--<input type="text" name="email" autocomplete="off" placeholder="请输入邮箱" class="layui-input"--%>
-                       <%--value="${admin.email}">--%>
-            <%--</div>--%>
-        <%--</div>--%>
-        <%--<div class="layui-form-item">--%>
-            <%--<label class="layui-form-label">组织</label>--%>
-            <%--<div class="layui-input-block">--%>
-                <%--<input type="text" name="oname" class="layui-input" value="${admin.oname}" disabled>--%>
-            <%--</div>--%>
-        <%--</div>--%>
-        <%--<input type="hidden" name="huid" value="${admin.huid}"/>--%>
-        <%--<div class="layui-form-item">--%>
-            <%--<div class="layui-input-block">--%>
-                <%--<button class="layui-btn" lay-submit lay-filter="edit">修改信息</button>--%>
-            <%--</div>--%>
-        <%--</div>--%>
-    <%--</form>--%>
-<%--</div>--%>
 
 <script type="text/javascript" src="<%=path %>/static/js/jquery.min.js"></script>
 <script type="text/javascript" src="<%=path %>/static/layui/layui.js"></script>
@@ -212,21 +141,6 @@
             type: 'iframe'
         }).init();
 
-
-        //信息
-        $('#info').on('click', function () {
-            layer.open({
-                type: 1,                //弹窗类型
-                title: '编辑个人信息',     //显示标题
-                closeBtn: 1,         //是否显示关闭按钮
-                shadeClose: true, //显示模态窗口
-                fixed: false,    //层是否固定在可视区域
-                move: false,//禁止拖拽
-                area: ['890px', '560px'], //宽高
-                content: $("#editIndexMsg")  //弹窗内容
-            });
-        });
-
         $('#out').on('click', function () {
             $.get('<%=path %>/data/admin/out',
               function (data) {
@@ -238,25 +152,6 @@
               }
             );
         });
-
-        //修改信息
-        form.on('submit(edit)', function (data) {
-            $.post('<%=path %>/data/admin/edit',
-                $('#huserForm').serialize(),
-                function (res) {
-                    if (res.code === 0) {
-                        layer.closeAll();
-                        layer.msg('修改成功！');
-                        $('#rname').empty();
-                        $('#rname').text(res.data.rname);
-                    } else {
-                        layer.msg("修改失败，请重新再试")
-                    }
-                }, 'json'
-            );
-            return false;
-        });
-
     });
 
 </script>

@@ -12,4 +12,11 @@
 
     <context:component-scan base-package="com.sucheng" />
 
+    <!-- quartz的定时任务的factorybean,配置其他config -->
+    <bean id="jobFactory" class="com.sucheng.quartz.factory.MyJobFactory"></bean>
+    <bean id="schedulerFactoryBean" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+        <property name="jobFactory" ref="jobFactory"></property>
+    </bean>
+
+
 </beans>
