@@ -42,9 +42,7 @@
     <div class="layui-btn-group demoTable">
         <a href="javascript:void(0);" class="layui-btn" id="proShow" data-type="edit">查看商品配方</a>
         <button class="layui-btn" data-type="update">修改商品信息</button>
-        >
         <button class="layui-btn" data-type="explort">导出商品信息</button>
-        >
         <button class="layui-btn" data-type="delete">删除商品</button>
         <button class="layui-btn" data-type="refresh">刷新</button>
     </div>
@@ -144,7 +142,7 @@
             active[type] ? active[type].call(this) : '';
         });
 
-        $('#searchBtn').on('click', function(){
+        $('#searchBtn').on('click', function () {
             var type = $(this).data('type');
             active[type].call(this);
         });
@@ -248,12 +246,12 @@
                     });
             }, refresh: function () {
                 location.reload(true);
-            }, reload: function(){
+            }, reload: function () {
                 table.reload('idTest', {
                     page: {
                         curr: 1 //重新从第 1 页开始
                     }
-                    ,where: {
+                    , where: {
                         name : $('#name').val()
                         ,unitId : $('#unit').val()
                         ,typeId : $('#type').val()
@@ -263,7 +261,7 @@
             }
         };
         $(function () {
-            if(${sessionScope.store != null}) {
+            if (${sessionScope.store != null}) {
                 $.ajax({
                     url: '<%=path %>/data/proType/all',
                     success: function (data) {
@@ -272,7 +270,6 @@
                                 + data[i].name + '</option>'
                         }
                         $("#type").append(typeList);
-                        // 重新刷新表单，新option才会出现
                         form.render();
                     }
                 });
@@ -284,7 +281,6 @@
                                 + data[i].taste + '</option>'
                         }
                         $("#taste").append(supList);
-                        // 重新刷新表单，新option才会出现
                         form.render();
                     }
                 });
@@ -292,12 +288,11 @@
                     url: '<%=path %>/data/unit/all',
                     success: function (data) {
                         var len = data.length;
-                        for (var i = len; i > 0 ; i--) {
-                            unitList += '<option value="' + data[i-1].id + '">'
-                                + data[i-1].unit + '(' + data[i-1].descript + ')</option>'
+                        for (var i = len; i > 0; i--) {
+                            unitList += '<option value="' + data[i - 1].id + '">'
+                                + data[i - 1].unit + '(' + data[i - 1].descript + ')</option>'
                         }
                         $("#unit").append(unitList);
-                        // 重新刷新表单，新option才会出现
                         form.render();
                     }
                 });

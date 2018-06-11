@@ -192,7 +192,6 @@
                         }, function () {
                             location.reload(true);
                         });
-                        layer.closeAll(index);
                     } else {
                         layer.msg(res.message);
                     }
