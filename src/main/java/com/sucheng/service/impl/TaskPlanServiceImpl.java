@@ -38,4 +38,9 @@ public class TaskPlanServiceImpl extends AbstractBaseService implements TaskPlan
     public void updateActiveStatus(Integer id, String status) {
         taskPlanDAO.updateActiveStatus(id, status);
     }
+
+    @Override
+    public void updateActiveByName(String name) {
+        taskPlanDAO.updateActiveByName(name);
+    }
 }

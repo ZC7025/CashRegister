@@ -35,8 +35,6 @@ public class CronJob implements Job {
         System.out.println(jobname+" 运行 ：" + dateFormat.format(new Date()));
         logger.error(jobname+" 运行 ：" + dateFormat.format(new Date()));
 
-        //执行重置任务
-        // TODO 改运行状态
-//        taskPlanService.resetContainerCellsStatus();
+//        taskPlanService.updateActiveByName(jobname);
     }
 }

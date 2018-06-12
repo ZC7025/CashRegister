@@ -39,7 +39,11 @@
                 </div>
             </div>
             <div class="layui-form-item">
-                <label class="layui-form-label">时间表达式</label>
+                <a href="javascript:void(0);" onclick="cronView();">
+                    <label class="layui-form-label">表达式
+                        <i class="layui-icon layui-icon-help" style="font-size: 5px;">&#xe607;</i>
+                    </label>
+                </a>
                 <div class="layui-input-block">
                     <input type="text" name="cronExpression" lay-verify="required" autocomplete="off"
                            placeholder="请输入时间表达式" class="layui-input">
@@ -66,7 +70,7 @@
 <script type="text/javascript" src="<%=path %>/static/layui/layui.js"></script>
 <script type="text/javascript" src="<%=path %>/static/js/home/public.js"></script>
 <script>
-    layui.use(['form'], function () {
+    layui.use(['form', 'layer'], function () {
 
         var form = layui.form;
         var $ = layui.jquery;
@@ -90,6 +94,16 @@
             );
             return false;
         });
-    })
+    });
+
+    function cronView() {
+        console.log('loading2333');
+        layer.open({
+            type: 2,
+            title: '在线cron表达式生成器',
+            area: ['700px', '400px'],
+            content: 'http://cron.qqe2.com/'
+        });
+    }
 </script>
 </html>

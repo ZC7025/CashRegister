@@ -24,4 +24,6 @@ public interface TaskPlanDAO extends BaseDAO {
     Long countByCondition(@Param("query") Object queryObj);
 
     void updateActiveStatus(@Param("id")Integer id, @Param("status")String status);
+
+    void updateActiveByName(String name);
 }

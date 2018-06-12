@@ -78,11 +78,11 @@
                     layer.msg('请选中一行！', {time:1500});
                 }
             }
-            ,add: function(){ //商品类型添加
+            ,add: function(){
                 layer.open({
                     type: 2,
                     title: '计划任务添加',
-                    area: ['700px', '400px'],
+                    area: ['85%', '85%'],
                     maxmin:true,
                     content: '<%=path %>/page/taskPlan/add'
                 });
@@ -93,7 +93,7 @@
                 if(data.length === 1) {
                     layer.open({
                         type: 2,
-                        area: ['700px', '400px'],
+                        area: ['85%', '85%'],
                         maxmin:true,
                         content:"<%=path %>/page/taskPlan/update?id="+data[0].id
                     })

@@ -50,6 +50,7 @@ public class TaskPlanController extends BaseController {
         try {
             taskPlanService.save(getBeanMapper().map(taskPlanVO, TaskPlanDTO.class));
             statusVO.okStatus(0, "添加成功");
+            // TODO 判断jobName唯一
             QuartzManager.addJob((Class<? extends Job>) Class.forName(taskPlanVO.getClassName()),
                     taskPlanVO.getJobName(), JobBaseUtil.GROUP_NAME, taskPlanVO.getCronExpression());
         } catch (ServiceException | ClassNotFoundException e) {

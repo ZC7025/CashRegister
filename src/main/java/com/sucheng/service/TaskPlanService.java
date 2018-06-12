@@ -15,4 +15,6 @@ import java.util.List;
 public interface TaskPlanService extends BaseService {
 
     void updateActiveStatus(Integer id, String status);
+
+    void updateActiveByName(String name);
 }
