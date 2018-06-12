@@ -29,6 +29,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -50,10 +51,9 @@ public class StoreController extends BaseController {
 
     @PostMapping("save")
     @ResponseBody
-    public ControllerStatusVO save(StoreVO storeVO) {
+    public ControllerStatusVO save(StoreVO storeVO, BigDecimal money) {
         ControllerStatusVO statusVO = new ControllerStatusVO();
         try {
-            // TODO  门店金额初始化
             int checked = storeService.hasPhoneEmail(storeVO.getPhone(), storeVO.getEmail());
             if(checked != 0) {
                 statusVO.errorStatus(500, "号码或邮箱已存在");
@@ -64,7 +64,7 @@ public class StoreController extends BaseController {
             if(storeVO1 != null) {
                 storeVO.setGeneralId(storeVO1.getId());
             }
-            storeService.save(getBeanMapper().map(storeVO, StoreDTO.class));
+            storeService.save(storeVO, money);
             statusVO.okStatus(0, "添加成功");
         } catch (ServiceException e) {
             logger.error("添加失败：{}", e.getMessage());

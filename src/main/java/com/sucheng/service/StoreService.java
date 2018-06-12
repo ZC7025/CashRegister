@@ -2,6 +2,8 @@ package com.sucheng.service;
 
 import com.sucheng.vo.StoreVO;
 
+import java.math.BigDecimal;
+
 /**
  * StoreService服务接口<br/>
  *
@@ -13,4 +15,6 @@ import com.sucheng.vo.StoreVO;
 public interface StoreService extends BaseService {
     StoreVO getByPhonePwd(String phone, String pwd);
     Integer hasPhoneEmail(String phone, String email);
+
+    void save(StoreVO storeVO, BigDecimal money);
 }

@@ -117,6 +117,13 @@
                     </div>
                 </div>
             </c:if>
+            <div class="layui-form-item">
+                <label class="layui-form-label">开店预算</label>
+                <div class="layui-input-block">
+                    <input type="text" id="money" name="money" lay-verify="required|isNumber" autocomplete="off"
+                           placeholder="请输入开店预算" class="layui-input">
+                </div>
+            </div>
 
             <div class="layui-form-item">
                 <div class="layui-row">
@@ -212,7 +219,9 @@
         form.verify({
             pass: [/(.+){6,12}$/, '密码必须6到12位']
         });
-
+        form.verify({
+            isNumber: [/^\d+(?=\.{0,1}\d+$|$)/, '必须是正数']
+        });
         form.verify({
             repass: function(value){
                 var repassValue = $('#pwd').val();
@@ -225,7 +234,7 @@
         uploadImg(upload, 'license', '<%=path %>/file/firist', 'imgDemo', 'licenseImg', 'imgText');
 
         form.on('submit(add)', function (data) {
-            $.post('<%=path %>/data/store/save',
+            $.post('<%=path %>/data/store/save?money=' + $('#money').val(),
                 $('#store').serialize(),
                 function (res) {
                     if (res.code === 0) {

@@ -14,7 +14,7 @@
 
 <div class="layui-btn-group demoTable" >
     <button class="layui-btn" data-type="update">修改门店信息</button>
-    <button class="layui-btn" data-type="delete">删除门店</button>
+    <%--<button class="layui-btn" data-type="delete">删除门店</button>--%>
     <button class="layui-btn" data-type="refresh">刷新</button>
 </div>
 

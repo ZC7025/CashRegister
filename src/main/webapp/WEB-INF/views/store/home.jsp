@@ -91,6 +91,9 @@
                                    data-options="{url:'<%=path %>/page/store/updatePwd',icon:'&#xe658;',title:'修改密码',id:'2'}"><i class="layui-icon">&#xe658;</i><span>修改密码</span></a>
                             </dd>
                             <dd><a href="javascript:;" kit-target
+                                   data-options="{url:'<%=path %>/page/store/add',icon:'&#xe658;',title:'添加分店',id:'53'}"><i class="layui-icon">&#xe658;</i><span>添加分店</span></a>
+                            </dd>
+                            <dd><a href="javascript:;" kit-target
                                    data-options="{url:'<%=path %>/page/store/storeList',icon:'&#xe658;',title:'分店管理',id:'3'}"><i class="layui-icon">&#xe658;</i><span>分店管理</span></a>
                             </dd>
                         </dl>
