@@ -16,7 +16,6 @@
 			<if test="status != null">
 				status,
 			</if>
-			
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="id != null">
@@ -28,16 +27,15 @@
 			<if test="status != null">
 				#{status},
 			</if>
-			
         </trim>
     </insert>
 
     <delete id="remove" parameterType="com.sucheng.dos.PayWayDO">
-        delete from t_pay_way where id = #{id}
+        delete from t_pay_way where id = #{id} and id != 1
     </delete>
 
     <delete id="removeById" parameterType="long">
-        delete from t_pay_way where id = #{id}
+        delete from t_pay_way where id = #{id} and id != 1
     </delete>
 
     <delete id="removeByIds">
@@ -50,16 +48,12 @@
     <update id="update" parameterType="com.sucheng.dos.PayWayDO">
         update t_pay_way
         <set>
-            <if test="id != null">
-				id = #{id},
-			</if>
 			<if test="payWay != null">
 				pay_way = #{payWay},
 			</if>
 			<if test="status != null">
 				status = #{status},
 			</if>
-			
         </set>
         where id = #{id}
     </update>
@@ -82,14 +76,14 @@
         select
         <include refid="select_columns"/>
         from t_pay_way
-        order by created_time desc
+        order by id desc
     </select>
 
     <select id="listPage" parameterType="com.sucheng.query.PageQuery" resultType="com.sucheng.dos.PayWayDO">
         select
         <include refid="select_columns"/>
         from t_pay_way
-        order by created_time desc
+        order by id desc
         limit #{beginIndex}, #{pageSize}
     </select>
 
@@ -99,26 +93,26 @@
 
     <sql id="where_clause">
         <if test="query != null and query.id != null">
-			id = #{id},
+			id = #{query.id}
 		</if>
 		<if test="query != null and query.payWay != null and query.payWay != ''">
-			and pay_way = #{payWay},
+			and pay_way = #{query.payWay}
 		</if>
 		<if test="query != null and query.status != null and query.status != ''">
-			and status = #{status},
+			and status = #{query.status}
 		</if>
 		
     </sql>
 
-    <select id="listPageByCondition" resultType="com.sucheng.dos.PayWayDO">
+    <select id="listPageByCondition" resultType="com.sucheng.query.PayWayQuery">
         select
         <include refid="select_columns"/>
         from t_pay_way
         <where>
             <include refid="where_clause"/>
         </where>
-        order by created_time desc
-        limit #{beginIndex}, #{pageSize}
+        order by id desc
+        limit #{pager.beginIndex}, #{pager.pageSize}
     </select>
 
     <select id="countByCondition" parameterType="com.sucheng.query.PayWayQuery" resultType="long">

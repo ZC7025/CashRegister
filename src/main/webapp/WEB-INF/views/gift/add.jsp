@@ -86,7 +86,7 @@
             </div>
             <div class="layui-form-item">
                 <div class="layui-input-block">
-                    <button class="layui-btn" lay-submit lay-filter="add">提交申请</button>
+                    <button class="layui-btn" lay-submit lay-filter="add">确认提交</button>
                 </div>
             </div>
         </form>

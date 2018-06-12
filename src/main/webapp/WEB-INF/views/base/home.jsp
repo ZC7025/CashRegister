@@ -106,6 +106,14 @@
                         </dd>
                     </dl>
                 </li>
+                <li class="layui-nav-item">
+                    <a href="javascript:;"><span>支付类别管理</span></a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="javascript:;" kit-target
+                               data-options="{url:'<%=path %>/page/payWay/payWayList',icon:'&#xe658;',title:'支付类别管理',id:'5'}"><i class="layui-icon">&#xe658;</i><span>支付类别管理</span></a>
+                        </dd>
+                    </dl>
+                </li>
             </ul>
         </div>
     </div>

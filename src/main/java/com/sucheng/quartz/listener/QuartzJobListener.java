@@ -31,12 +31,14 @@ public class QuartzJobListener implements ServletContextListener {
 				taskPlanDTOList.add((TaskPlanDTO) object);
 			}
 			for (TaskPlanDTO taskPlanDTO : taskPlanDTOList) {
-				map1 = new HashMap<String, Object>();
-				map1.put("jobClass", "com.sucheng.quartz.CronJob");
-				map1.put("jobName", taskPlanDTO.getJobName());
-				map1.put("jobGroupName", JobBaseUtil.GROUP_NAME);
-				map1.put("jobTime", taskPlanDTO.getCronExpression());
-				listMap.add(map1);
+				if("Y".equals(taskPlanDTO.getIsStart()) && "Y".equals(taskPlanDTO.getStatus())) {
+					map1 = new HashMap<String, Object>();
+					map1.put("jobClass", "com.sucheng.quartz.CronJob");
+					map1.put("jobName", taskPlanDTO.getJobName());
+					map1.put("jobGroupName", JobBaseUtil.GROUP_NAME);
+					map1.put("jobTime", taskPlanDTO.getCronExpression());
+					listMap.add(map1);
+				}
 			}
 		}else{
 			map1 = new HashMap<String, Object>();

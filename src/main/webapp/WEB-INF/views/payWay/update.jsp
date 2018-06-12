@@ -13,7 +13,7 @@
 %>
 <html>
 <head>
-    <title>员工更改</title>
+    <title>支付类型更改</title>
 </head>
 <link rel="stylesheet" href="<%=path%>/static/css/public.css">
 <link rel="stylesheet" href="<%=path%>/static/layui/css/layui.css">
@@ -21,9 +21,9 @@
 <body>
 <div class="container">
     <div class="account-right">
-        <h1>员工更改</h1>
+        <h1>支付类型更改</h1>
         <hr/>
-        <form class="layui-form" id="employee">
+        <form class="layui-form" id="payWayForm">
             <div class="layui-form-item">
                 <div class="layui-input-block">
                     <input type="hidden" id="id" name="id" lay-verify="required" autocomplete="off"
@@ -31,24 +31,10 @@
                 </div>
             </div>
             <div class="layui-form-item">
-                <label class="layui-form-label">员工姓名</label>
+                <label class="layui-form-label">支付类型</label>
                 <div class="layui-input-block">
-                    <input type="text" id="realName" name="realName" lay-verify="required" autocomplete="off"
-                           placeholder="请输入员工姓名" class="layui-input">
-                </div>
-            </div>
-            <div class="layui-form-item">
-                <label class="layui-form-label">手机号码</label>
-                <div class="layui-input-block">
-                    <input type="text" id="phone" name="phone" lay-verify="required" autocomplete="off"
-                           placeholder="请输入手机号码" maxlength="11" class="layui-input">
-                </div>
-            </div>
-            <div class="layui-form-item">
-                <label class="layui-form-label">关联邮箱</label>
-                <div class="layui-input-block">
-                    <input type="text" id="email" name="email" lay-verify="required|email" autocomplete="off"
-                           placeholder="请输入关联邮箱" class="layui-input">
+                    <input type="text" id="payWay" name="payWay" lay-verify="required" autocomplete="off"
+                           placeholder="请输入支付类型" class="layui-input">
                 </div>
             </div>
 
@@ -65,24 +51,22 @@
 <script type="text/javascript" src="<%=path %>/static/layui/layui.js"></script>
 <script type="text/javascript" src="<%=path %>/static/js/home/public.js"></script>
 <script>
-    var empId = GetQueryString("id");
+    var payWayId = GetQueryString("id");
     layui.use(['form'], function () {
 
         var form = layui.form;
         var $ = layui.jquery;
         var layer = layui.layer;
 
-        $.get('<%=path %>/data/employee/one/' + empId,
+        $.get('<%=path %>/data/payWay/one/' + payWayId,
             function (data) {
                 $('#id').val(data.id);
-                $('#realName').val(data.realName);
-                $('#phone').val(data.phone);
-                $('#email').val(data.email);
+                $('#payWay').val(data.payWay);
             });
 
         form.on('submit(update)', function (data) {
-            $.post('<%=path %>/data/employee/update',
-                $('#employee').serialize(),
+            $.post('<%=path %>/data/payWay/update',
+                $('#payWayForm').serialize(),
                 function (res) {
                     if (res.code === 0) {
                         layer.msg('修改成功', {

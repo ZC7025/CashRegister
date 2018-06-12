@@ -31,7 +31,7 @@ import java.util.List;
  * @version 1.0
  */
 @Controller
-@RequestMapping("/pay-way")
+@RequestMapping("/data/payWay")
 public class PayWayController extends BaseController {
 
     private static final Logger logger = LoggerFactory.getLogger(PayWayController.class);
@@ -44,7 +44,7 @@ public class PayWayController extends BaseController {
         ControllerStatusVO statusVO = new ControllerStatusVO();
         try {
             payWayService.save(getBeanMapper().map(payWayVO, PayWayDTO.class));
-            statusVO.okStatus(200, "添加成功");
+            statusVO.okStatus(0, "添加成功");
         } catch (ServiceException e) {
             logger.error("添加失败：{}", e.getMessage());
             statusVO.errorStatus(500, "添加失败");
@@ -58,7 +58,7 @@ public class PayWayController extends BaseController {
         ControllerStatusVO statusVO = new ControllerStatusVO();
         try {
             payWayService.remove(getBeanMapper().map(payWayVO, PayWayDTO.class));
-            statusVO.okStatus(200, "删除成功");
+            statusVO.okStatus(0, "删除成功");
         } catch (ServiceException e) {
             logger.error("删除失败：{}", e.getMessage());
             statusVO.errorStatus(500, "删除失败");
@@ -72,7 +72,7 @@ public class PayWayController extends BaseController {
         ControllerStatusVO statusVO = new ControllerStatusVO();
         try {
             payWayService.removeById(id);
-            statusVO.okStatus(200, "删除成功");
+            statusVO.okStatus(0, "删除成功");
         } catch (ServiceException e) {
             logger.error("删除失败：{}", e.getMessage());
             statusVO.errorStatus(500, "删除失败");
@@ -86,7 +86,7 @@ public class PayWayController extends BaseController {
         ControllerStatusVO statusVO = new ControllerStatusVO();
         try {
             payWayService.removeByIds(StringUtils.strToLongArray(ids, ","));
-            statusVO.okStatus(200, "批量删除成功");
+            statusVO.okStatus(0, "批量删除成功");
         } catch (ServiceException e) {
             logger.error("批量删除失败：{}", e.getMessage());
             statusVO.errorStatus(500, "批量删除失败");
@@ -100,7 +100,7 @@ public class PayWayController extends BaseController {
         ControllerStatusVO statusVO = new ControllerStatusVO();
         try {
             payWayService.update(getBeanMapper().map(payWayVO, PayWayDTO.class));
-            statusVO.okStatus(200, "更新成功");
+            statusVO.okStatus(0, "更新成功");
         } catch (ServiceException e) {
             logger.error("更新失败：{}", e.getMessage());
             statusVO.errorStatus(500, "更新失败");
@@ -114,7 +114,7 @@ public class PayWayController extends BaseController {
         ControllerStatusVO statusVO = new ControllerStatusVO();
         try {
             payWayService.updateActiveStatus(statusQuery);
-            statusVO.okStatus(200, statusQuery.getStatus() == 0 ? "激活成功" : "冻结成功");
+            statusVO.okStatus(0, statusQuery.getStatus() == 0 ? "激活成功" : "冻结成功");
         } catch (ServiceException e) {
             logger.error("激活或冻结失败：{}", e.getMessage());
             statusVO.errorStatus(500, statusQuery.getStatus() == 0 ? "激活失败" : "冻结失败");
@@ -165,15 +165,16 @@ public class PayWayController extends BaseController {
         return pagerVO;
     }
 
-    @RequestMapping("pageList")
+    @RequestMapping("payWayList")
     @ResponseBody
-    public PagerVO listPageByCondition(PageQuery pageQuery, PayWayQuery payWayQuery) {
+    public PagerVO listPageByCondition(int page, int limit, PayWayQuery payWayQuery) {
+        PageQuery pageQuery = new PageQuery(page, limit);
         PagerVO pagerVO = new PagerVO();
         try {
             PagerDTO pagerDTO = payWayService.listPageByCondition(pageQuery, payWayQuery);
             Mapper mapper = getBeanMapper();
             pagerVO = mapper.map(pagerDTO, PagerVO.class);
-            pagerVO.setRows(DozerMapperUtils.mapList(mapper, pagerDTO.getRows(), PayWayVO.class));
+            pagerVO.setRows(DozerMapperUtils.mapList(mapper, pagerDTO.getRows(), PayWayQuery.class));
         } catch (ServiceException e) {
             logger.error("返回指定条件的分页对象JSON数据失败：{}", e.getMessage());
         }
