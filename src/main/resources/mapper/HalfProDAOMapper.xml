@@ -16,9 +16,12 @@
 			<if test="count != null">
 				count,
 			</if>
-			<if test="unit != null">
-				unit,
+			<if test="unitId != null">
+				unit_id,
 			</if>
+            <if test="storeId != null">
+                store_id,
+            </if>
 			<if test="status != null">
 				status,
 			</if>
@@ -37,9 +40,12 @@
 			<if test="count != null">
 				#{count},
 			</if>
-			<if test="unit != null">
-				#{unit},
+			<if test="unitId != null">
+				#{unitId},
 			</if>
+            <if test="storeId != null">
+                #{storeId},
+            </if>
 			<if test="status != null">
 				#{status},
 			</if>
@@ -77,9 +83,12 @@
 			<if test="count != null">
 				count = #{count},
 			</if>
-			<if test="unit != null">
-				unit = #{unit},
+			<if test="unitId != null">
+				unit_id = #{unitId},
 			</if>
+            <if test="storeId != null">
+                store_id = #{storeId},
+            </if>
 			<if test="status != null">
 				status = #{status},
 			</if>
@@ -96,7 +105,7 @@
     </update>
 
     <sql id="select_columns">
-        id, name, count, unit, status, created_time
+        id, name, count, unit_id, store_id, status, created_time
     </sql>
 
     <select id="getById" parameterType="long" resultType="com.sucheng.dos.HalfProDO">
@@ -126,35 +135,41 @@
 
     <sql id="where_clause">
         <if test="query != null and query.id != null">
-			id = #{id},
+			id = #{query.id}
 		</if>
 		<if test="query != null and query.name != null and query.name != ''">
-			and name = #{name},
+			and name = #{query.name}
 		</if>
 		<if test="query != null and query.count != null">
-			and count = #{count},
+			and count = #{query.count}
 		</if>
-		<if test="query != null and query.unit != null and query.unit != ''">
-			and unit = #{unit},
+		<if test="query != null and query.unitId != null and query.unitId != ''">
+			and unit_id = #{query.unitId}
 		</if>
+        <if test="query != null and query.storeId != null and query.storeId != ''">
+            and store_id = #{query.storeId}
+        </if>
 		<if test="query != null and query.status != null and query.status != ''">
-			and status = #{status},
+			and status = #{query.status}
 		</if>
 		<if test="query != null and query.createdTime != null">
-			and created_time = #{createdTime},
+			and created_time = #{query.createdTime}
 		</if>
 		
     </sql>
 
-    <select id="listPageByCondition" resultType="com.sucheng.dos.HalfProDO">
-        select
-        <include refid="select_columns"/>
-        from t_half_pro
+    <select id="listPageByCondition" resultType="com.sucheng.query.HalfProQuery">
+        select hp.*, u.unit from t_half_pro hp, t_unit u
         <where>
-            <include refid="where_clause"/>
+            <if test="true">
+                and hp.unit_id = u.id
+            </if>
+            <if test="query != null and query.storeId != null">
+                and hp.store_id = #{query.storeId}
+            </if>
         </where>
-        order by created_time desc
-        limit #{beginIndex}, #{pageSize}
+        order by hp.created_time desc
+        limit #{pager.beginIndex}, #{pager.pageSize}
     </select>
 
     <select id="countByCondition" parameterType="com.sucheng.query.HalfProQuery" resultType="long">

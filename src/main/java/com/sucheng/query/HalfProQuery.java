@@ -29,6 +29,10 @@ public class HalfProQuery extends BaseQuery {
 	/**
 	*单位
 	*/
+	private Integer unitId;
+
+	private Integer storeId;
+
 	private String unit;
 	/**
 	*处理状态
@@ -41,17 +45,19 @@ public class HalfProQuery extends BaseQuery {
 	
     public HalfProQuery () {}
 
-    public HalfProQuery (Integer id, String name, Float count, String unit, String status, Date createdTime) {
-        this.id = id;
+	public HalfProQuery(Integer id, String name, Float count,
+						Integer unitId, Integer storeId, String unit, String status, Date createdTime) {
+		this.id = id;
 		this.name = name;
 		this.count = count;
+		this.unitId = unitId;
+		this.storeId = storeId;
 		this.unit = unit;
 		this.status = status;
 		this.createdTime = createdTime;
-		
-    }
+	}
 
-    public Integer getId() {
+	public Integer getId() {
 		return id;
 	}
 
@@ -75,12 +81,28 @@ public class HalfProQuery extends BaseQuery {
 		this.count = count;
 	}
 
+	public Integer getUnitId() {
+		return unitId;
+	}
+
+	public void setUnitId(Integer unitId) {
+		this.unitId = unitId;
+	}
+
 	public String getUnit() {
 		return unit;
 	}
 
 	public void setUnit(String unit) {
 		this.unit = unit;
+	}
+
+	public Integer getStoreId() {
+		return storeId;
+	}
+
+	public void setStoreId(Integer storeId) {
+		this.storeId = storeId;
 	}
 
 	public String getStatus() {

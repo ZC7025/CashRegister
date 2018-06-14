@@ -12,6 +12,8 @@ import com.sucheng.service.HalfProService;
 import com.sucheng.vo.ControllerStatusVO;
 import com.sucheng.vo.HalfProVO;
 import com.sucheng.vo.PagerVO;
+import com.sucheng.vo.StoreVO;
+import org.apache.shiro.SecurityUtils;
 import org.dozer.Mapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -165,12 +167,18 @@ public class HalfProController extends BaseController {
         return pagerVO;
     }
 
-    @RequestMapping("pageList")
+    @RequestMapping("proList")
     @ResponseBody
     public PagerVO listPageByCondition(int page, int limit, HalfProQuery halfProQuery) {
         PageQuery pageQuery = new PageQuery(page, limit);
         PagerVO pagerVO = new PagerVO();
         try {
+            StoreVO storeVO = (StoreVO) SecurityUtils.getSubject().getSession().getAttribute("store");
+            if(storeVO == null) {
+                logger.error("session失效");
+                return pagerVO;
+            }
+            halfProQuery.setStoreId(storeVO.getId());
             PagerDTO pagerDTO = halfProService.listPageByCondition(pageQuery, halfProQuery);
             Mapper mapper = getBeanMapper();
             pagerVO = mapper.map(pagerDTO, PagerVO.class);

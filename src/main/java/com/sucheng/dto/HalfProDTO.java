@@ -30,6 +30,11 @@ public class HalfProDTO extends BaseDTO {
 	*单位
 	*/
 	private String unit;
+
+	private Integer unitId;
+
+	private Integer storeId;
+
 	/**
 	*处理状态
 	*/
@@ -41,17 +46,19 @@ public class HalfProDTO extends BaseDTO {
 	
     public HalfProDTO () {}
 
-    public HalfProDTO (Integer id, String name, Float count, String unit, String status, Date createdTime) {
-        this.id = id;
+	public HalfProDTO(Integer id, String name, Float count,
+					  String unit, Integer unitId, Integer storeId, String status, Date createdTime) {
+		this.id = id;
 		this.name = name;
 		this.count = count;
 		this.unit = unit;
+		this.unitId = unitId;
+		this.storeId = storeId;
 		this.status = status;
 		this.createdTime = createdTime;
-		
-    }
+	}
 
-    public Integer getId() {
+	public Integer getId() {
 		return id;
 	}
 
@@ -81,6 +88,22 @@ public class HalfProDTO extends BaseDTO {
 
 	public void setUnit(String unit) {
 		this.unit = unit;
+	}
+
+	public Integer getUnitId() {
+		return unitId;
+	}
+
+	public void setUnitId(Integer unitId) {
+		this.unitId = unitId;
+	}
+
+	public Integer getStoreId() {
+		return storeId;
+	}
+
+	public void setStoreId(Integer storeId) {
+		this.storeId = storeId;
 	}
 
 	public String getStatus() {

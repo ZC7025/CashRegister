@@ -39,7 +39,7 @@
                 </div>
             </div>
             <div class="layui-form-item">
-                <a href="javascript:void(0);" onclick="cronView();">
+                <a href="javascript:void(0);" onclick="cronView();" title="点击查看帮助">
                     <label class="layui-form-label">表达式
                         <i class="layui-icon layui-icon-help" style="font-size: 5px;">&#xe607;</i>
                     </label>
@@ -101,7 +101,7 @@
         layer.open({
             type: 2,
             title: '在线cron表达式生成器',
-            area: ['700px', '400px'],
+            area: ['80%', '80%'],
             content: 'http://cron.qqe2.com/'
         });
     }

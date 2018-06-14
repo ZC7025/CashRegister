@@ -31,7 +31,7 @@
                 </div>
             </div>
             <div class="layui-form-item">
-                <a href="javascript:void(0);" onclick="cronView();">
+                <a href="javascript:void(0);" onclick="cronView();" title="点击查看帮助">
                     <label class="layui-form-label">表达式
                         <i class="layui-icon layui-icon-help" style="font-size: 5px;">&#xe607;</i>
                     </label>
@@ -44,6 +44,7 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">描述</label>
                 <div class="layui-input-block">
+
                     <input type="text" id="descript" name="descript" lay-verify="required" autocomplete="off"
                            placeholder="请输入描述" class="layui-input">
                 </div>
@@ -101,7 +102,7 @@
         layer.open({
             type: 2,
             title: '在线cron表达式生成器',
-            area: ['700px', '400px'],
+            area: ['80%', '80%'],
             content: 'http://cron.qqe2.com/'
         });
     }

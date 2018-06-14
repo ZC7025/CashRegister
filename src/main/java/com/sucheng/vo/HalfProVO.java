@@ -29,7 +29,10 @@ public class HalfProVO extends BaseVO {
 	/**
 	*单位
 	*/
-	private String unit;
+	private Integer unitId;
+
+	private Integer storeId;
+
 	/**
 	*处理状态
 	*/
@@ -41,15 +44,16 @@ public class HalfProVO extends BaseVO {
 	
     public HalfProVO () {}
 
-    public HalfProVO (Integer id, String name, Float count, String unit, String status, Date createdTime) {
-        this.id = id;
+	public HalfProVO(Integer id, String name, Float count,
+					 Integer unitId, Integer storeId, String status, Date createdTime) {
+		this.id = id;
 		this.name = name;
 		this.count = count;
-		this.unit = unit;
+		this.unitId = unitId;
+		this.storeId = storeId;
 		this.status = status;
 		this.createdTime = createdTime;
-		
-    }
+	}
 
     public Integer getId() {
 		return id;
@@ -75,12 +79,20 @@ public class HalfProVO extends BaseVO {
 		this.count = count;
 	}
 
-	public String getUnit() {
-		return unit;
+	public Integer getUnitId() {
+		return unitId;
 	}
 
-	public void setUnit(String unit) {
-		this.unit = unit;
+	public void setUnitId(Integer unitId) {
+		this.unitId = unitId;
+	}
+
+	public Integer getStoreId() {
+		return storeId;
+	}
+
+	public void setStoreId(Integer storeId) {
+		this.storeId = storeId;
 	}
 
 	public String getStatus() {
@@ -106,8 +118,7 @@ public class HalfProVO extends BaseVO {
                 "id = " + id + 
 				", name = " + name + 
 				", count = " + count + 
-				", unit = " + unit + 
-				", status = " + status + 
+				", status = " + status +
 				", createdTime = " + createdTime + 
 				"}";
     }

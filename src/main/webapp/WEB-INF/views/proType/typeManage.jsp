@@ -77,7 +77,7 @@
                 layer.open({
                     type: 2,
                     title: '商品类型添加',
-                    area: ['700px', '400px'],
+                    area: ['80%', '80%'],
                     maxmin:true,
                     content: '<%=path %>/page/proType/add'
                 });
@@ -88,7 +88,7 @@
                 if(data.length === 1) {
                     layer.open({
                         type: 2,
-                        area: ['700px', '400px'],
+                        area: ['80%', '80%'],
                         maxmin:true,
                         content:"<%=path %>/page/proType/update?id="+data[0].id
                     })

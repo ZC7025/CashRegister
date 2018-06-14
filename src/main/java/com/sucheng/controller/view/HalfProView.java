@@ -4,21 +4,21 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/page/payWay")
-public class PayWayView {
+@RequestMapping("/page/halfPro")
+public class HalfProView {
 
     @RequestMapping("add")
     public String add() {
-        return "payWay/add";
+        return "halfPro/add";
     }
 
-    @RequestMapping("payWayList")
+    @RequestMapping("proList")
     public String typeList() {
-        return "payWay/wayManage";
+        return "halfPro/proManage";
     }
 
     @RequestMapping("update")
     public String update() {
-        return "payWay/update";
+        return "halfPro/update";
     }
 }
