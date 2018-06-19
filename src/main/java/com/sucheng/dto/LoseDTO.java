@@ -26,6 +26,14 @@ public class LoseDTO extends BaseDTO {
 	*
 	*/
 	private Integer rawId;
+
+	private Integer storeId;
+
+	private String name;
+
+	private String proName;
+
+	private String searchType;
 	/**
 	*损失数量
 	*/
@@ -94,6 +102,38 @@ public class LoseDTO extends BaseDTO {
 
 	public void setReason(String reason) {
 		this.reason = reason;
+	}
+
+	public Integer getStoreId() {
+		return storeId;
+	}
+
+	public void setStoreId(Integer storeId) {
+		this.storeId = storeId;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getProName() {
+		return proName;
+	}
+
+	public void setProName(String proName) {
+		this.proName = proName;
+	}
+
+	public String getSearchType() {
+		return searchType;
+	}
+
+	public void setSearchType(String searchType) {
+		this.searchType = searchType;
 	}
 
 	public String getStatus() {

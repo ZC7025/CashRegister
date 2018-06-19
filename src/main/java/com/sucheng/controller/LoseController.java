@@ -2,6 +2,7 @@ package com.sucheng.controller;
 
 import com.sucheng.common.DozerMapperUtils;
 import com.sucheng.common.StringUtils;
+import com.sucheng.dos.StockDO;
 import com.sucheng.dto.LoseDTO;
 import com.sucheng.dto.PagerDTO;
 import com.sucheng.exception.ServiceException;
@@ -12,6 +13,8 @@ import com.sucheng.service.LoseService;
 import com.sucheng.vo.ControllerStatusVO;
 import com.sucheng.vo.LoseVO;
 import com.sucheng.vo.PagerVO;
+import com.sucheng.vo.StoreVO;
+import org.apache.shiro.SecurityUtils;
 import org.dozer.Mapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,7 +34,7 @@ import java.util.List;
  * @version 1.0
  */
 @Controller
-@RequestMapping("/lose")
+@RequestMapping("/data/lose")
 public class LoseController extends BaseController {
 
     private static final Logger logger = LoggerFactory.getLogger(LoseController.class);
@@ -44,7 +47,7 @@ public class LoseController extends BaseController {
         ControllerStatusVO statusVO = new ControllerStatusVO();
         try {
             loseService.save(getBeanMapper().map(loseVO, LoseDTO.class));
-            statusVO.okStatus(200, "添加成功");
+            statusVO.okStatus(0, "添加成功");
         } catch (ServiceException e) {
             logger.error("添加失败：{}", e.getMessage());
             statusVO.errorStatus(500, "添加失败");
@@ -58,7 +61,7 @@ public class LoseController extends BaseController {
         ControllerStatusVO statusVO = new ControllerStatusVO();
         try {
             loseService.remove(getBeanMapper().map(loseVO, LoseDTO.class));
-            statusVO.okStatus(200, "删除成功");
+            statusVO.okStatus(0, "删除成功");
         } catch (ServiceException e) {
             logger.error("删除失败：{}", e.getMessage());
             statusVO.errorStatus(500, "删除失败");
@@ -72,7 +75,7 @@ public class LoseController extends BaseController {
         ControllerStatusVO statusVO = new ControllerStatusVO();
         try {
             loseService.removeById(id);
-            statusVO.okStatus(200, "删除成功");
+            statusVO.okStatus(0, "删除成功");
         } catch (ServiceException e) {
             logger.error("删除失败：{}", e.getMessage());
             statusVO.errorStatus(500, "删除失败");
@@ -86,7 +89,7 @@ public class LoseController extends BaseController {
         ControllerStatusVO statusVO = new ControllerStatusVO();
         try {
             loseService.removeByIds(StringUtils.strToLongArray(ids, ","));
-            statusVO.okStatus(200, "批量删除成功");
+            statusVO.okStatus(0, "批量删除成功");
         } catch (ServiceException e) {
             logger.error("批量删除失败：{}", e.getMessage());
             statusVO.errorStatus(500, "批量删除失败");
@@ -100,7 +103,7 @@ public class LoseController extends BaseController {
         ControllerStatusVO statusVO = new ControllerStatusVO();
         try {
             loseService.update(getBeanMapper().map(loseVO, LoseDTO.class));
-            statusVO.okStatus(200, "更新成功");
+            statusVO.okStatus(0, "更新成功");
         } catch (ServiceException e) {
             logger.error("更新失败：{}", e.getMessage());
             statusVO.errorStatus(500, "更新失败");
@@ -114,7 +117,7 @@ public class LoseController extends BaseController {
         ControllerStatusVO statusVO = new ControllerStatusVO();
         try {
             loseService.updateActiveStatus(statusQuery);
-            statusVO.okStatus(200, statusQuery.getStatus() == 0 ? "激活成功" : "冻结成功");
+            statusVO.okStatus(0, statusQuery.getStatus() == 0 ? "激活成功" : "冻结成功");
         } catch (ServiceException e) {
             logger.error("激活或冻结失败：{}", e.getMessage());
             statusVO.errorStatus(500, statusQuery.getStatus() == 0 ? "激活失败" : "冻结失败");
@@ -167,13 +170,23 @@ public class LoseController extends BaseController {
 
     @RequestMapping("pageList")
     @ResponseBody
-    public PagerVO listPageByCondition(PageQuery pageQuery, LoseQuery loseQuery) {
+    public PagerVO listPageByCondition(int page, int limit, LoseQuery loseQuery) {
+        PageQuery pageQuery = new PageQuery(page, limit);
         PagerVO pagerVO = new PagerVO();
         try {
+            StoreVO storeVO = (StoreVO) SecurityUtils.getSubject().getSession().getAttribute("store");
+            if(storeVO == null) {
+                logger.error("session失效");
+                return pagerVO;
+            }
+            loseQuery.setStoreId(storeVO.getId());
+            if(loseQuery.getSearchType() == null) {
+                loseQuery.setSearchType("raw");
+            }
             PagerDTO pagerDTO = loseService.listPageByCondition(pageQuery, loseQuery);
             Mapper mapper = getBeanMapper();
             pagerVO = mapper.map(pagerDTO, PagerVO.class);
-            pagerVO.setRows(DozerMapperUtils.mapList(mapper, pagerDTO.getRows(), LoseVO.class));
+            pagerVO.setRows(DozerMapperUtils.mapList(mapper, pagerDTO.getRows(), LoseQuery.class));
         } catch (ServiceException e) {
             logger.error("返回指定条件的分页对象JSON数据失败：{}", e.getMessage());
         }

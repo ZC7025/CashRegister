@@ -126,7 +126,7 @@
         <include refid="select_columns"/>
         from t_lose
         order by created_time desc
-        limit #{beginIndex}, #{pageSize}
+        limit #{pager.beginIndex}, #{pager.pageSize}
     </select>
 
     <select id="count" resultType="long">
@@ -135,38 +135,54 @@
 
     <sql id="where_clause">
         <if test="query != null and query.id != null">
-			id = #{id},
+			id = #{query.id}
 		</if>
 		<if test="query != null and query.proId != null">
-			and pro_id = #{proId},
+			and pro_id = #{query.proId}
 		</if>
 		<if test="query != null and query.rawId != null">
-			and raw_id = #{rawId},
+			and raw_id = #{query.rawId}
 		</if>
 		<if test="query != null and query.count != null">
-			and count = #{count},
+			and count = #{query.count}
 		</if>
 		<if test="query != null and query.reason != null and query.reason != ''">
-			and reason = #{reason},
+			and reason = #{query.reason}
 		</if>
 		<if test="query != null and query.status != null and query.status != ''">
-			and status = #{status},
+			and status = #{query.status}
 		</if>
 		<if test="query != null and query.createdTime != null">
-			and created_time = #{createdTime},
+			and created_time = #{query.createdTime}
 		</if>
 		
     </sql>
 
-    <select id="listPageByCondition" resultType="com.sucheng.dos.LoseDO">
-        select
-        <include refid="select_columns"/>
-        from t_lose
-        <where>
-            <include refid="where_clause"/>
-        </where>
-        order by created_time desc
-        limit #{beginIndex}, #{pageSize}
+    <select id="listPageByCondition" resultType="com.sucheng.query.LoseQuery">
+		<if test="query != null and query.searchType != null and query.searchType == 'pro'">
+			select l.*, p.name as proName from t_lose l, t_product p
+			<where>
+				<if test="true">
+					and l.pro_id = p.id
+				</if>
+				<if test="query != null and query.storeId != null">
+					and p.store_id = #{query.storeId}
+				</if>
+			</where>
+		</if>
+		<if test="query != null and query.searchType != null and query.searchType == 'raw'">
+			select l.*, rm.name from t_lose l, t_raw_materials rm
+			<where>
+				<if test="true">
+					and l.raw_id = rm.id
+				</if>
+				<if test="query != null and query.storeId != null">
+					and rm.store_id = #{query.storeId}
+				</if>
+			</where>
+		</if>
+        order by l.created_time desc
+        limit #{pager.beginIndex}, #{pager.pageSize}
     </select>
 
     <select id="countByCondition" parameterType="com.sucheng.query.LoseQuery" resultType="long">
