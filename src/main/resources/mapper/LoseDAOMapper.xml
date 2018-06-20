@@ -186,10 +186,28 @@
     </select>
 
     <select id="countByCondition" parameterType="com.sucheng.query.LoseQuery" resultType="long">
-        select count(*) from t_lose
-        <where>
-            <include refid="where_clause"/>
-        </where>
+		<if test="query != null and query.searchType != null and query.searchType == 'pro'">
+			select count(*) from t_lose l, t_product p
+			<where>
+				<if test="true">
+					and l.pro_id = p.id
+				</if>
+				<if test="query != null and query.storeId != null">
+					and p.store_id = #{query.storeId}
+				</if>
+			</where>
+		</if>
+		<if test="query != null and query.searchType != null and query.searchType == 'raw'">
+			select count(*) from t_lose l, t_raw_materials rm
+			<where>
+				<if test="true">
+					and l.raw_id = rm.id
+				</if>
+				<if test="query != null and query.storeId != null">
+					and rm.store_id = #{query.storeId}
+				</if>
+			</where>
+		</if>
     </select>
 
 </mapper>

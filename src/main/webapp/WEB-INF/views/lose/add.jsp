@@ -36,13 +36,13 @@
             <div class="layui-form-item" id="rawDiv">
                 <label class="layui-form-label">原料</label>
                 <div class="layui-input-block">
-                    <select name="rawId" id="raw" class="raw" lay-verify="required"></select>
+                    <select name="rawId" id="raw" class="raw"></select>
                 </div>
             </div>
             <div class="layui-form-item" id="proDiv">
                 <label class="layui-form-label">商品</label>
                 <div class="layui-input-block">
-                    <select name="proId" id="pro" class="product" lay-verify="required"></select>
+                    <select name="proId" id="pro" class="product"></select>
                 </div>
             </div>
             <div class="layui-form-item">
@@ -176,6 +176,21 @@
         }
 
         form.on('submit(add)', function (data) {
+            var type = $('#type').val();
+            if(type === 'raw') {
+                var raw = $('#raw').val();
+                if(raw === null || raw === '') {
+                    layer.msg("请选择报损原料");
+                    return false;
+                }
+            }
+            if(type === 'pro') {
+                var pro = $('#pro').val();
+                if(pro === null || pro === '') {
+                    layer.msg("请选择报损商品");
+                    return false;
+                }
+            }
             $.post('<%=path %>/data/lose/save',
                 $('#lose').serialize(),
                 function (res) {

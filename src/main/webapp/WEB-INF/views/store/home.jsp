@@ -153,7 +153,7 @@
                                    data-options="{url:'<%=path %>/page/halfPro/proList',icon:'&#xe658;',title:'半成品管理',id:'15'}"><i class="layui-icon">&#xe658;</i><span>半成品管理</span></a>
                             </dd>
                             <dd><a href="javascript:;" kit-target
-                                   data-options="{url:'<%=path %>/page/lose/add',icon:'&#xe658;',title:'报损记录添加',id:'55'}"><i class="layui-icon">&#xe658;</i><span>报损记录添加</span></a>
+                                   data-options="{url:'<%=path %>/page/lose/loseList',icon:'&#xe658;',title:'报损记录管理',id:'56'}"><i class="layui-icon">&#xe658;</i><span>报损记录管理</span></a>
                             </dd>
                         </dl>
                     </li>
