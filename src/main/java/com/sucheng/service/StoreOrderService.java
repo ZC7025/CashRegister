@@ -1,5 +1,7 @@
 package com.sucheng.service;
 
+import com.sucheng.dto.StoreOrderDTO;
+
 /**
  * StoreOrderService服务接口<br/>
  *
@@ -9,4 +11,6 @@ package com.sucheng.service;
  * @version 1.0
  */
 public interface StoreOrderService extends BaseService {
+
+    void save(StoreOrderDTO storeOrderDTO, String details);
 }

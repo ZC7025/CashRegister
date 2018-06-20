@@ -155,6 +155,9 @@
                             <dd><a href="javascript:;" kit-target
                                    data-options="{url:'<%=path %>/page/lose/loseList',icon:'&#xe658;',title:'报损记录管理',id:'56'}"><i class="layui-icon">&#xe658;</i><span>报损记录管理</span></a>
                             </dd>
+                            <dd><a href="javascript:;" kit-target
+                                   data-options="{url:'<%=path %>/page/storeOrder/add',icon:'&#xe658;',title:'点餐订单管理',id:'57'}"><i class="layui-icon">&#xe658;</i><span>点餐订单管理</span></a>
+                            </dd>
                         </dl>
                     </li>
                     <li class="layui-nav-item">

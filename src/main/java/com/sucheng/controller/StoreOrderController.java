@@ -1,7 +1,6 @@
 package com.sucheng.controller;
 
 import com.sucheng.common.DozerMapperUtils;
-import com.sucheng.common.StringUtils;
 import com.sucheng.dto.PagerDTO;
 import com.sucheng.dto.StoreOrderDTO;
 import com.sucheng.exception.ServiceException;
@@ -31,20 +30,20 @@ import java.util.List;
  * @version 1.0
  */
 @Controller
-@RequestMapping("/store-order")
+@RequestMapping("/data/storeOrder")
 public class StoreOrderController extends BaseController {
 
     private static final Logger logger = LoggerFactory.getLogger(StoreOrderController.class);
 
     private StoreOrderService storeOrderService;
 
-    @PostMapping("save")
+    @RequestMapping("save")
     @ResponseBody
-    public ControllerStatusVO save(StoreOrderVO storeOrderVO) {
+    public ControllerStatusVO save(StoreOrderDTO storeOrderDTO, String details) {
         ControllerStatusVO statusVO = new ControllerStatusVO();
         try {
-            storeOrderService.save(getBeanMapper().map(storeOrderVO, StoreOrderDTO.class));
-            statusVO.okStatus(200, "添加成功");
+            storeOrderService.save(storeOrderDTO, details);
+            statusVO.okStatus(0, "添加成功");
         } catch (ServiceException e) {
             logger.error("添加失败：{}", e.getMessage());
             statusVO.errorStatus(500, "添加失败");
@@ -58,7 +57,7 @@ public class StoreOrderController extends BaseController {
         ControllerStatusVO statusVO = new ControllerStatusVO();
         try {
             storeOrderService.remove(getBeanMapper().map(storeOrderVO, StoreOrderDTO.class));
-            statusVO.okStatus(200, "删除成功");
+            statusVO.okStatus(0, "删除成功");
         } catch (ServiceException e) {
             logger.error("删除失败：{}", e.getMessage());
             statusVO.errorStatus(500, "删除失败");
@@ -72,24 +71,10 @@ public class StoreOrderController extends BaseController {
         ControllerStatusVO statusVO = new ControllerStatusVO();
         try {
             storeOrderService.removeById(id);
-            statusVO.okStatus(200, "删除成功");
+            statusVO.okStatus(0, "删除成功");
         } catch (ServiceException e) {
             logger.error("删除失败：{}", e.getMessage());
             statusVO.errorStatus(500, "删除失败");
-        }
-        return statusVO;
-    }
-
-    @PostMapping("batch-remove")
-    @ResponseBody
-    public ControllerStatusVO removeByIds(String ids) {
-        ControllerStatusVO statusVO = new ControllerStatusVO();
-        try {
-            storeOrderService.removeByIds(StringUtils.strToLongArray(ids, ","));
-            statusVO.okStatus(200, "批量删除成功");
-        } catch (ServiceException e) {
-            logger.error("批量删除失败：{}", e.getMessage());
-            statusVO.errorStatus(500, "批量删除失败");
         }
         return statusVO;
     }
@@ -100,7 +85,7 @@ public class StoreOrderController extends BaseController {
         ControllerStatusVO statusVO = new ControllerStatusVO();
         try {
             storeOrderService.update(getBeanMapper().map(storeOrderVO, StoreOrderDTO.class));
-            statusVO.okStatus(200, "更新成功");
+            statusVO.okStatus(0, "更新成功");
         } catch (ServiceException e) {
             logger.error("更新失败：{}", e.getMessage());
             statusVO.errorStatus(500, "更新失败");
@@ -114,7 +99,7 @@ public class StoreOrderController extends BaseController {
         ControllerStatusVO statusVO = new ControllerStatusVO();
         try {
             storeOrderService.updateActiveStatus(statusQuery);
-            statusVO.okStatus(200, statusQuery.getStatus() == 0 ? "激活成功" : "冻结成功");
+            statusVO.okStatus(0, statusQuery.getStatus() == 0 ? "激活成功" : "冻结成功");
         } catch (ServiceException e) {
             logger.error("激活或冻结失败：{}", e.getMessage());
             statusVO.errorStatus(500, statusQuery.getStatus() == 0 ? "激活失败" : "冻结失败");
@@ -165,15 +150,16 @@ public class StoreOrderController extends BaseController {
         return pagerVO;
     }
 
-    @RequestMapping("pageList")
+    @RequestMapping("orderList")
     @ResponseBody
-    public PagerVO listPageByCondition(PageQuery pageQuery, StoreOrderQuery storeOrderQuery) {
+    public PagerVO listPageByCondition(int page, int limit, StoreOrderQuery storeOrderQuery) {
+        PageQuery pageQuery = new PageQuery(page, limit);
         PagerVO pagerVO = new PagerVO();
         try {
             PagerDTO pagerDTO = storeOrderService.listPageByCondition(pageQuery, storeOrderQuery);
             Mapper mapper = getBeanMapper();
             pagerVO = mapper.map(pagerDTO, PagerVO.class);
-            pagerVO.setRows(DozerMapperUtils.mapList(mapper, pagerDTO.getRows(), StoreOrderVO.class));
+            pagerVO.setRows(DozerMapperUtils.mapList(mapper, pagerDTO.getRows(), StoreOrderQuery.class));
         } catch (ServiceException e) {
             logger.error("返回指定条件的分页对象JSON数据失败：{}", e.getMessage());
         }

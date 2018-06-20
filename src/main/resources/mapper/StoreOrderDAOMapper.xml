@@ -4,7 +4,10 @@
 
 <mapper namespace="com.sucheng.dao.StoreOrderDAO">
 
-    <insert id="save" parameterType="com.sucheng.dos.StoreOrderDO">
+    <insert id="save" parameterType="com.sucheng.dto.StoreOrderDTO">
+		<selectKey keyColumn="id" keyProperty="id" resultType="integer" order="AFTER">
+			SELECT LAST_INSERT_ID() as id
+		</selectKey>
         insert into t_store_order
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="id != null">

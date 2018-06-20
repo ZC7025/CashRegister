@@ -108,7 +108,11 @@
     <select id="listAll" resultType="com.sucheng.dos.GradeDO">
         select
         <include refid="select_columns"/>
-        from t_grade
+        from t_grade order by created_time desc
+    </select>
+
+    <select id="listAllById" resultType="com.sucheng.dos.GradeDO">
+        select id, grade_name as gradeName, seat from t_grade where store_id = #{storeId}
         order by created_time desc
     </select>
 

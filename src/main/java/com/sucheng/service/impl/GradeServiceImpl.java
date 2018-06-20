@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
+import java.util.List;
 
 /**
  * GradeServiceImpl服务接口实现类<br/>
@@ -32,5 +33,10 @@ public class GradeServiceImpl extends AbstractBaseService implements GradeServic
     @PostConstruct
     public void init() {
         super.init(GradeDO.class, GradeDTO.class);
+    }
+
+    @Override
+    public List<Object> listAllById(Integer storeId) {
+        return gradeDAO.listAllById(storeId);
     }
 }

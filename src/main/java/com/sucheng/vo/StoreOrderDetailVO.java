@@ -22,6 +22,7 @@ public class StoreOrderDetailVO extends BaseVO {
 	*
 	*/
 	private Integer orderId;
+	private Integer giftId;
 	/**
 	*
 	*/
@@ -37,14 +38,21 @@ public class StoreOrderDetailVO extends BaseVO {
 	
     public StoreOrderDetailVO () {}
 
-    public StoreOrderDetailVO (Integer id, Integer orderId, Integer proId, Integer count, BigDecimal totalMoney) {
+    public StoreOrderDetailVO (Integer orderId, Integer proId, Integer count, BigDecimal totalMoney) {
         this.id = id;
 		this.orderId = orderId;
 		this.proId = proId;
 		this.count = count;
 		this.totalMoney = totalMoney;
-		
     }
+
+	public StoreOrderDetailVO (Integer orderId, Integer proId, Integer giftId, Integer count, BigDecimal totalMoney) {
+		this.giftId = giftId;
+		this.orderId = orderId;
+		this.proId = proId;
+		this.count = count;
+		this.totalMoney = totalMoney;
+	}
 
     public Integer getId() {
 		return id;
@@ -86,8 +94,15 @@ public class StoreOrderDetailVO extends BaseVO {
 		this.totalMoney = totalMoney;
 	}
 
-	
-    @Override
+	public Integer getGiftId() {
+		return giftId;
+	}
+
+	public void setGiftId(Integer giftId) {
+		this.giftId = giftId;
+	}
+
+	@Override
     public String toString() {
         return "StoreOrderDetailDO{" +
                 "id = " + id + 

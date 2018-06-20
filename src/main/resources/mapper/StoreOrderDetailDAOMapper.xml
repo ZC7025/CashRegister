@@ -43,7 +43,7 @@
 			
         </trim>
     </insert>
-
+<!--TODO 少了gift_id字段对应关系-->
     <delete id="remove" parameterType="com.sucheng.dos.StoreOrderDetailDO">
         delete from t_store_order_detail where id = #{id}
     </delete>
@@ -108,6 +108,7 @@
         <include refid="select_columns"/>
         from t_store_order_detail
         order by created_time desc
+--         TODO 少了pager.
         limit #{beginIndex}, #{pageSize}
     </select>
 
@@ -117,10 +118,11 @@
 
     <sql id="where_clause">
         <if test="query != null and query.id != null">
-			id = #{id},
+			id = #{query.id}
 		</if>
 		<if test="query != null and query.orderId != null">
-			and order_id = #{orderId},
+--             TODO 有误，应为#{query.orderId}
+			and order_id = #{query.orderId}
 		</if>
 		<if test="query != null and query.proId != null">
 			and pro_id = #{proId},

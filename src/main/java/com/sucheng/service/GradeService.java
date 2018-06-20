@@ -1,5 +1,7 @@
 package com.sucheng.service;
 
+import java.util.List;
+
 /**
  * GradeService服务接口<br/>
  *
@@ -9,4 +11,5 @@ package com.sucheng.service;
  * @version 1.0
  */
 public interface GradeService extends BaseService {
+    List<Object> listAllById(Integer storeId);
 }

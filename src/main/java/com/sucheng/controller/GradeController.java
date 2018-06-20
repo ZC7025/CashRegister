@@ -146,7 +146,13 @@ public class GradeController extends BaseController {
     public List<GradeVO> listAll() {
         List<GradeVO> gradeVOList = new ArrayList<>();
         try {
-            List<Object> objectList = gradeService.listAll();
+            Session session = SecurityUtils.getSubject().getSession();
+            StoreVO storeVO = (StoreVO) session.getAttribute("store");
+            if(storeVO == null) {
+                logger.error("门店session失效");
+                return null;
+            }
+            List<Object> objectList = gradeService.listAllById(storeVO.getId());
             gradeVOList =  DozerMapperUtils.map(getBeanMapper(), objectList, GradeVO.class);
         } catch (ServiceException e) {
             logger.error("返回所有对象JSON数据失败：{}", e.getMessage());
