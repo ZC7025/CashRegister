@@ -26,6 +26,8 @@ public class StoreOrderDTO extends BaseDTO {
 	/**
 	*桌牌号
 	*/
+	private Integer gradeId;
+
 	private String gradeNo;
 	/**
 	*负责员工
@@ -50,10 +52,10 @@ public class StoreOrderDTO extends BaseDTO {
 	
     public StoreOrderDTO () {}
 
-    public StoreOrderDTO (Integer id, String orderNo, String gradeNo, Integer empId, Integer peopleCount, BigDecimal totalMoney, String status, Date createdTime) {
+    public StoreOrderDTO (Integer id, String orderNo, Integer gradeId, Integer empId, Integer peopleCount, BigDecimal totalMoney, String status, Date createdTime) {
         this.id = id;
 		this.orderNo = orderNo;
-		this.gradeNo = gradeNo;
+		this.gradeId = gradeId;
 		this.empId = empId;
 		this.peopleCount = peopleCount;
 		this.totalMoney = totalMoney;
@@ -76,6 +78,14 @@ public class StoreOrderDTO extends BaseDTO {
 
 	public void setOrderNo(String orderNo) {
 		this.orderNo = orderNo;
+	}
+
+	public Integer getGradeId() {
+		return gradeId;
+	}
+
+	public void setGradeId(Integer gradeId) {
+		this.gradeId = gradeId;
 	}
 
 	public String getGradeNo() {
@@ -132,7 +142,7 @@ public class StoreOrderDTO extends BaseDTO {
         return "StoreOrderDO{" +
                 "id = " + id + 
 				", orderNo = " + orderNo + 
-				", gradeNo = " + gradeNo + 
+				", gradeId = " + gradeId +
 				", empId = " + empId + 
 				", peopleCount = " + peopleCount + 
 				", totalMoney = " + totalMoney + 

@@ -26,6 +26,8 @@ public class StoreOrderQuery extends BaseQuery {
 	/**
 	*桌牌号
 	*/
+	private Integer gradeId;
+
 	private String gradeNo;
 	/**
 	*负责员工
@@ -50,10 +52,10 @@ public class StoreOrderQuery extends BaseQuery {
 	
     public StoreOrderQuery () {}
 
-    public StoreOrderQuery (Integer id, String orderNo, String gradeNo, Integer empId, Integer peopleCount, BigDecimal totalMoney, String status, Date createdTime) {
+    public StoreOrderQuery (Integer id, String orderNo, Integer gradeId, Integer empId, Integer peopleCount, BigDecimal totalMoney, String status, Date createdTime) {
         this.id = id;
 		this.orderNo = orderNo;
-		this.gradeNo = gradeNo;
+		this.gradeId = gradeId;
 		this.empId = empId;
 		this.peopleCount = peopleCount;
 		this.totalMoney = totalMoney;
@@ -76,6 +78,14 @@ public class StoreOrderQuery extends BaseQuery {
 
 	public void setOrderNo(String orderNo) {
 		this.orderNo = orderNo;
+	}
+
+	public Integer getGradeId() {
+		return gradeId;
+	}
+
+	public void setGradeId(Integer gradeId) {
+		this.gradeId = gradeId;
 	}
 
 	public String getGradeNo() {

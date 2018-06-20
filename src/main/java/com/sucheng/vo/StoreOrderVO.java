@@ -26,7 +26,7 @@ public class StoreOrderVO extends BaseVO {
 	/**
 	*桌牌号
 	*/
-	private String gradeNo;
+	private Integer gradeId;
 	/**
 	*负责员工
 	*/
@@ -50,10 +50,10 @@ public class StoreOrderVO extends BaseVO {
 	
     public StoreOrderVO () {}
 
-    public StoreOrderVO (Integer id, String orderNo, String gradeNo, Integer empId, Integer peopleCount, BigDecimal totalMoney, String status, Date createdTime) {
+    public StoreOrderVO (Integer id, String orderNo, Integer gradeId, Integer empId, Integer peopleCount, BigDecimal totalMoney, String status, Date createdTime) {
         this.id = id;
 		this.orderNo = orderNo;
-		this.gradeNo = gradeNo;
+		this.gradeId = gradeId;
 		this.empId = empId;
 		this.peopleCount = peopleCount;
 		this.totalMoney = totalMoney;
@@ -78,12 +78,12 @@ public class StoreOrderVO extends BaseVO {
 		this.orderNo = orderNo;
 	}
 
-	public String getGradeNo() {
-		return gradeNo;
+	public Integer getGradeId() {
+		return gradeId;
 	}
 
-	public void setGradeNo(String gradeNo) {
-		this.gradeNo = gradeNo;
+	public void setGradeId(Integer gradeId) {
+		this.gradeId = gradeId;
 	}
 
 	public Integer getEmpId() {
@@ -132,7 +132,7 @@ public class StoreOrderVO extends BaseVO {
         return "StoreOrderDO{" +
                 "id = " + id + 
 				", orderNo = " + orderNo + 
-				", gradeNo = " + gradeNo + 
+				", gradeId = " + gradeId +
 				", empId = " + empId + 
 				", peopleCount = " + peopleCount + 
 				", totalMoney = " + totalMoney + 

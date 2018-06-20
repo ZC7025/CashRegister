@@ -13,8 +13,8 @@
 			<if test="orderNo != null">
 				order_no,
 			</if>
-			<if test="gradeNo != null">
-				grade_no,
+			<if test="gradeId != null">
+				grade_id,
 			</if>
 			<if test="empId != null">
 				emp_id,
@@ -40,8 +40,8 @@
 			<if test="orderNo != null">
 				#{orderNo},
 			</if>
-			<if test="gradeNo != null">
-				#{gradeNo},
+			<if test="gradeId != null">
+				#{gradeId},
 			</if>
 			<if test="empId != null">
 				#{empId},
@@ -86,8 +86,8 @@
 			<if test="orderNo != null">
 				order_no = #{orderNo},
 			</if>
-			<if test="gradeNo != null">
-				grade_no = #{gradeNo},
+			<if test="gradeId != null">
+				grade_id = #{gradeId},
 			</if>
 			<if test="empId != null">
 				emp_id = #{empId},
@@ -114,7 +114,7 @@
     </update>
 
     <sql id="select_columns">
-        id, order_no, grade_no, emp_id, people_count, total_money, status, created_time
+        id, order_no, grade_id, emp_id, people_count, total_money, status, created_time
     </sql>
 
     <select id="getById" parameterType="long" resultType="com.sucheng.dos.StoreOrderDO">
@@ -135,7 +135,7 @@
         <include refid="select_columns"/>
         from t_store_order
         order by created_time desc
-        limit #{beginIndex}, #{pageSize}
+        limit #{pager.beginIndex}, #{pager.pageSize}
     </select>
 
     <select id="count" resultType="long">
@@ -144,33 +144,33 @@
 
     <sql id="where_clause">
         <if test="query != null and query.id != null">
-			id = #{id},
+			id = #{query.id}
 		</if>
 		<if test="query != null and query.orderNo != null and query.orderNo != ''">
-			and order_no = #{orderNo},
+			and order_no = #{query.orderNo}
 		</if>
-		<if test="query != null and query.gradeNo != null and query.gradeNo != ''">
-			and grade_no = #{gradeNo},
+		<if test="query != null and query.gradeId != null and query.gradeId != ''">
+			and grade_id = #{query.gradeId}
 		</if>
 		<if test="query != null and query.empId != null">
-			and emp_id = #{empId},
+			and emp_id = #{query.empId}
 		</if>
 		<if test="query != null and query.peopleCount != null">
-			and people_count = #{peopleCount},
+			and people_count = #{query.peopleCount}
 		</if>
 		<if test="query != null and query.totalMoney != null">
-			and total_money = #{totalMoney},
+			and total_money = #{query.totalMoney}
 		</if>
 		<if test="query != null and query.status != null and query.status != ''">
-			and status = #{status},
+			and status = #{query.status}
 		</if>
 		<if test="query != null and query.createdTime != null">
-			and created_time = #{createdTime},
+			and created_time = #{query.createdTime}
 		</if>
 		
     </sql>
 
-    <select id="listPageByCondition" resultType="com.sucheng.dos.StoreOrderDO">
+    <select id="listPageByCondition" resultType="com.sucheng.query.StoreOrderQuery">
         select
         <include refid="select_columns"/>
         from t_store_order
@@ -178,7 +178,7 @@
             <include refid="where_clause"/>
         </where>
         order by created_time desc
-        limit #{beginIndex}, #{pageSize}
+        limit #{pager.beginIndex}, #{pager.pageSize}
     </select>
 
     <select id="countByCondition" parameterType="com.sucheng.query.StoreOrderQuery" resultType="long">

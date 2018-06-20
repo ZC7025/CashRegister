@@ -26,7 +26,7 @@
     </div>
     <div class="layui-btn-group demoTable">
         <button class="layui-btn" data-type="add">新增报损记录</button>
-        <button class="layui-btn" data-type="update">修改报损记录</button>
+        <%--<button class="layui-btn" data-type="update">修改报损记录</button>--%>
         <button class="layui-btn" data-type="delete">删除报损记录</button>
         <button class="layui-btn" data-type="refresh">刷新</button>
     </div>
@@ -76,7 +76,6 @@
         });
 
         form.on('select(searchType)', function (data) {
-            console.log($('#searchType').val());
             table.reload('idTest', {
                 page: {
                     curr: 1 //重新从第 1 页开始
@@ -127,8 +126,7 @@
                 } else {
                     layer.msg("请选择一行！");
                 }
-            },
-            refresh: function () {
+            }, refresh: function () {
                 location.reload(true);
             }
         };

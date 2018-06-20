@@ -10,8 +10,11 @@ Target Server Type    : MYSQL
 Target Server Version : 50717
 File Encoding         : 65001
 
-Date: 2018-06-04 09:05:37
+Date: 2018-06-20 10:45:07
 */
+# 建数据库
+# CREATE DATABASE IF NOT EXISTS d_cash DEFAULT CHARSET utf8 COLLATE utf8_general_ci;
+# use d_cash;
 
 SET FOREIGN_KEY_CHECKS=0;
 
@@ -108,12 +111,13 @@ CREATE TABLE `t_employee` (
   `status` varchar(2) DEFAULT 'Y',
   `created_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of t_employee
 -- ----------------------------
 INSERT INTO `t_employee` VALUES ('1', '张三', '13500000000', '123456', '100011@qq.com', '3', 'Y', '2018-05-30 09:38:28');
+INSERT INTO `t_employee` VALUES ('3', '李四', '13511111111', '41EA4112960ADD9614CA22968A104D34', '100001@qq.com', '3', 'Y', '2018-06-08 14:47:17');
 
 -- ----------------------------
 -- Table structure for `t_emp_role`
@@ -140,18 +144,19 @@ INSERT INTO `t_emp_role` VALUES ('2', null, '2', null, '3');
 DROP TABLE IF EXISTS `t_formula`;
 CREATE TABLE `t_formula` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(60) NOT NULL COMMENT '配方名',
-  `unit_id` int(11) NOT NULL COMMENT '单位',
+  `raw_id` int(11) NOT NULL COMMENT '配方名',
   `pro_id` int(11) NOT NULL COMMENT '商品id',
+  `count` float NOT NULL,
   `descript` varchar(500) DEFAULT NULL COMMENT '描述',
   `status` varchar(2) DEFAULT 'Y',
   `created_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of t_formula
 -- ----------------------------
+INSERT INTO `t_formula` VALUES ('2', '16', '7', '1', '生抽', 'Y', '2018-06-05 15:01:38');
 
 -- ----------------------------
 -- Table structure for `t_gift`
@@ -166,11 +171,16 @@ CREATE TABLE `t_gift` (
   `status` varchar(2) DEFAULT 'Y',
   `created_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of t_gift
 -- ----------------------------
+INSERT INTO `t_gift` VALUES ('3', '3', '小龙虾套餐', '999', '', 'Y', '2018-06-05 10:15:43');
+INSERT INTO `t_gift` VALUES ('4', '3', '冰饮套餐', '20', '', 'Y', '2018-06-05 10:16:27');
+INSERT INTO `t_gift` VALUES ('5', '3', '早餐套餐', '16', '', 'Y', '2018-06-05 17:19:08');
+INSERT INTO `t_gift` VALUES ('6', '3', '主食套餐', '8888', '', 'Y', '2018-06-05 17:21:31');
+INSERT INTO `t_gift` VALUES ('7', '3', '海鲜套餐', '9999', '', 'Y', '2018-06-11 08:47:12');
 
 -- ----------------------------
 -- Table structure for `t_grade`
@@ -203,15 +213,17 @@ CREATE TABLE `t_half_pro` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) NOT NULL COMMENT '半成品名',
   `count` float NOT NULL COMMENT '数量',
+  `store_id` int(11) NOT NULL,
   `unit_id` int(11) NOT NULL COMMENT '单位',
   `status` varchar(10) DEFAULT NULL COMMENT '处理状态',
   `created_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of t_half_pro
 -- ----------------------------
+INSERT INTO `t_half_pro` VALUES ('2', '腌鸡腿', '5', '3', '8', '0', '2018-06-14 15:23:54');
 
 -- ----------------------------
 -- Table structure for `t_industry`
@@ -251,11 +263,12 @@ CREATE TABLE `t_log_money` (
   `created_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `descript` varchar(500) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of t_log_money
 -- ----------------------------
+INSERT INTO `t_log_money` VALUES ('1', '1', '1', '7', '1000000', '2018-06-12 11:24:10', '开店预算');
 
 -- ----------------------------
 -- Table structure for `t_log_traffic`
@@ -312,14 +325,18 @@ CREATE TABLE `t_lose` (
   `raw_id` int(11) DEFAULT NULL,
   `count` float NOT NULL COMMENT '损失数量',
   `reason` varchar(500) DEFAULT NULL COMMENT '原因',
-  `status` varchar(10) DEFAULT NULL COMMENT '处理状态',
+  `status` varchar(10) DEFAULT '已处理' COMMENT '处理状态',
   `created_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of t_lose
 -- ----------------------------
+INSERT INTO `t_lose` VALUES ('1', '1', null, '3', '过期', '已处理', '2018-06-15 09:19:34');
+INSERT INTO `t_lose` VALUES ('5', null, '16', '1.5', '过期', '已处理', '2018-06-19 09:46:13');
+INSERT INTO `t_lose` VALUES ('6', null, '18', '5', '过期，已处理', '已处理', '2018-06-20 09:47:59');
+INSERT INTO `t_lose` VALUES ('7', null, '18', '5', '过期', '已处理', '2018-06-20 10:26:13');
 
 -- ----------------------------
 -- Table structure for `t_money`
@@ -330,11 +347,12 @@ CREATE TABLE `t_money` (
   `money` decimal(10,0) NOT NULL,
   `store_id` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of t_money
 -- ----------------------------
+INSERT INTO `t_money` VALUES ('1', '1000000', '7');
 
 -- ----------------------------
 -- Table structure for `t_orders`
@@ -363,11 +381,19 @@ CREATE TABLE `t_pay_way` (
   `pay_way` varchar(30) NOT NULL,
   `status` varchar(2) DEFAULT 'Y',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of t_pay_way
 -- ----------------------------
+INSERT INTO `t_pay_way` VALUES ('1', '现金', 'Y');
+INSERT INTO `t_pay_way` VALUES ('2', '支付宝', 'Y');
+INSERT INTO `t_pay_way` VALUES ('3', '微信', 'Y');
+INSERT INTO `t_pay_way` VALUES ('4', '银行卡', 'Y');
+INSERT INTO `t_pay_way` VALUES ('5', '云闪付', 'Y');
+INSERT INTO `t_pay_way` VALUES ('6', '会员卡', 'Y');
+INSERT INTO `t_pay_way` VALUES ('7', 'PayPal', 'Y');
+INSERT INTO `t_pay_way` VALUES ('8', '其他', 'Y');
 
 -- ----------------------------
 -- Table structure for `t_product`
@@ -389,12 +415,15 @@ CREATE TABLE `t_product` (
   `status` varchar(255) DEFAULT 'Y',
   `created_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of t_product
 -- ----------------------------
-INSERT INTO `t_product` VALUES ('1', '小龙虾', '3', '2', '1', '66', '1', 'static/uploads/55128217d1bd25af448b1e9cbf56e910.gif', '', '', '', '99', 'Y', '2018-06-02 17:54:50');
+INSERT INTO `t_product` VALUES ('1', '小龙虾', '3', '2', '1', '666', '1', 'static/uploads/55128217d1bd25af448b1e9cbf56e910.gif', 'static/uploads/餐饮收银系统功能分析.png', '', '', '99', 'Y', '2018-06-02 17:54:50');
+INSERT INTO `t_product` VALUES ('2', '冰淇淋', '3', '2', '4', '5', '1', 'static/uploads/55128217d1bd25af448b1e9cbf56e910.gif', 'static/uploads/55128217d1bd25af448b1e9cbf56e910.gif', 'static/uploads/55128217d1bd25af448b1e9cbf56e910.gif', null, '99', 'Y', '2018-06-04 16:43:28');
+INSERT INTO `t_product` VALUES ('3', '酸梅汤', '3', '1', '1', '9', '4', null, null, null, null, '99', 'Y', '2018-06-04 16:44:31');
+INSERT INTO `t_product` VALUES ('7', '酱油包', '3', '2', '4', '3', '2', null, null, null, null, '99', 'Y', '2018-06-05 15:01:38');
 
 -- ----------------------------
 -- Table structure for `t_pro_gift`
@@ -406,11 +435,26 @@ CREATE TABLE `t_pro_gift` (
   `gift_id` int(11) NOT NULL,
   `count` float NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of t_pro_gift
 -- ----------------------------
+INSERT INTO `t_pro_gift` VALUES ('4', '3', '3', '1');
+INSERT INTO `t_pro_gift` VALUES ('5', '2', '3', '2');
+INSERT INTO `t_pro_gift` VALUES ('6', '1', '3', '1');
+INSERT INTO `t_pro_gift` VALUES ('7', '3', '4', '1');
+INSERT INTO `t_pro_gift` VALUES ('8', '2', '4', '1');
+INSERT INTO `t_pro_gift` VALUES ('9', '7', '5', '1');
+INSERT INTO `t_pro_gift` VALUES ('10', '3', '5', '1');
+INSERT INTO `t_pro_gift` VALUES ('11', '2', '5', '1');
+INSERT INTO `t_pro_gift` VALUES ('12', '7', '6', '1');
+INSERT INTO `t_pro_gift` VALUES ('13', '3', '6', '1');
+INSERT INTO `t_pro_gift` VALUES ('14', '1', '6', '1');
+INSERT INTO `t_pro_gift` VALUES ('15', '7', '7', '2');
+INSERT INTO `t_pro_gift` VALUES ('16', '3', '7', '2');
+INSERT INTO `t_pro_gift` VALUES ('17', '2', '7', '2');
+INSERT INTO `t_pro_gift` VALUES ('18', '1', '7', '1');
 
 -- ----------------------------
 -- Table structure for `t_pro_type`
@@ -439,7 +483,7 @@ DROP TABLE IF EXISTS `t_raw_materials`;
 CREATE TABLE `t_raw_materials` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) NOT NULL COMMENT '商品名',
-  `amount` float(11,0) NOT NULL COMMENT '数量',
+  `amount` float(11,2) NOT NULL COMMENT '数量',
   `price` decimal(10,0) NOT NULL COMMENT '进价',
   `unit_id` int(11) NOT NULL COMMENT '单位',
   `supplier_id` int(11) NOT NULL COMMENT '供应商id',
@@ -452,13 +496,14 @@ CREATE TABLE `t_raw_materials` (
   `status` varchar(2) DEFAULT 'Y',
   `created_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of t_raw_materials
 -- ----------------------------
-INSERT INTO `t_raw_materials` VALUES ('16', '酱油', '10', '5', '3', '1', '2018-06-02 09:22:28', '150天', '2018-10-30 09:22:28', '1', '30', '3', 'Y', '2018-06-02 09:23:02');
-INSERT INTO `t_raw_materials` VALUES ('17', '面粉', '12', '6', '1', '1', '2018-06-02 14:16:50', '12月', '2019-06-02 14:16:50', '1', '30', '3', 'Y', '2018-06-02 14:17:25');
+INSERT INTO `t_raw_materials` VALUES ('16', '酱油', '7.50', '5', '3', '1', '2018-06-02 09:22:28', '150天', '2018-10-30 09:22:28', '1', '30', '3', 'Y', '2018-06-02 09:23:02');
+INSERT INTO `t_raw_materials` VALUES ('17', '面粉', '11.90', '6', '1', '1', '2018-06-02 14:16:50', '12月', '2019-06-02 14:16:50', '1', '30', '3', 'Y', '2018-06-02 14:17:25');
+INSERT INTO `t_raw_materials` VALUES ('18', '辣椒', '2.00', '7', '1', '1', '2018-06-04 10:36:19', '9天', '2018-06-13 10:36:19', '10', '30', '3', 'Y', '2018-06-19 10:37:28');
 
 -- ----------------------------
 -- Table structure for `t_role`
@@ -509,13 +554,14 @@ CREATE TABLE `t_stock` (
   `created_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `update_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP COMMENT '更新时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of t_stock
 -- ----------------------------
-INSERT INTO `t_stock` VALUES ('1', '16', null, '10', '3', '5', '2018-06-02 09:23:12', '2018-06-02 09:23:12');
-INSERT INTO `t_stock` VALUES ('2', '17', null, '12', '1', '6', '2018-06-02 14:17:25', '2018-06-02 14:17:25');
+INSERT INTO `t_stock` VALUES ('1', '16', null, '7.5', '3', '5', '2018-06-02 09:23:12', '2018-06-19 09:46:19');
+INSERT INTO `t_stock` VALUES ('2', '17', null, '11.9', '1', '6', '2018-06-02 14:17:25', '2018-06-08 09:48:15');
+INSERT INTO `t_stock` VALUES ('3', '18', null, '2', '1', '7', '2018-06-19 10:37:28', '2018-06-20 10:26:14');
 
 -- ----------------------------
 -- Table structure for `t_stock_operating`
@@ -528,16 +574,22 @@ CREATE TABLE `t_stock_operating` (
   `out_stock_count` float DEFAULT NULL COMMENT '出库数量',
   `unit_id` int(11) DEFAULT NULL COMMENT '单位',
   `emp_name` varchar(30) NOT NULL COMMENT '出入库员工',
-  `operating_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '操作时间',
+  `operating_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP COMMENT '操作时间',
   `descript` varchar(500) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of t_stock_operating
 -- ----------------------------
 INSERT INTO `t_stock_operating` VALUES ('1', '16', '10', null, '3', '店长', '2018-06-02 09:23:31', null);
 INSERT INTO `t_stock_operating` VALUES ('2', '17', '12', null, '1', '店长', '2018-06-02 14:17:25', null);
+INSERT INTO `t_stock_operating` VALUES ('4', '16', null, '1', '3', '张三', '2018-06-08 09:48:05', '营业原料领用');
+INSERT INTO `t_stock_operating` VALUES ('5', '17', null, '0.1', '1', '张三', '2018-06-08 09:48:14', '营业原料领用');
+INSERT INTO `t_stock_operating` VALUES ('6', '16', null, '1.5', '3', '店长', '2018-06-19 09:47:57', null);
+INSERT INTO `t_stock_operating` VALUES ('7', '18', '12', null, '1', '店长', '2018-06-19 10:37:28', null);
+INSERT INTO `t_stock_operating` VALUES ('8', '18', null, '5', '1', '店长', '2018-06-20 09:48:00', '过期，已处理');
+INSERT INTO `t_stock_operating` VALUES ('9', '18', null, '5', '1', '店长', '2018-06-20 10:26:14', '过期');
 
 -- ----------------------------
 -- Table structure for `t_store`
@@ -547,12 +599,13 @@ CREATE TABLE `t_store` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `store_id` varchar(50) NOT NULL COMMENT '门店账号',
   `name` varchar(100) NOT NULL,
+  `manager` varchar(50) NOT NULL COMMENT '负责人',
   `phone` varchar(20) NOT NULL,
   `pwd` varchar(200) NOT NULL,
   `email` varchar(50) NOT NULL,
-  `province` varchar(30) NOT NULL,
-  `city` varchar(50) DEFAULT NULL,
-  `county` varchar(50) DEFAULT NULL,
+  `province` varchar(30) NOT NULL COMMENT '省',
+  `city` varchar(50) DEFAULT NULL COMMENT '市',
+  `county` varchar(50) DEFAULT NULL COMMENT '区',
   `address` varchar(160) NOT NULL COMMENT '详细地址',
   `license_img` varchar(500) DEFAULT NULL COMMENT '营业执照图片',
   `industry_id` int(11) NOT NULL COMMENT '行业id',
@@ -560,15 +613,16 @@ CREATE TABLE `t_store` (
   `status` varchar(2) DEFAULT 'Y',
   `created_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of t_store
 -- ----------------------------
-INSERT INTO `t_store` VALUES ('3', '10001', '真功夫餐饮店', '13500000000', '41EA4112960ADD9614CA22968A104D34', '10010@qq.com', '广东省-440000', '东莞-441900', '市辖区-441901', '宏图路33号', '', '1', null, 'Y', '2018-05-28 15:05:33');
-INSERT INTO `t_store` VALUES ('4', '10002', '真功夫分店1', '13511111111', '41EA4112960ADD9614CA22968A104D34', '10020@qq.com', '广东省-440000', '东莞-441900', '莞城区-441902', '33号', '', '1', '3', 'Y', '2018-05-28 15:05:28');
-INSERT INTO `t_store` VALUES ('5', '10004', '真功夫分店2', '13522222222', '41EA4112960ADD9614CA22968A104D34', '10002@qq.com', '广东省-440000', '深圳-440300', '南山区-440305', '33号', '', '1', '3', 'Y', '2018-05-29 10:04:36');
-INSERT INTO `t_store` VALUES ('6', '10003', '真功夫分店3', '13533333333', '41EA4112960ADD9614CA22968A104D34', '10002@qq.com', '广东省-440000', '深圳-440300', '龙岗区-440307', '1001路33号', '', '1', '3', 'Y', '2018-05-30 11:13:16');
+INSERT INTO `t_store` VALUES ('3', '10001', '真功夫餐饮店', '张三', '13500000000', '41EA4112960ADD9614CA22968A104D34', '10010@qq.com', '广东省-440000', '东莞-441900', '市辖区-441901', '宏图路33号', '', '1', null, 'Y', '2018-05-28 15:05:33');
+INSERT INTO `t_store` VALUES ('4', '10002', '真功夫分店1', '张三', '13511111111', '41EA4112960ADD9614CA22968A104D34', '10020@qq.com', '广东省-440000', '东莞-441900', '莞城区-441902', '33号', '', '1', '3', 'Y', '2018-05-28 15:05:28');
+INSERT INTO `t_store` VALUES ('5', '10004', '真功夫分店2', '李四', '13522222222', '41EA4112960ADD9614CA22968A104D34', '10002@qq.com', '广东省-440000', '深圳-440300', '南山区-440305', '33号', '', '1', '3', 'Y', '2018-05-29 10:04:36');
+INSERT INTO `t_store` VALUES ('6', '10003', '真功夫分店3', '王五', '13533333333', '41EA4112960ADD9614CA22968A104D34', '10002@qq.com', '广东省-440000', '深圳-440300', '龙岗区-440307', '1001路33号', '', '1', '3', 'Y', '2018-05-30 11:13:16');
+INSERT INTO `t_store` VALUES ('7', '10056', '真功夫3', '王武', '13544444444', '41EA4112960ADD9614CA22968A104D34', '1000023@qq.com', '广东省-440000', '东莞-441900', '莞城区-441902', '10023号', '', '1', '3', 'Y', '2018-06-12 11:23:47');
 
 -- ----------------------------
 -- Table structure for `t_store_order`
@@ -577,7 +631,7 @@ DROP TABLE IF EXISTS `t_store_order`;
 CREATE TABLE `t_store_order` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `order_no` varchar(36) NOT NULL COMMENT '订单编号',
-  `grade_no` varchar(30) NOT NULL COMMENT '桌牌号',
+  `grade_id` int(11) NOT NULL COMMENT '桌牌号',
   `emp_id` int(11) NOT NULL COMMENT '负责员工',
   `people_count` int(11) NOT NULL COMMENT '客人个数',
   `total_money` decimal(10,0) DEFAULT NULL COMMENT '总支付金额',
@@ -597,7 +651,8 @@ DROP TABLE IF EXISTS `t_store_order_detail`;
 CREATE TABLE `t_store_order_detail` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `order_id` int(11) NOT NULL,
-  `pro_id` int(11) NOT NULL,
+  `pro_id` int(11) DEFAULT NULL,
+  `gift_id` int(11) DEFAULT NULL,
   `count` int(11) NOT NULL DEFAULT '1',
   `total_money` decimal(10,0) NOT NULL,
   PRIMARY KEY (`id`)
@@ -628,6 +683,28 @@ CREATE TABLE `t_supplier` (
 -- ----------------------------
 INSERT INTO `t_supplier` VALUES ('1', '3', '张三', '13500000000', '广东省东莞市', 'Y', 'Y', '2018-05-30 17:30:47');
 INSERT INTO `t_supplier` VALUES ('2', '3', '李四', '13511111111', '东莞市', 'N', 'Y', '2018-05-31 08:44:18');
+
+-- ----------------------------
+-- Table structure for `t_task_plan`
+-- ----------------------------
+DROP TABLE IF EXISTS `t_task_plan`;
+CREATE TABLE `t_task_plan` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `class_name` varchar(50) NOT NULL,
+  `job_name` varchar(100) NOT NULL COMMENT '任务名称',
+  `cron_expression` varchar(30) NOT NULL COMMENT 'cron表达式',
+  `is_start` varchar(2) DEFAULT 'Y' COMMENT '是否开始运行',
+  `descript` varchar(300) DEFAULT NULL COMMENT '任务描述',
+  `status` varchar(2) DEFAULT 'Y' COMMENT '是否生效',
+  `update_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `created_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of t_task_plan
+-- ----------------------------
+INSERT INTO `t_task_plan` VALUES ('5', 'com.sucheng.quartz.CronJob', 'cronJobDetail', '0 0 0 1/1 * ? ', 'Y', '每天0点执行', 'Y', '2018-06-12 14:57:55', '2018-06-11 16:36:38');
 
 -- ----------------------------
 -- Table structure for `t_taste`
@@ -661,7 +738,7 @@ CREATE TABLE `t_unit` (
   `status` varchar(2) DEFAULT 'Y',
   `created_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of t_unit
@@ -670,6 +747,8 @@ INSERT INTO `t_unit` VALUES ('1', 'kg', '千克', '3', 'Y', '2018-06-01 10:21:16
 INSERT INTO `t_unit` VALUES ('2', 'g', '克', '3', 'Y', '2018-06-01 10:21:53');
 INSERT INTO `t_unit` VALUES ('3', 'L', '升', '3', 'Y', '2018-06-01 10:22:22');
 INSERT INTO `t_unit` VALUES ('4', 'ml', '毫升', '3', 'Y', '2018-06-01 10:22:38');
+INSERT INTO `t_unit` VALUES ('7', 'kg', '千克', '4', 'Y', '2018-06-06 08:48:09');
+INSERT INTO `t_unit` VALUES ('8', '份', '1份', '3', 'Y', '2018-06-11 08:45:53');
 
 -- ----------------------------
 -- Table structure for `t_vip`
