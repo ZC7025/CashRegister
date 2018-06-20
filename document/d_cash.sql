@@ -10,12 +10,11 @@ Target Server Type    : MYSQL
 Target Server Version : 50717
 File Encoding         : 65001
 
-Date: 2018-06-20 10:45:07
+Date: 2018-06-20 16:26:49
 */
-# 建数据库
-# CREATE DATABASE IF NOT EXISTS d_cash DEFAULT CHARSET utf8 COLLATE utf8_general_ci;
-# use d_cash;
-
+-- 建数据库
+-- CREATE DATABASE IF NOT EXISTS d_cash DEFAULT CHARSET utf8 COLLATE utf8_general_ci;
+-- use d_cash;
 SET FOREIGN_KEY_CHECKS=0;
 
 -- ----------------------------
@@ -635,14 +634,15 @@ CREATE TABLE `t_store_order` (
   `emp_id` int(11) NOT NULL COMMENT '负责员工',
   `people_count` int(11) NOT NULL COMMENT '客人个数',
   `total_money` decimal(10,0) DEFAULT NULL COMMENT '总支付金额',
-  `status` varchar(10) DEFAULT NULL,
+  `status` varchar(10) DEFAULT 'N' COMMENT '默认未支付',
   `created_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of t_store_order
 -- ----------------------------
+INSERT INTO `t_store_order` VALUES ('1', 'SC20180620162035312', '1', '1', '6', '689', 'N', '2018-06-20 16:20:53');
 
 -- ----------------------------
 -- Table structure for `t_store_order_detail`
@@ -656,11 +656,14 @@ CREATE TABLE `t_store_order_detail` (
   `count` int(11) NOT NULL DEFAULT '1',
   `total_money` decimal(10,0) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of t_store_order_detail
 -- ----------------------------
+INSERT INTO `t_store_order_detail` VALUES ('1', '1', '1', null, '1', '666');
+INSERT INTO `t_store_order_detail` VALUES ('2', '1', '3', null, '2', '18');
+INSERT INTO `t_store_order_detail` VALUES ('3', '1', '2', null, '1', '5');
 
 -- ----------------------------
 -- Table structure for `t_supplier`
